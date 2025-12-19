@@ -1,12 +1,10 @@
 <div align="center">
 
-# ZoneTech 🌐
-
 ![ZoneTech Header](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=300&section=header&text=ZoneTech&fontSize=90&fontAlignY=38&animation=twinkling)
 
-### Plataforma integral de e-commerce tecnológico y soporte técnico especializado
+# ZoneTech 🌐
 
-ZoneTech es una solución completa que combina un robusto sistema de comercio electrónico para productos tecnológicos con herramientas avanzadas de gestión de soporte técnico y un portal de colaboración para usuarios.
+**Plataforma integral de e-commerce tecnológico y soporte técnico especializado**
 
 </div>
 
@@ -16,59 +14,86 @@ ZoneTech es una solución completa que combina un robusto sistema de comercio el
 [![GitHub forks](https://img.shields.io/github/forks/Andres-glitch-cell/zoneTech?style=social)](https://github.com/Andres-glitch-cell/zoneTech/network/members)
 [![GitHub watchers](https://img.shields.io/github/watchers/Andres-glitch-cell/zoneTech?style=social)](https://github.com/Andres-glitch-cell/zoneTech/watchers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Laravel](https://img.shields.io/badge/Built%20with-Laravel-ff2d20?style=flat&logo=laravel)](https://laravel.com)
+[![Built with Laravel](https://img.shields.io/badge/Built_with-Laravel-ff2d20?style=flat&logo=laravel&logoColor=white)](https://laravel.com)
 
 </div>
 
-## Descripción del Proyecto
+## Overview
 
-ZoneTech busca reinventar la experiencia de compra y soporte en el sector tecnológico, ofreciendo:
+ZoneTech es una plataforma todo-en-uno diseñada para reinventar la experiencia en el sector tecnológico. Combina un potente sistema de **comercio electrónico** especializado en productos high-tech con un avanzado módulo de **soporte técnico** y un **portal de colaboración comunitaria**.
 
-- **E-commerce especializado**: Catálogo dinámico de productos high-tech, carrito de compras inteligente y procesamiento seguro de pagos.
-- **Gestión de soporte técnico**: Sistema de tickets, seguimiento de reparaciones y atención personalizada en tiempo real.
-- **Portal de colaboración**: Espacio comunitario con reseñas, foros y recomendaciones personalizadas.
-- **Diseño responsive**: Interfaz moderna y adaptable a cualquier dispositivo.
-
-Desarrollado con un enfoque en escalabilidad, seguridad y mantenibilidad.
+### Características clave
+- Catálogo dinámico de productos tecnológicos con carrito inteligente y pagos seguros.
+- Sistema de gestión de tickets, seguimiento de reparaciones y soporte en tiempo real.
+- Comunidad integrada con reseñas, foros y recomendaciones personalizadas.
+- Diseño completamente responsive y optimizado para todos los dispositivos.
+- Arquitectura enfocada en escalabilidad, seguridad y facilidad de mantenimiento.
 
 <div align="center">
 
-![Laravel Logo](https://zaltek.co.uk/wp-content/uploads/2024/09/laravel-logolockup-cmyk-red-768x432.jpg.webp)
+![Laravel Official Logo](https://miro.medium.com/1*CweHpGpUvTbdSCwZEm61cA.jpeg)
+
+**Construido con Laravel – Framework PHP moderno y robusto**
 
 </div>
 
-## Tecnologías Utilizadas
+## Preview de la Interfaz (Ejemplos representativos)
 
-| Tecnología    | Descripción                              |
-|---------------|------------------------------------------|
-| **Laravel**   | Framework PHP principal para backend     |
-| **PHP**       | Lenguaje principal del servidor          |
-| **JavaScript**| Lógica frontend y interacciones dinámicas|
-| **MySQL**     | Sistema de gestión de base de datos      |
-| **HTML5 & CSS3** | Estructura y estilos de la interfaz   |
-| **phpMyAdmin**| Herramienta de administración de BD     |
+Estas imágenes muestran estilos y dashboards similares a los que implementaremos en ZoneTech (capturas reales del proyecto se añadirán progresivamente).
 
-## Instalación
+<div align="center">
 
-Sigue estos pasos para configurar el proyecto localmente:
+### Panel Administrativo / Dashboard
+
+![Modern Laravel Admin Dashboard 1](https://www.bootstrapdash.com/blog/wp-content/uploads/2023/07/purple-laravel.png)
+
+![Modern Laravel Admin Dashboard 2](https://www.bootstrapdash.com/blog/wp-content/uploads/2023/07/1_stellar-laravel.png)
+
+![Modern Laravel Admin Dashboard 3](https://www.bootstrapdash.com/blog/wp-content/uploads/2023/07/star-admin-laravel.png)
+
+### Catálogo de Productos
+
+![Laravel E-commerce Product Catalog Example](https://bagisto.com/wp-content/uploads/2021/02/webkul-laravel-ecommerce-product-labels-custom-product-labels-list-3.png)
+
+### Sistema de Soporte Técnico / Tickets
+
+![Tech Support Ticket Dashboard 1](https://www.geckoboard.com/uploads/helpdesk_dashboard_example_geckoboard.png)
+
+![Tech Support Ticket Dashboard 2](https://www.slideteam.net/wp/wp-content/uploads/2024/01/Customer-service-dashboard-with-ticket-resolution.png)
+
+</div>
+
+## Stack Tecnológico
+
+| Tecnología       | Uso Principal                          |
+|------------------|----------------------------------------|
+| **Laravel**      | Framework backend principal            |
+| **PHP**          | Lógica del servidor                    |
+| **JavaScript**   | Interactividad frontend                |
+| **MySQL**        | Base de datos relacional               |
+| **HTML5 & CSS3** | Estructura y diseño de la interfaz     |
+| **phpMyAdmin**   | Administración de la base de datos     |
+
+## Instrucciones de Instalación
+
+Para ejecutar el proyecto en local:
 
 ```bash
-# Clonar el repositorio
+# 1. Clonar el repositorio
 git clone https://github.com/Andres-glitch-cell/zoneTech.git
 cd zoneTech
 
-# Instalar dependencias PHP
+# 2. Instalar dependencias
 composer install
 
-# Instalar dependencias frontend (si aplica)
+# 3. Instalar assets frontend (si los hay)
 npm install && npm run dev
 
-# Configurar variables de entorno
+# 4. Configurar entorno
 cp .env.example .env
 php artisan key:generate
 
-# Configurar base de datos en .env
-# Ejemplo:
+# 5. Configurar base de datos en .env
 # DB_CONNECTION=mysql
 # DB_HOST=127.0.0.1
 # DB_PORT=3306
@@ -76,11 +101,11 @@ php artisan key:generate
 # DB_USERNAME=root
 # DB_PASSWORD=
 
-# Ejecutar migraciones
+# 6. Ejecutar migraciones
 php artisan migrate
 
-# (Opcional) Cargar datos de prueba
+# 7. (Opcional) Cargar datos de ejemplo
 php artisan db:seed
 
-# Iniciar servidor de desarrollo
+# 8. Iniciar el servidor
 php artisan serve
