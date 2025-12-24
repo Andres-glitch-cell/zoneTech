@@ -28,3 +28,10 @@ Homestead.json
 .env.production
 .phpactor.json
 auth.json
+
+# ! Notas de Andrés y Carolina
+# Ruta a excluir archivos temporales de LibreOffice
+.~lock.Guia_Git.odt#
+
+# Archivo .odt de LibreOffice
+Guia_Git.odt
