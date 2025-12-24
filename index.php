@@ -22,7 +22,6 @@
 
 6. `git push -u origin main` - Sube el proyecto.
     -->
-
 </body>
 
 </html>
