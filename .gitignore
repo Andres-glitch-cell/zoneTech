@@ -38,3 +38,4 @@ auth.json
 
 # Archivo .odt de LibreOffice
 Guia_Git.odt
+*.odt
