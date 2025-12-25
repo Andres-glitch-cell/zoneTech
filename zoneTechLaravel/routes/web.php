@@ -28,9 +28,8 @@ Route::get('/', function () {
 });
 
 /*
-! Texto de bienvenida personalizado con fn() => 
+Texto de bienvenida personalizado con fn() =>
  route::get("/", fn() => "<h1>¡Hola! ZoneTech está online 🚀</h1>");
  */
-
 
 ?>
