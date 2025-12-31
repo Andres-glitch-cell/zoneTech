@@ -41,14 +41,14 @@ El proyecto se desarrolla con estándares profesionales de código limpio, prueb
 
 ## Arquitectura y Tecnologías
 
-| Componente       | Tecnología                     | Descripción                                      |
-|------------------|--------------------------------|--------------------------------------------------|
-| Backend          | Laravel 11 (PHP 8.2+)          | Routing, Eloquent ORM, autenticación y queues    |
-| Frontend         | Blade Templates + Livewire     | Renderizado del servidor con interactividad      |
-| Base de datos    | MySQL                          | Almacenamiento relacional eficiente              |
-| Gestión de assets| Vite + Tailwind CSS (próximo)  | Preparado para estilos modernos y compilación    |
-| Administración BD| phpMyAdmin                     | Interfaz gráfica durante desarrollo              |
-| Control de versiones | Git + GitHub                | Colaboración y CI/CD futuro                      |
+| Componente           | Tecnología                    | Descripción                                   |
+| -------------------- | ----------------------------- | --------------------------------------------- |
+| Backend              | Laravel 11 (PHP 8.2+)         | Routing, Eloquent ORM, autenticación y queues |
+| Frontend             | Blade Templates + Livewire    | Renderizado del servidor con interactividad   |
+| Base de datos        | MySQL                         | Almacenamiento relacional eficiente           |
+| Gestión de assets    | Vite + Tailwind CSS (próximo) | Preparado para estilos modernos y compilación |
+| Administración BD    | phpMyAdmin                    | Interfaz gráfica durante desarrollo           |
+| Control de versiones | Git + GitHub                  | Colaboración y CI/CD futuro                   |
 
 ## Requisitos del Sistema
 
@@ -88,3 +88,14 @@ php artisan migrate --seed
 
 # 7. Iniciar servidor de desarrollo
 php artisan serve
+
+/* ! IMPORTANTE A TENER EN CUENTA !
+ ? 1. Si queremos cambiar el nombre de la pestaña (etiqueta <title>), hay que ponerlo entre ""
+
+ ? 2. Para cambiar o hacer cambios en este caso en la página principal de Laravel, donde sale todo,
+ ? hay que modificar archivos que acaben en  *.blade.php (blade es el "gestor" que usa Laravel para
+ ? trabajar y/o modificar archivos)
+
+ ? 3. Si queremos hacer otros archivos hay que hacerles un "linkeo" un Route::get en el archivo routes\web.php
+? e importante tener en cuenta que al nombre del archivo o de la página nueva, hay que ponerle siempre .blade.php
+*/
