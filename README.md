@@ -88,9 +88,10 @@ php artisan migrate --seed
 
 # 7. Iniciar servidor de desarrollo
 php artisan serve
-
+```
 
 ## Datos importantes ⚠️
+
 ```php
 /* ! IMPORTANTE A TENER EN CUENTA !
  ? 1. Si queremos cambiar el nombre de la pestaña (etiqueta <title>), hay que ponerlo entre ""
