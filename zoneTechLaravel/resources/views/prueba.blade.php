@@ -5,19 +5,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Prueba de que Funciona</title>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Hola esto es una prueba</h1>
-    <script>
-        const elemento = document.getElementsByTagName("h1")
-        elemento[0].addEventListener("mouseenter", () => {
-            elemento[0].style.backgroundColor = "blue"
-        })
-        elemento[0].addEventListener("mouseout", () => {
-            elemento[0].style.backgroundColor = ""
-        })
-    </script>
+    <div class="container">
+        <ul>Inicio</ul>
+        <ul>Contenido</ul>
+        <ul>Productos</ul>
+    </div>
 </body>
 
 </html>

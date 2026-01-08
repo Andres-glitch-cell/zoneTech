@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 🚀 GUÍA DE GIT - TRABAJO EN EQUIPO
  * --------------------------------
@@ -29,7 +30,6 @@ El "/" quiere decir que esta en localhost, si quisieramos tener archivos en otra
 Route::get('/', function () {
     return view('welcome');
 });
-
 Route::get('/prueba', function () {
     return view('prueba');
 });
@@ -38,5 +38,3 @@ Route::get('/prueba', function () {
 Texto de bienvenida personalizado con fn() =>
  route::get("/", fn() => "<h1>¡Hola! ZoneTech está online 🚀</h1>");
  */
-
-?>
