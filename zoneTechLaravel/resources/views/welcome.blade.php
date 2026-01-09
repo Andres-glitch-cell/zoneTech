@@ -16,25 +16,12 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @else
     <style>
-        /* Video como fondo */
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-        }
-
         /* Video en full screen detrás de todo */
         #backgroundVideo {
             position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
             z-index: -1;
-            /* detrás de todo */
         }
 
         /* Contenido encima del video */
@@ -52,8 +39,6 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
             z-index: 0;
             animation-name: backgroundBody;
             animation-duration: 10s;
@@ -1621,6 +1606,7 @@
             </script>
             <!-- Div bloque de Laravel 12 -->
             <div
+                style="opacity: 80%;"
                 class="text-[13px] leading-[20px] flex-1 p-6 pb-12 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] rounded-bl-lg rounded-br-lg lg:rounded-tl-lg lg:rounded-br-none" ; id="scroll-target" ; class="transition-all duration-500 text-[13px] leading-[20px] flex-1 p-6 pb-12 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] rounded-bl-lg rounded-br-lg lg:rounded-tl-lg lg:rounded-br-none">
                 <h1 class="mb-1 font-medium">Empecemos !</h1>
                 <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]"> Laravel tiene un ecosistema increíblemente rico
@@ -1687,6 +1673,7 @@
             </div>
             <!-- ACABA EL DIV DEL BLOQUE DE LARAVEL 12 -->
             <div
+                style="opacity: 80%;"
                 class="bg-[#fff2f2] dark:bg-[#1D0002] relative lg:-ml-px -mb-px lg:mb-0 rounded-t-lg lg:rounded-t-none lg:rounded-r-lg aspect-[335/376] lg:aspect-auto w-full lg:w-[438px] shrink-0 overflow-hidden">
                 {{-- Laravel Logo --}}
                 <svg class="w-full text-[#F53003] dark:text-[#F61500] transition-all translate-y-0 opacity-100 max-w-none duration-750 starting:opacity-0 starting:translate-y-6"

@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 /* Ruta principal que carga la vista 'welcome' (significa que tiene el nombre welcome.blade.php)
 El "/" quiere decir que esta en localhost, si quisieramos tener archivos en otras carpetas u/o en otras ubicaciones serian por ejemplo /ubicaciones/objetos.blade.php
 */
+
 Route::get('/', function () {
     return view('welcome');
 });
