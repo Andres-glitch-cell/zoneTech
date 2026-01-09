@@ -33,6 +33,9 @@ Route::get('/', function () {
 Route::get('/prueba', function () {
     return view('prueba');
 });
+Route::get('/login', function () {
+    return view('login');
+});
 
 /*
 Texto de bienvenida personalizado con fn() =>

@@ -18,8 +18,20 @@
     <header>
         <ul>Productos</ul>
         <ul>Soporte</ul>
-        <ul><a class="login">Login</a></ul>
+        <ul class="login">Login</ul>
     </header>
+    <h1>Login</h1>
+    <div>
+        <form action="">
+            <label for="usuario">Usuario:</label>
+            <input type="text" id="usuario" name="usuario" />
+            <br />
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" id="contrasena" name="contrasena" />
+            <br />
+            <input type="submit" value="Iniciar Sesión" />
+        </form>
+    </div>
     <script>
         const elementoLogin = document.getElementByClassName("login")[0];
         elementoLogin.addEventListener("click", function() {
