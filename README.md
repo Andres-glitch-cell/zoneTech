@@ -14,28 +14,6 @@
 
 </div>
 
-// Source - https://stackoverflow.com/a
-// Posted by fideloper, modified by community. See post 'Timeline' for change history
-// Retrieved 2026-01-09, License - CC BY-SA 3.0
-
-<?php namespace My\App\Service;
-
-class SomeApi {
-
-    public function __construct($buzz)
-    {
-        $this->client = $buzz;
-    }
-
-    public function getAllWidgets()
-    {
-        $data = $this->client->get('http://api.example.com/all.json');
-        // Do things with data, etc etc
-    }
-
-}
-
-
 ## Descripción del Proyecto
 
 ZoneTech es una plataforma web integral diseñada para cubrir las necesidades del sector tecnológico actual. Combina un potente módulo de **comercio electrónico** especializado en productos de alta tecnología con un sistema avanzado de **gestión de soporte técnico** y un espacio de **colaboración comunitaria**.
