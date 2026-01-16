@@ -16,9 +16,9 @@
 
 ## Descripción del Proyecto
 
-ZoneTech es una plataforma web integral diseñada para cubrir las necesidades del sector tecnológico actual. Combina un potente módulo de **comercio electrónico** especializado en productos de alta tecnología con un sistema avanzado de **gestión de soporte técnico** y un espacio de **colaboración comunitaria**.
+ZoneTech es una plataforma web integral diseñada para cubrir las necesidades del sector tecnológico actual. Combina un potente módulo de **comercio electrónico** especializado en productos de alta tecnología con un sistema avanzado de **gestión de soporte técnico**.
 
-El objetivo principal es ofrecer una experiencia unificada y moderna —similar a un "MediaMarkt 2.0"— donde los usuarios puedan adquirir dispositivos, gestionar reparaciones y compartir conocimientos en un único entorno seguro y escalable.
+El objetivo principal es ofrecer una experiencia unificada y moderna —similar a un "MediaMarkt" — donde los usuarios puedan adquirir dispositivos, gestionar reparaciones y compartir conocimientos en uno de nuestros foros únicos, en un entorno seguro.
 
 El proyecto se desarrolla con estándares profesionales de código limpio, pruebas unitarias y documentación, garantizando mantenibilidad a largo plazo.
 
