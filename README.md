@@ -24,10 +24,10 @@ El proyecto se desarrolla con estándares profesionales de código limpio, prueb
 
 ## Características Principales
 
-- **Comercio electrónico**: Catálogo completo de productos, gestión de inventario, carrito de compras y preparación para integración de pasarelas de pago.
+- **Comercio electrónico**: Catálogo completo de productos, gestión de inventario, carrito de compras y preparación para la integración de targetas de pago.
 - **Soporte técnico**: Sistema de tickets con estados, prioridades, asignación de técnicos y seguimiento en tiempo real.
 - **Comunidad**: Publicación de reseñas, foros temáticos y sistema de recomendaciones basado en historial de usuario.
-- **Autenticación y roles**: Gestión de usuarios con diferentes niveles de acceso (cliente, técnico, administrador).
+- **Autenticación y roles**: Gestión de usuarios con diferentes niveles de acceso (cliente, técnico, administrador, etc).
 - **Diseño responsive**: Interfaz adaptada a dispositivos móviles y de escritorio.
 - **Seguridad**: Protección CSRF, validación de entradas, hashing de contraseñas y políticas de autorización.
 
@@ -44,9 +44,9 @@ El proyecto se desarrolla con estándares profesionales de código limpio, prueb
 | Componente           | Tecnología                    | Descripción                                   |
 | -------------------- | ----------------------------- | --------------------------------------------- |
 | Backend              | Laravel 11 (PHP 8.2+)         | Routing, Eloquent ORM, autenticación y queues |
-| Frontend             | Blade Templates + Livewire    | Renderizado del servidor con interactividad   |
+| Frontend             | Blade Templates + HTML / JS   | Renderizado del servidor con interactividad   |
 | Base de datos        | MySQL                         | Almacenamiento relacional eficiente           |
-| Gestión de assets    | Vite + Tailwind CSS (próximo) | Preparado para estilos modernos y compilación |
+| Gestión de assets    | CSS & Tailwind (En desarollo) | Preparado para estilos modernos y compilación |
 | Administración BD    | phpMyAdmin                    | Interfaz gráfica durante desarrollo           |
 | Control de versiones | Git + GitHub                  | Colaboración y CI/CD futuro                   |
 
