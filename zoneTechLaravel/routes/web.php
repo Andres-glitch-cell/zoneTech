@@ -39,6 +39,6 @@ Route::get('/login', function () {
 });
 
 /*
-Texto de bienvenida personalizado con fn() =>
+? Texto de prueba bienvenida personalizado con fn() anónima =>
  route::get("/", fn() => "<h1>¡Hola! ZoneTech está online 🚀</h1>");
- */
+*/
