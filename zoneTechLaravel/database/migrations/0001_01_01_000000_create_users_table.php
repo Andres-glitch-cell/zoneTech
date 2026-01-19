@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->int("id")-> autoincrement();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email')->unique() -> notNullValue();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -34,6 +34,11 @@ return new class extends Migration
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
+        });
+
+        Schema::create('pruebaTabla', function (Blueprint $table) {
+            $table->bigIncrements("pruebaCampoUno");
+            $table->timestamps();
         });
     }
 
