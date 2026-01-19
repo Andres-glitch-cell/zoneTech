@@ -1,0 +1,3 @@
+localhost --> /
+prueba --> /prueba (Página principal de zoneTech)
+login --> /login (Página de Logeo de zoneTech)
