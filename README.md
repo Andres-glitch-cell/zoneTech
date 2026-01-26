@@ -1,5 +1,22 @@
 <div align="center">
-
+<div style="width: 300px; height: 50px; padding: 0px; clear: both; background-color: transparent; border: 1px solid rgb(192, 192, 192); border-radius: 5px; position: relative !important; overflow: hidden;">
+    <div class="yap_img" style="position: relative !important; float: right;">
+      <a href="{click_url}" target="_blank" style="display: block; color: #FFF;">
+                <img src="{image}" style="background-size: cover !important; width: 50px !important; height: 50px !important; margin-left: 5px;" alt="{title}">
+                
+              </a>
+    </div>
+    <div class="yap_ad_txt" style="padding: 5px;">
+      <a href="{click_url}" target="_blank" style=" color: #000; text-decoration: none;">
+        <h2 style="padding: 0; margin: 0; font-weight: bold; font-size: 14px; text-align: left; width: 235px; text-align: left; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{title}</h2>
+        <p style="margin: 0; padding-top: 5px; font-size: 12px; width: 215px; text-align: left; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">Ad: {sponsor}</p>
+        <div>
+        </div>
+      </a>
+      <div style="text-align: right; position: absolute; bottom: 3px; left: 225px;">{gemini}</div>
+    </div>
+  </div>
+  <div style="clear: both"></div>
 <!-- Animated Header Banner -->
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0,2,2,5,30&height=180&section=header&text=ZoneTech&fontSize=50&fontColor=fff&animation=fadeIn&fontAlignY=35&desc=E-Commerce%20%26%20Technical%20Support%20Platform&descAlignY=55&descAlign=50"/>
 
