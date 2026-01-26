@@ -1,10 +1,10 @@
 <div align="center">
 
 <!-- Animated Header Banner -->
-<img width="100%" src="https://capsule-render.vercel.app/api?type=venom&color=gradient&customColorList=0,2,2,5,30&height=300&section=header&text=ZoneTech&fontSize=90&fontColor=fff&animation=fadeIn&fontAlignY=38&desc=E-Commerce%20%26%20Technical%20Support%20Platform&descAlignY=55&descAlign=50"/>
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0,2,2,5,30&height=180&section=header&text=ZoneTech&fontSize=50&fontColor=fff&animation=fadeIn&fontAlignY=35&desc=E-Commerce%20%26%20Technical%20Support%20Platform&descAlignY=55&descAlign=50"/>
 
 <!-- Typing Animation -->
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&duration=3000&pause=1000&color=00D9FF&center=true&vCenter=true&multiline=true&repeat=true&width=800&height=100&lines=%F0%9F%9B%92+Tu+tienda+tecnol%C3%B3gica+de+confianza;%F0%9F%94%A7+Soporte+t%C3%A9cnico+profesional;%F0%9F%92%AC+Comunidad+activa+de+usuarios" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=500&size=18&duration=3000&pause=1000&color=00D9FF&center=true&vCenter=true&repeat=true&width=500&height=45&lines=Tu+tienda+tecnologica+de+confianza;Soporte+tecnico+profesional;Comunidad+activa+de+usuarios" alt="Typing SVG" /></a>
 
 <br/>
 
@@ -89,7 +89,7 @@
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/VgCDAzcKvsR6OM0uWg/giphy.gif" width="50"> Sobre el Proyecto
+## <img src="https://media.giphy.com/media/VgCDAzcKvsR6OM0uWg/giphy.gif" width="30"> Sobre el Proyecto
 
 </div>
 
@@ -99,7 +99,7 @@
 <tr>
 <td>
 
-<img align="right" width="300" src="https://raw.githubusercontent.com/gist/patevs/b007a0e98fb216438d4cbf559fac4166/raw/88f20c9d749d756be63f22b09f3c4ac570bc5101/programming.gif"/>
+<img align="right" width="180" src="https://raw.githubusercontent.com/gist/patevs/b007a0e98fb216438d4cbf559fac4166/raw/88f20c9d749d756be63f22b09f3c4ac570bc5101/programming.gif"/>
 
 ### Que es ZoneTech?
 
@@ -131,7 +131,7 @@ Combina tres pilares fundamentales:
 <tr>
 <td align="center" width="25%">
 
-<img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="100">
+<img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="60">
 
 **Desarrollo Profesional**
 
@@ -140,7 +140,7 @@ Codigo limpio siguiendo estandares PSR-12 y mejores practicas de Laravel
 </td>
 <td align="center" width="25%">
 
-<img src="https://media.giphy.com/media/ln7z2eWriiQAllfVcn/giphy.gif" width="100">
+<img src="https://media.giphy.com/media/ln7z2eWriiQAllfVcn/giphy.gif" width="60">
 
 **Escalabilidad**
 
@@ -149,7 +149,7 @@ Arquitectura preparada para crecer con tu negocio
 </td>
 <td align="center" width="25%">
 
-<img src="https://media.giphy.com/media/UVG0BN8TOMKkPOJS6e/giphy.gif" width="100">
+<img src="https://media.giphy.com/media/UVG0BN8TOMKkPOJS6e/giphy.gif" width="60">
 
 **Seguridad**
 
@@ -158,7 +158,7 @@ Autenticacion robusta y proteccion contra vulnerabilidades
 </td>
 <td align="center" width="25%">
 
-<img src="https://media.giphy.com/media/du3J3cXyzhj75IOgvA/giphy.gif" width="100">
+<img src="https://media.giphy.com/media/du3J3cXyzhj75IOgvA/giphy.gif" width="60">
 
 **Documentacion**
 
@@ -177,7 +177,7 @@ Codigo documentado y guias de uso completas
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif" width="50"> Demo y Capturas
+## <img src="https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif" width="30"> Demo y Capturas
 
 </div>
 
@@ -242,7 +242,7 @@ Codigo documentado y guias de uso completas
 <br/>
 
 <!-- Demo GIF Placeholder -->
-<img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" width="600" alt="Demo GIF"/>
+<img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" width="400" alt="Demo GIF"/>
 
 <br/>
 
@@ -259,7 +259,7 @@ Codigo documentado y guias de uso completas
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="35"> Caracteristicas Principales
+## <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="25"> Caracteristicas Principales
 
 </div>
 
@@ -275,7 +275,7 @@ Codigo documentado y guias de uso completas
 <h3 align="center">E-Commerce Avanzado</h3>
 
 <div align="center">
-<img src="https://media.giphy.com/media/JWuBH9rCO2uZuHBFpm/giphy.gif" width="150"/>
+<img src="https://media.giphy.com/media/JWuBH9rCO2uZuHBFpm/giphy.gif" width="80"/>
 </div>
 
 <br/>
@@ -297,7 +297,7 @@ Codigo documentado y guias de uso completas
 <h3 align="center">Soporte Tecnico</h3>
 
 <div align="center">
-<img src="https://media.giphy.com/media/LaVp0AyqR5bGsC5Cbm/giphy.gif" width="150"/>
+<img src="https://media.giphy.com/media/LaVp0AyqR5bGsC5Cbm/giphy.gif" width="80"/>
 </div>
 
 <br/>
@@ -321,7 +321,7 @@ Codigo documentado y guias de uso completas
 <h3 align="center">Comunidad</h3>
 
 <div align="center">
-<img src="https://media.giphy.com/media/Cmr1OMJ2FN0B2/giphy.gif" width="150"/>
+<img src="https://media.giphy.com/media/Cmr1OMJ2FN0B2/giphy.gif" width="80"/>
 </div>
 
 <br/>
@@ -343,7 +343,7 @@ Codigo documentado y guias de uso completas
 <h3 align="center">Seguridad y Admin</h3>
 
 <div align="center">
-<img src="https://media.giphy.com/media/077i6AULCXc0FKTj9s/giphy.gif" width="150"/>
+<img src="https://media.giphy.com/media/077i6AULCXc0FKTj9s/giphy.gif" width="80"/>
 </div>
 
 <br/>
@@ -370,35 +370,35 @@ Codigo documentado y guias de uso completas
 <!-- Responsive Design Banner -->
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=0,2,2,5,30&height=80&section=header&text=100%25%20Responsive%20Design&fontSize=30&fontColor=fff&animation=twinkling"/>
+<img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=0,2,2,5,30&height=50&section=header&text=100%25%20Responsive%20Design&fontSize=20&fontColor=fff&animation=twinkling"/>
 
 <br/><br/>
 
 <table>
 <tr>
 <td align="center">
-<img src="https://img.icons8.com/fluency/96/000000/multiple-devices.png" width="80"/>
+<img src="https://img.icons8.com/fluency/96/000000/multiple-devices.png" width="50"/>
 <br/>
 <b>Multi-dispositivo</b>
 <br/>
 <sub>Desktop, Tablet y Movil</sub>
 </td>
 <td align="center">
-<img src="https://img.icons8.com/fluency/96/000000/chrome.png" width="80"/>
+<img src="https://img.icons8.com/fluency/96/000000/chrome.png" width="50"/>
 <br/>
 <b>Cross-browser</b>
 <br/>
 <sub>Chrome, Firefox, Safari, Edge</sub>
 </td>
 <td align="center">
-<img src="https://img.icons8.com/fluency/96/000000/speed.png" width="80"/>
+<img src="https://img.icons8.com/fluency/96/000000/speed.png" width="50"/>
 <br/>
 <b>Optimizado</b>
 <br/>
 <sub>Rendimiento y SEO</sub>
 </td>
 <td align="center">
-<img src="https://img.icons8.com/fluency/96/000000/accessibility2.png" width="80"/>
+<img src="https://img.icons8.com/fluency/96/000000/accessibility2.png" width="50"/>
 <br/>
 <b>Accesible</b>
 <br/>
@@ -418,7 +418,7 @@ Codigo documentado y guias de uso completas
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif" width="35"> Arquitectura
+## <img src="https://media.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif" width="25"> Arquitectura
 
 </div>
 
@@ -669,7 +669,7 @@ Codigo documentado y guias de uso completas
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/f9XgHHnPnDjOF1hWpl/giphy.gif" width="35"> Estructura del Proyecto
+## <img src="https://media.giphy.com/media/f9XgHHnPnDjOF1hWpl/giphy.gif" width="25"> Estructura del Proyecto
 
 </div>
 
@@ -867,7 +867,7 @@ zoneTech/
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/WFZvB7VIXBgiz3oDXE/giphy.gif" width="35"> Requisitos Previos
+## <img src="https://media.giphy.com/media/WFZvB7VIXBgiz3oDXE/giphy.gif" width="25"> Requisitos Previos
 
 </div>
 
@@ -1005,14 +1005,14 @@ php -m | grep -E "pdo|mysql|mbstring|xml|curl|zip|bcmath|gd"
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/fsEaZldNC8A1PJ3mwp/giphy.gif" width="35"> Instalacion
+## <img src="https://media.giphy.com/media/fsEaZldNC8A1PJ3mwp/giphy.gif" width="25"> Instalacion
 
 </div>
 
 <br/>
 
 <div align="center">
-<img src="https://media.giphy.com/media/3orifgYbnsq43eFsdO/giphy.gif" width="200"/>
+<img src="https://media.giphy.com/media/3orifgYbnsq43eFsdO/giphy.gif" width="120"/>
 </div>
 
 <br/>
@@ -1180,7 +1180,7 @@ npm run dev
 
 ### Listo!
 
-<img src="https://media.giphy.com/media/xT0GqssRweIhlz209i/giphy.gif" width="200"/>
+<img src="https://media.giphy.com/media/xT0GqssRweIhlz209i/giphy.gif" width="120"/>
 
 Visita **`http://localhost:8000`** en tu navegador
 
@@ -1195,7 +1195,7 @@ Visita **`http://localhost:8000`** en tu navegador
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/ZVik7pBtu9dNS/giphy.gif" width="35"> Instalacion Rapida (One-liner)
+## <img src="https://media.giphy.com/media/ZVik7pBtu9dNS/giphy.gif" width="25"> Instalacion Rapida (One-liner)
 
 </div>
 
@@ -1266,7 +1266,7 @@ echo "======================================${NC}"
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/jSKBmKkvo2dPQQtsR1/giphy.gif" width="35"> Uso
+## <img src="https://media.giphy.com/media/jSKBmKkvo2dPQQtsR1/giphy.gif" width="25"> Uso
 
 </div>
 
@@ -1342,7 +1342,7 @@ Si ejecutaste los seeders, tienes acceso a estos usuarios de prueba:
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="35"> Configuracion Avanzada
+## <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="25"> Configuracion Avanzada
 
 </div>
 
@@ -1466,7 +1466,7 @@ Route::get('/mi-pagina', function () {
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/KzJkzjggfGN5Py6nkT/giphy.gif" width="35"> API REST (Proximamente)
+## <img src="https://media.giphy.com/media/KzJkzjggfGN5Py6nkT/giphy.gif" width="25"> API REST (Proximamente)
 
 </div>
 
@@ -1507,7 +1507,7 @@ POST   /reviews            → Crear resena
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/gG6OcTSRWaSIS/giphy.gif" width="35"> Testing
+## <img src="https://media.giphy.com/media/gG6OcTSRWaSIS/giphy.gif" width="25"> Testing
 
 </div>
 
@@ -1560,7 +1560,7 @@ tests/
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/26n6WywJyh39n1pBu/giphy.gif" width="35"> Roadmap
+## <img src="https://media.giphy.com/media/26n6WywJyh39n1pBu/giphy.gif" width="25"> Roadmap
 
 </div>
 
@@ -1623,14 +1623,14 @@ tests/
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/du3J3cXyzhj75IOgvA/giphy.gif" width="35"> Contribuir
+## <img src="https://media.giphy.com/media/du3J3cXyzhj75IOgvA/giphy.gif" width="25"> Contribuir
 
 </div>
 
 <br/>
 
 <div align="center">
-<img src="https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif" width="200"/>
+<img src="https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif" width="120"/>
 </div>
 
 <br/>
@@ -1717,7 +1717,7 @@ Seguimos [Conventional Commits](https://www.conventionalcommits.org/):
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/jTNG3RF6EwbkpD4LZx/giphy.gif" width="35"> Soporte
+## <img src="https://media.giphy.com/media/jTNG3RF6EwbkpD4LZx/giphy.gif" width="25"> Soporte
 
 </div>
 
@@ -1788,7 +1788,7 @@ Contacto directo
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/VkMV9TldsPd28/giphy.gif" width="35"> Licencia
+## <img src="https://media.giphy.com/media/VkMV9TldsPd28/giphy.gif" width="25"> Licencia
 
 </div>
 
@@ -1835,7 +1835,7 @@ Ver [`LICENSE`](LICENSE) para mas informacion.
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/LnQjpWaON8nhr21vNW/giphy.gif" width="35"> Contacto
+## <img src="https://media.giphy.com/media/LnQjpWaON8nhr21vNW/giphy.gif" width="25"> Contacto
 
 </div>
 
@@ -1872,7 +1872,7 @@ Ver [`LICENSE`](LICENSE) para mas informacion.
 
 <div align="center">
 
-## <img src="https://media.giphy.com/media/xUA7bdpLxQhsSQdyog/giphy.gif" width="35"> Agradecimientos
+## <img src="https://media.giphy.com/media/xUA7bdpLxQhsSQdyog/giphy.gif" width="25"> Agradecimientos
 
 </div>
 
@@ -1955,7 +1955,7 @@ Recursos y herramientas que hicieron posible este proyecto:
 <!-- Footer -->
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0,2,2,5,30&height=150&section=footer&text=Gracias%20por%20visitar!&fontSize=30&fontColor=fff&animation=twinkling&fontAlignY=75"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0,2,2,5,30&height=100&section=footer&text=Gracias%20por%20visitar!&fontSize=20&fontColor=fff&animation=twinkling&fontAlignY=70"/>
 
 <br/>
 
