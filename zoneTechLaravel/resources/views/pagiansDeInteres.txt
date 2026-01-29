@@ -1,0 +1,3 @@
+! ! TAILWIND OR BOOSTRAP ! !
+Icons:
+https://animate-ui.com/docs/icons
