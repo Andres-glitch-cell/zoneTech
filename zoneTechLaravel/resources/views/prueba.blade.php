@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ZoneTech – Cabecera Responsive</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
@@ -14,7 +18,8 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Cambio de fuente principal a Inter */
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #0f0f11;
             color: #e0e0e0;
             min-height: 100vh;
@@ -49,11 +54,15 @@
         }
 
         .logo {
+            /* Fuente Outfit para el logo */
+            font-family: 'Outfit', sans-serif;
             font-size: 1.9rem;
-            font-weight: 800;
+            font-weight: 900;
             color: #ff0000;
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
+            /* Más compacto para estilo tech */
             cursor: pointer;
+            text-transform: uppercase;
         }
 
         .navegacion-principal {
@@ -65,14 +74,17 @@
             color: #e0e0e0;
             text-decoration: none;
             font-weight: 500;
+            font-size: 0.95rem;
             white-space: nowrap;
             transition: color .2s;
+            letter-spacing: -0.2px;
         }
 
         .navegacion-principal a:hover {
             color: #ff2a2a;
         }
 
+        /* ... (Resto de estilos iguales) ... */
         .acciones-cabecera {
             display: flex;
             align-items: center;
@@ -118,7 +130,6 @@
             place-items: center;
         }
 
-        /* --- Buscador y Overlay --- */
         .overlay-blur {
             position: fixed;
             inset: 0;
@@ -205,28 +216,18 @@
             align-items: center;
         }
 
-        .input__button__shadow.loading svg {
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
         .input__search {
             flex: 1;
             border-radius: 20px;
             outline: none;
             border: none;
             padding: 10px 14px;
+            font-family: 'Inter', sans-serif;
             font-size: 14px;
             background: transparent;
             color: #17202A;
         }
 
-        /* --- Menú Móvil --- */
         .superposicion-menu-movil {
             position: fixed;
             inset: 0;
@@ -271,6 +272,7 @@
             text-decoration: none;
             font-size: 1.2rem;
             padding: 10px;
+            font-family: 'Outfit', sans-serif;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -283,7 +285,11 @@
         }
 
         h1 {
+            /* Fuente Outfit para títulos */
+            font-family: 'Outfit', sans-serif;
             margin-bottom: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
             font-size: clamp(2.2rem, 6vw, 3.4rem);
         }
 
@@ -300,11 +306,9 @@
 </head>
 
 <body>
-
     <header class="cabecera-sitio" id="cabeceraPrincipal">
         <div class="contenedor-cabecera">
             <div class="logo">ZoneTech</div>
-
             <nav class="navegacion-principal">
                 <a href="#">Ofertas</a>
                 <a href="#">Móviles</a>
@@ -312,26 +316,22 @@
                 <a href="#">Informática</a>
                 <a href="#">Electrodomésticos</a>
             </nav>
-
             <div class="acciones-cabecera">
                 <button class="boton-accion" id="btnBuscar" aria-label="Buscar">
                     <svg class="icono-svg" viewBox="0 0 24 24">
                         <path d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
                 </button>
-
                 <button class="boton-accion" title="Lista de deseos">
                     <svg class="icono-svg" viewBox="0 0 24 24">
                         <path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                     </svg>
                 </button>
-
                 <button class="boton-accion" title="Mi cuenta">
                     <svg class="icono-svg" viewBox="0 0 24 24">
                         <path d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                 </button>
-
                 <button class="boton-menu-movil" id="botonMenuMovil" aria-label="Menú">☰</button>
             </div>
         </div>
@@ -371,7 +371,6 @@
     </main>
 
     <script>
-        // Selección de elementos
         const cabecera = document.getElementById("cabeceraPrincipal");
         const btnBuscar = document.getElementById("btnBuscar");
         const buscador = document.getElementById("buscadorAnimado");
@@ -381,7 +380,6 @@
         const menuMovil = document.getElementById("menuMovil");
         const botonCerrar = document.getElementById("botonCerrar");
 
-        // Scroll: Ocultar/Mostrar cabecera
         let ultimaPosicionScroll = 0;
         window.addEventListener("scroll", () => {
             const pos = window.scrollY;
@@ -396,7 +394,6 @@
             passive: true
         });
 
-        // Buscador funciones
         function abrirBuscador() {
             buscador.classList.add("activo");
             overlay.classList.add("activo");
@@ -412,7 +409,6 @@
         btnBuscar.addEventListener("click", abrirBuscador);
         overlay.addEventListener("click", cerrarBuscador);
 
-        // Menú Móvil funciones
         botonMenu.addEventListener("click", () => {
             menuMovil.classList.add("activo");
             document.body.style.overflow = "hidden";
@@ -425,7 +421,6 @@
 
         botonCerrar.addEventListener("click", cerrarMenu);
 
-        // Atajos de teclado (Windows/General)
         window.addEventListener("keydown", e => {
             if (e.key === "Escape") {
                 cerrarBuscador();
@@ -433,7 +428,6 @@
             }
         });
 
-        // Efecto loading
         btnAnimado.addEventListener("click", () => {
             btnAnimado.classList.add("loading");
             setTimeout(() => btnAnimado.classList.remove("loading"), 1000);
