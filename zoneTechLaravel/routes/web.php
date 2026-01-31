@@ -93,10 +93,13 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('/password-check', function () {
-    return view('password-check');
+Route::get('/registerandlogin', function () {
+    return view('registerandlogin');
 });
 
+Route::get('/loginandregister', function () {
+    return view('loginandregister');
+});
 /*
 ? Texto de prueba bienvenida personalizado con fn() anónima =>
  route::get("/", fn() => "<h1>¡Hola! ZoneTech está online 🚀</h1>");
