@@ -19,8 +19,6 @@
         /* Video en full screen detrás de todo */
         #backgroundVideo {
             position: fixed;
-            width: 100%;
-            height: 100%;
             z-index: -1;
         }
 
@@ -32,6 +30,7 @@
             text-align: center;
             font-family: Arial, sans-serif;
             padding-top: 50px;
+
         }
 
         body::after {
@@ -1552,7 +1551,7 @@
 
 <body
     class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
-    <video id="backgroundVideo" autoplay muted loop playsinline>
+    <video style="width: 40%; width: 100%; height: 70%; object-fit: cover;" id="backgroundVideo" autoplay muted loop playsinline>
         <source src="{{ asset('videoGrokLaravel12.mp4') }}" type="video/mp4">
         Tu navegador no soporta video de fondo.
     </video>
