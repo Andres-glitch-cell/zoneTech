@@ -1,0 +1,36 @@
+<!-- /\*
+! 1. La parte que NO debes borrar (La estructura)
+@ Las líneas de arriba (use ...) y el return new class extends Migration son como los cimientos de una casa. No los ves, pero si los quitas, todo se cae.
+
+! 2. La parte donde TÚ trabajas: up()
+
++ - Este es el corazón del archivo. Todo lo que pongas aquí es lo que se convertirá en columnas en tu base de datos. Schema::create: Es la orden de "Crea esta tabla".
+
+@ $table->id() y $table->timestamps(): Vienen por defecto porque Laravel considera que toda tabla profesional debe tener un ID y saber cuándo se creó cada cosa.
+
+! 3. Si quieres que tu tabla sirva para algo.
+@ Tienes que añadir tus campos aquí, entre el id() y el timestamps():
+
+! 4. El botón de "Deshacer": down()
++ Esta es la parte que mucha gente ignora pero es vital.
+@ ¿Para qué sirve?: Si te equivocas al hacer php artisan migrate, puedes usar el comando php artisan migrate:rollback. Laravel buscará la función down() de este archivo y ejecutará Schema::dropIfExists('productos'), que básicamente significa: "Borra la tabla y haz como si nada hubiera pasado". Es tu red de seguridad.
+\*/
+-->
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+    <style>
+        body{
+            color: rgb(185, 162, 28);
+          }
+    </style>
+</head>
+<body>
+
+</body>
+</html>
