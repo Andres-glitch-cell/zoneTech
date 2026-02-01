@@ -115,10 +115,9 @@ Combina tres pilares fundamentales:
 
 ### 1. Las Relaciones (El siguiente nivel del Backend)
 Una tienda no son solo usuarios. Necesitas Productos y Pedidos. Tu trabajo ahora es crear la lógica para que un usuario pueda tener muchos pedidos.
-* [ ] Crear la tabla productos y la tabla pedidos.
+* [ ] Crear la tabla productos y la tabla pedidos. <img width="498" height="498" alt="image" src="https://github.com/user-attachments/assets/dc73639b-391d-4f01-b71c-a9bf3ee16433" />
 * [ ] Lo que nos aporta: Podrás hacer consultas complejas como: "Dime todos los productos que ha comprado el usuario con ID 1".
 
-![UI Progress](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXZueXpueXpueXpueXpueXpueXpueXpueXpueXpueXpueZCZ3ZjZCZ3ZCZ3ZCZ3ZCZ3ZCZ3ZCZ3ZCZ/3o7TKMGpxxS0ZzH6dq/giphy.gif)
 
 ---
 
