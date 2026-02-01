@@ -107,6 +107,38 @@ Combina tres pilares fundamentales:
 
 <div align="center">
 
+# 🎯 Objetivos del Proyecto: [zoneTech] 01/2/2026
+
+---
+
+## 📌 Metas Principales
+
+### 1. Las Relaciones (El siguiente nivel del Backend)
+Una tienda no son solo usuarios. Necesitas Productos y Pedidos. Tu trabajo ahora es crear la lógica para que un usuario pueda tener muchos pedidos.
+* [ ] Crear la tabla productos y la tabla pedidos.
+* [ ] Lo que nos aporta: Podrás hacer consultas complejas como: "Dime todos los productos que ha comprado el usuario con ID 1".
+
+![UI Progress](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXZueXpueXpueXpueXpueXpueXpueXpueXpueXpueXpueZCZ3ZjZCZ3ZCZ3ZCZ3ZCZ3ZCZ3ZCZ3ZCZ/3o7TKMGpxxS0ZzH6dq/giphy.gif)
+
+---
+
+### 2. Lógica y Funcionalidad
+* [ ] Configurar los controladores principales.
+* [ ] Integrar la API de datos.
+
+![Coding Logic](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXZueXpueXpueXpueXpueXpueXpueXpueXpueXpueXpueZCZ3ZjZCZ3ZCZ3ZCZ3ZCZ3ZCZ3ZCZ3ZCZ/o0vwzuFwCGAFO/giphy.gif)
+
+---
+
+### 3. Optimización y Despliegue
+* [ ] Reducir el tiempo de carga bajo 2 segundos.
+* [ ] Publicar en el servidor de producción.
+
+![Launch](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXZueXpueXpueXpueXpueXpueXpueXpueXpueXpueXpueZCZ3ZjZCZ3ZCZ3ZCZ3ZCZ3ZCZ3ZCZ3ZCZ/3o7TKVUn7iM8FMEU24/giphy.gif)
+
+---
+
+
 ### Por que elegir ZoneTech?
 
 </div>
