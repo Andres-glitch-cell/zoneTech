@@ -159,7 +159,7 @@
     }">
 
         <div class="text-center mb-8">
-            <h1 onclick="window.location.href='/'" class="text-4xl font-black text-white tracking-tighter uppercase logo-font cursor-pointer group">
+            <h1 onclick="window.location.href='/dashboard'" class="text-4xl font-black text-white tracking-tighter uppercase logo-font cursor-pointer group">
                 Zone<span class="text-red-500 group-hover:text-cyan-400 transition-colors duration-500">Tech</span>
             </h1>
             <p class="text-zinc-600 text-[10px] font-bold uppercase tracking-[0.4em] mt-2">New Account Protocol</p>

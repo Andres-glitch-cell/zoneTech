@@ -86,24 +86,28 @@ El "/" quiere decir que esta en localhost, si quisieramos tener archivos en otra
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/prueba', function () {
-    return view('prueba');
+Route::get('/dashboard', function () {
+    return view('dashboard');
 });
 Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('/registerandlogin', function () {
-    return view('registerandlogin');
+Route::get('/register', function () {
+    return view('register');
 });
 
-Route::get('/loginandregister', function () {
-    return view('loginandregister');
-});
+// Route::get('/registerandlogin', function () {
+//     return view('registerandlogin');
+// });
 
-Route::get('/crearcuenta', function () {
-    return view('crearcuenta');
-});
+// Route::get('/loginandregister', function () {
+//     return view('loginandregister');
+// });
+
+// Route::get('/crearcuenta', function () {
+//     return view('crearcuenta');
+// });
 
 /*
 ? Texto de prueba bienvenida personalizado con fn() anónima =>
