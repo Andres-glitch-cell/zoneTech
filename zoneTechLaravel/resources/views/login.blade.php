@@ -4,11 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<<<<<<< HEAD:zoneTechLaravel/resources/views/login.blade.php
-    <title>ZoneTech – Inicia Sesión</title>
-=======
     <title>ZoneTech – Iniciar Sesión</title>
->>>>>>> main:zoneTechLaravel/resources/views/registerandlogin.blade.php
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -274,13 +270,10 @@
         function inicio() {
             window.location.href = "/dashboard";
         }
-<<<<<<< HEAD:zoneTechLaravel/resources/views/login.blade.php
 
         function crearCuenta() {
             window.location.href = "/register";
         }
-=======
->>>>>>> main:zoneTechLaravel/resources/views/registerandlogin.blade.php
     </script>
 </body>
 
