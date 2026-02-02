@@ -268,7 +268,11 @@
     </div>
     <script>
         function inicio() {
-            window.location.href = "/prueba";
+            window.location.href = "/dashboard";
+        }
+
+        function crearCuenta() {
+            window.location.href = "/register";
         }
     </script>
 </body>
