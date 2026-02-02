@@ -97,6 +97,7 @@ Route::get('/register', function () {
     return view('register');
 });
 
+<<<<<<< HEAD
 // Route::get('/registerandlogin', function () {
 //     return view('registerandlogin');
 // });
@@ -109,6 +110,11 @@ Route::get('/register', function () {
 //     return view('crearcuenta');
 // });
 
+=======
+Route::get('/loginandregister', function () {
+    return view('loginandregister');
+});
+>>>>>>> main
 /*
 ? Texto de prueba bienvenida personalizado con fn() anónima =>
  route::get("/", fn() => "<h1>¡Hola! ZoneTech está online 🚀</h1>");
