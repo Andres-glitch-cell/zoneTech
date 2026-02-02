@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ZoneTech – Acceso Pro</title>
+    <title>ZoneTech – Iniciar Sesión</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Outfit:wght@700;800&display=swap"
+        rel="stylesheet">
 
     <style>
         [x-cloak] {
@@ -19,7 +21,6 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #030305;
         }
 
         h1,
@@ -28,178 +29,246 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* --- CONTENEDOR CON LUZ FLUIDA Y SUAVE --- */
-        .contenedor-border-pro {
+        /* From Uiverse.io by 3HugaDa3 */
+        .checkbox-wrapper {
+            --checkbox-size: 25px;
+            --checkbox-color: black;
+            --checkbox-shadow: rgba(0, 255, 136, 0.3);
+            display: flex;
+            align-items: center;
             position: relative;
-            padding: 1.5px;
-            /* Borde más fino para menos intensidad */
-            border-radius: 16px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .checkbox-wrapper input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkbox-wrapper .checkmark {
+            position: relative;
+            width: var(--checkbox-size);
+            height: var(--checkbox-size);
+            border: #ad4ec5 2px solid;
+            border-radius: 8px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.03);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* El haz de luz: Colores más suaves y mayor difuminado */
-        .contenedor-border-pro::before {
-            content: '';
+        .checkbox-wrapper .checkmark::before {
+            content: "";
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            /* Colores ZoneTech: Rojo suave, Violeta y Cian */
-            background: conic-gradient(from 0deg,
-                    transparent 0%,
-                    #ff3333 15%,
-                    #a855f7 30%,
-                    #06b6d4 45%,
-                    transparent 60%);
-            animation: rotate-border 4s linear infinite;
-            opacity: 0;
-            filter: blur(8px);
-            /* Difuminado para que no sea tan intenso */
-            transition: opacity 0.5s ease;
-        }
-
-        @keyframes rotate-border {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Activación por Focus o Contenido */
-        .contenedor-activo {
-            box-shadow: 0 0 25px rgba(168, 85, 247, 0.1);
-        }
-
-        .contenedor-activo::before {
-            opacity: 1;
-        }
-
-        /* Estilo del Input */
-        .input-pro {
-            position: relative;
-            z-index: 2;
             width: 100%;
-            background: #0d0d10 !important;
-            border: none !important;
-            border-radius: 15px;
-            outline: none !important;
-            color: #e2e8f0;
-            font-size: 0.875rem;
-        }
-
-        /* Botón con Glow suave */
-        .btn-pro {
-            background: linear-gradient(90deg, #ff3333, #a855f7);
-            position: relative;
-            z-index: 1;
-            transition: all 0.4s ease;
-        }
-
-        .btn-pro::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: inherit;
-            filter: blur(15px);
+            height: 100%;
+            background: linear-gradient(45deg, #00ffcc);
             opacity: 0;
-            z-index: -1;
-            transition: opacity 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform: scale(0) rotate(-45deg);
         }
 
-        .btn-pro:hover {
-            transform: translateY(-2px);
+        .checkbox-wrapper input:checked~.checkmark::before {
+            opacity: 1;
+            transform: scale(1) rotate(0);
         }
 
-        .btn-pro:hover::after {
-            opacity: 0.5;
+        .checkbox-wrapper .checkmark svg {
+            width: 0;
+            height: 0;
+            color: #9c00c4;
+            z-index: 1;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+        }
+
+        .checkbox-wrapper input:checked~.checkmark svg {
+            width: 18px;
+            height: 18px;
+            transform: rotate(360deg);
+        }
+
+        .checkbox-wrapper:hover .checkmark {
+            border-color: #ad4ec5;
+            transform: scale(1.1);
+            box-shadow:
+                0 0 20px purple,
+                0 0 40px purple,
+                inset 0 0 10px purple;
+        }
+
+        .checkbox-wrapper input:checked~.checkmark {
+            animation: pulse 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 20px var(--checkbox-shadow);
+            }
+
+            50% {
+                transform: scale(0.9);
+                box-shadow:
+                    0 0 30px var(--checkbox-shadow),
+                    0 0 50px var(--checkbox-shadow);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px var(--checkbox-shadow);
+            }
+        }
+
+        .checkbox-wrapper .label {
+            margin-left: 15px;
+            font-family: "Segoe UI", sans-serif;
+            color: #ad4ec5;
+            font-size: 18px;
+            text-shadow: 0 0 10px var(--checkbox-shadow);
+            opacity: 0.9;
+            transition: all 0.3s;
+        }
+
+        .checkbox-wrapper:hover .label {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        /* Glowing dots animation */
+        .checkbox-wrapper::after,
+        .checkbox-wrapper::before {
+            content: "";
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #ad4ec5;
+            opacity: 0;
+            transition: all 0.5s;
+        }
+
+        .checkbox-wrapper::before {
+            left: -10px;
+            top: 50%;
+        }
+
+        .checkbox-wrapper::after {
+            right: -10px;
+            top: 50%;
+        }
+
+        .checkbox-wrapper:hover::before {
+            opacity: 1;
+            transform: translateX(-10px);
+            box-shadow: 0 0 10px #ad4ec5
+        }
+
+        .checkbox-wrapper:hover::after {
+            opacity: 1;
+            transform: translateX(10px);
+            box-shadow: 0 0 10px #ad4ec5
+        }
+
+        /* 1. El color del fondo cuando lo marcas */
+        .checkbox-wrapper .checkmark::before {
+            /* Cambiado de verde a un degradado rojo/violeta */
+            background: linear-gradient(45deg, #ff0000, #ad4ec5);
+        }
+
+        /* 2. El color del icono (el tick/palomita) */
+        .checkbox-wrapper .checkmark svg {
+            color: white;
+            /* Cambiado de morado oscuro a blanco para que se vea */
+            filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+        }
+
+        /* 3. La sombra que brilla (glow) al pasar el ratón */
+        .checkbox-wrapper:hover .checkmark {
+            border-color: #9c00c4;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4),
+                inset 0 0 10px rgba(255, 0, 0, 0.2);
         }
     </style>
 </head>
 
-<body class="min-h-screen flex items-center justify-center p-6 selection:bg-red-500/30">
+<body class="bg-[#0f0f11] min-h-screen flex items-center justify-center p-4 selection:bg-violet-500/30">
 
-    <div class="w-full max-w-[400px]" x-data="{
-        email: '',
-        password: '',
-        focusEmail: false,
-        focusPass: false
-    }">
+    <div class="w-full max-w-[400px]" x-data="{ email: '', password: '', remember: false }">
 
-        <div class="text-center mb-10">
-            <h1 onclick="inicio()" class="text-5xl font-black text-white tracking-tighter cursor-pointer">
-                Z<span class="text-red-500">T</span>
-            </h1>
-            <p class="text-zinc-600 text-[10px] font-bold uppercase tracking-[0.4em] mt-2">Security Interface v2.0</p>
+        <div class="text-center mb-8">
+            <h1 onclick="inicio()" class="text-3xl font-black text-red-600 tracking-tighter uppercase logo-font" style="cursor: pointer;">ZoneTech</h1>
+            <p class="text-zinc-500 text-sm mt-2">Bienvenido de nuevo, entusiasta.</p>
         </div>
 
-        <div class="bg-[#0d0d0f]/60 backdrop-blur-2xl border border-white/5 rounded-[2.5rem] p-8 shadow-2xl relative">
+        <div
+            class="bg-zinc-900/60 backdrop-blur-xl border border-zinc-800/50 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
 
-            <div class="absolute -top-10 -right-10 w-40 h-40 bg-red-500/5 blur-[80px] rounded-full"></div>
-            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-cyan-500/5 blur-[80px] rounded-full"></div>
+            <div class="absolute -top-24 -right-24 w-48 h-48 bg-violet-600/10 blur-[80px] rounded-full"></div>
+            <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-indigo-600/10 blur-[80px] rounded-full"></div>
+            <h2 class="text-2xl font-bold mb-8 text-white text-center">Iniciar Sesión</h2>
+            <form action="#" class="space-y-6 relative z-10">
 
-            <h2 class="text-xl font-bold mb-8 text-zinc-200 text-center tracking-tight">Identificación</h2>
-
-            <form action="#" class="space-y-6">
-
-                <div class="space-y-2">
-                    <label class="block text-[9px] font-bold text-zinc-500 uppercase tracking-widest ml-1">Email Corporativo</label>
-                    <div class="contenedor-border-pro" :class="(focusEmail || email.length > 0) ? 'contenedor-activo' : ''">
-                        <input
-                            type="email"
-                            x-model="email"
-                            @focus="focusEmail = true"
-                            @blur="focusEmail = false"
-                            placeholder="usuario@zonetech.com"
-                            class="input-pro py-3.5 px-5 placeholder-zinc-700 transition-all" />
+                <div>
+                    <label class="block text-xs font-medium text-zinc-400 uppercase tracking-widest mb-2 ml-1">Correo
+                        Electrónico</label>
+                    <div class="relative group">
+                        <input type="email" x-model="email" placeholder="micorreo@gmail.com"
+                            class="w-full bg-zinc-950/50 border border-zinc-800 rounded-xl py-3 px-4 text-white placeholder-zinc-600 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/20 transition-all duration-300" />
                     </div>
                 </div>
 
-                <div class="space-y-2">
-                    <div class="flex justify-between items-center px-1">
-                        <label class="text-[9px] font-bold text-zinc-500 uppercase tracking-widest">Código de Acceso</label>
-                        <a href="#" class="text-[9px] text-zinc-600 hover:text-zinc-400 transition-colors uppercase">Recuperar</a>
+                <div>
+                    <div class="flex justify-between mb-2 ml-1">
+                        <label class="text-xs font-medium text-zinc-400 uppercase tracking-widest">Contraseña</label>
+                        <a href="#" class="text-xs text-violet-400 hover:text-violet-300 transition-colors">¿Olvidaste
+                            la clave?</a>
                     </div>
-                    <div class="contenedor-border-pro" :class="(focusPass || password.length > 0) ? 'contenedor-activo' : ''">
-                        <input
-                            type="password"
-                            x-model="password"
-                            @focus="focusPass = true"
-                            @blur="focusPass = false"
-                            placeholder="••••••••••••"
-                            class="input-pro py-3.5 px-5 placeholder-zinc-700 transition-all" />
+                    <div class="relative">
+                        <input type="password" x-model="password" placeholder="Mínimo 8 caracteres, signos y números"
+                            class="w-full bg-zinc-950/50 border  border-zinc-800 rounded-xl py-3 px-4 text-white placeholder-zinc-600 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/20 transition-all duration-300" />
                     </div>
                 </div>
 
-                <div class="pt-4">
-                    <button type="submit" class="btn-pro w-full py-4 rounded-xl text-white text-xs font-black uppercase tracking-[0.2em] shadow-lg active:scale-95">
-                        Verificar Identidad
-                    </button>
+                <div class="flex items-center gap-3 px-1">
+
+                    <!-- From Uiverse.io by 3HugaDa3 -->
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" />
+                        <div class="checkmark">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20 6L9 17L4 12" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                        <span class="label">Recordar Credenciales</span>
+                    </label>
+
                 </div>
+
+                <button type="submit"
+                    class="w-full py-4 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white rounded-xl font-semibold shadow-lg shadow-violet-900/20 transition-all duration-300 active:scale-[0.98]">
+                    Entrar a ZoneTech
+                </button>
 
             </form>
         </div>
 
-        <div class="mt-8 text-center">
-            <button onclick="crearCuenta()" class="text-[10px] font-bold text-zinc-500 hover:text-red-500 transition-all uppercase tracking-widest">
-                ¿No tienes cuenta? <span class="text-zinc-300 ml-1 underline underline-offset-4 decoration-red-900">Registrarse</span>
-            </button>
-        </div>
+        <p class="text-center mt-8 text-zinc-500 text-sm">
+            ¿No tienes cuenta?
+            <a href="#" class="text-white font-medium hover:text-violet-400 transition-colors">Crea una ahora</a>
+        </p>
 
     </div>
-
     <script>
         function inicio() {
             window.location.href = "/prueba";
-        }
-
-        function crearCuenta() {
-            window.location.href = "/crearcuenta";
         }
     </script>
 </body>
