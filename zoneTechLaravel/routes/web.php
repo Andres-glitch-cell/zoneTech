@@ -86,8 +86,8 @@ El "/" quiere decir que esta en localhost, si quisieramos tener archivos en otra
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/inicio', function () {
+    return view('inicio');
 });
 Route::get('/login', function () {
     return view('login');
