@@ -262,17 +262,17 @@
 
         <p class="text-center mt-8 text-zinc-500 text-sm">
             ¿No tienes cuenta?
-            <a href="#" class="text-white font-medium hover:text-violet-400 transition-colors">Crea una ahora</a>
+            <a onclick="onRegister()" class="text-white font-medium hover:text-violet-400 transition-colors">Crea una ahora</a>
         </p>
 
     </div>
     <script>
         function inicio() {
-            window.location.href = "/dashboard";
+            window.location.href = "dashboard";
         }
 
-        function crearCuenta() {
-            window.location.href = "/register";
+        function onRegister() {
+            window.location.href = "register";
         }
     </script>
 </body>
