@@ -311,11 +311,11 @@
         <div class="contenedor-cabecera">
             <div class="logo">ZoneTech</div>
             <nav class="navegacion-principal">
-                <a href="#">Ofertas</a>
-                <a href="#">Móviles</a>
-                <a href="#">TV y Sonido</a>
-                <a href="#">Informática</a>
-                <a href="#">Electrodomésticos</a>
+                <a href="#">Productos</a>
+                <button onclick="toSoporte()" class="boton-accion" title="Soporte técnico">
+                <a href="">Soporte técnico</a>
+                <a href="#">Sobre nosotros</a>
+                <a href="#">Contacto</a>
             </nav>
             <div class="acciones-cabecera">
                 <button class="boton-accion" id="btnBuscar" aria-label="Buscar">
@@ -355,10 +355,6 @@
     <main>
         @yield('contenido')
     </main>
-
-    <section>
-
-    </section>
 
     <script>
         const cabecera = document.getElementById("cabeceraPrincipal");
@@ -422,6 +418,13 @@
             btnAnimado.classList.add("loading");
             setTimeout(() => btnAnimado.classList.remove("loading"), 1000);
         });
+
+        function toLogIn() {
+            window.location.href = "login"
+        }
+        function toSoporte() {
+            window.location.href = "soporteTecnico"
+        }
     </script>
     @stack('scripts')
 </body>

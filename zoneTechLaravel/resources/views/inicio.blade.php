@@ -3,12 +3,7 @@
 @section('titulo', 'Inicio')
 
 @push('styles')
-<link rel="stylesheet" href="">
-<style>
-    h1 {
-        color: blue;
-    }
-</style>
+
 @endpush
 
 @section('contenido')
@@ -17,8 +12,5 @@
 @endsection
 
 @push('scripts')
-<script src="/js/alerta-libros.js"></script>
-<script>
-    console.log("Cargado el script de libros");
-</script>
+
 @endpush
