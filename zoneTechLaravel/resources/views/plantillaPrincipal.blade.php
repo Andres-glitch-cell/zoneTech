@@ -352,25 +352,12 @@
         </div>
     </div>
 
-    <div class="superposicion-menu-movil" id="menuMovil">
-        <div class="panel-menu-movil">
-            <button class="boton-cerrar-menu" id="botonCerrar"></button>
-            <nav class="navegacion-movil">
-                <a href="#">Productos</a>
-                <a href="#">Soporte técnico</a>
-                <a href="#">Sobre nosotros</a>
-                <a href="#">Contacto</a>
-                <a href="#">Mi cuenta</a>
-            </nav>
-        </div>
-    </div>
-
     <main>
         @yield('contenido')
     </main>
 
     <section>
-        
+
     </section>
 
     <script>
