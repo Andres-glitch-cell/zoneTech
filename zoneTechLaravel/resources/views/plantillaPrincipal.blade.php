@@ -368,10 +368,6 @@
         @yield('contenido')
     </main>
 
-    <section>
-        
-    </section>
-
     <script>
         const cabecera = document.getElementById("cabeceraPrincipal");
         const btnBuscar = document.getElementById("btnBuscar");

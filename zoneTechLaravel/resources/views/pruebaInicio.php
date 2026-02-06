@@ -315,7 +315,21 @@
                 <a href="#">TV y Sonido</a>
                 <a href="#">Informática</a>
                 <a href="#">Electrodomésticos</a>
+         >
+
+    <div class="superposicion-menu-movil" id="menuMovil">
+        <div class="panel-menu-movil">
+            <button class="boton-cerrar-menu" id="botonCerrar">×</button>
+            <nav class="navegacion-movil">
+                <a href="#">Ofertas</a>
+                <a href="#">Móviles</a>
+                <a href="#">TV y Sonido</a>
+                <a href="#">Informática</a>
+                <a href="#">Electrodomésticos</a>
+                <a href="#">Mi cuenta</a>
             </nav>
+        </div>
+    </div>   </nav>
             <div class="acciones-cabecera">
                 <button class="boton-accion" id="btnBuscar" aria-label="Buscar">
                     <svg class="icono-svg" viewBox="0 0 24 24">
