@@ -311,11 +311,10 @@
         <div class="contenedor-cabecera">
             <div class="logo">ZoneTech</div>
             <nav class="navegacion-principal">
-                <a href="#">Ofertas</a>
-                <a href="#">Móviles</a>
-                <a href="#">TV y Sonido</a>
-                <a href="#">Informática</a>
-                <a href="#">Electrodomésticos</a>
+                <a href="#">Productos</a>
+                <a href="#">Soporte técnico</a>
+                <a href="#">Sobre nosotros</a>
+                <a href="#">Contacto</a>
             </nav>
             <div class="acciones-cabecera">
                 <button class="boton-accion" id="btnBuscar" aria-label="Buscar">
