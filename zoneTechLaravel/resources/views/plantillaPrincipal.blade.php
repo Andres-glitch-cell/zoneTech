@@ -312,7 +312,8 @@
             <div class="logo">ZoneTech</div>
             <nav class="navegacion-principal">
                 <a href="#">Productos</a>
-                <a href="#">Soporte técnico</a>
+                <button onclick="toSoporte()" class="boton-accion" title="Soporte técnico">
+                <a href="">Soporte técnico</a>
                 <a href="#">Sobre nosotros</a>
                 <a href="#">Contacto</a>
             </nav>
@@ -348,19 +349,6 @@
                 </svg>
             </button>
             <input type="text" class="input__search" placeholder="Buscar productos..." />
-        </div>
-    </div>
-
-    <div class="superposicion-menu-movil" id="menuMovil">
-        <div class="panel-menu-movil">
-            <button class="boton-cerrar-menu" id="botonCerrar"></button>
-            <nav class="navegacion-movil">
-                <a href="#">Productos</a>
-                <a href="#">Soporte técnico</a>
-                <a href="#">Sobre nosotros</a>
-                <a href="#">Contacto</a>
-                <a href="#">Mi cuenta</a>
-            </nav>
         </div>
     </div>
 
@@ -430,6 +418,13 @@
             btnAnimado.classList.add("loading");
             setTimeout(() => btnAnimado.classList.remove("loading"), 1000);
         });
+
+        function toLogIn() {
+            window.location.href = "login"
+        }
+        function toSoporte() {
+            window.location.href = "soporteTecnico"
+        }
     </script>
     @stack('scripts')
 </body>
