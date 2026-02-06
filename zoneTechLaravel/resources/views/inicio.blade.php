@@ -3,12 +3,7 @@
 @section('titulo', 'Inicio')
 
 @push('styles')
-<link rel="stylesheet" href="">
-<style>
-    h1 {
-        color: blue;
-    }
-</style>
+
 @endpush
 
 @section('contenido')
