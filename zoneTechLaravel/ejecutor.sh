@@ -9,3 +9,9 @@ echo "$MENSAJE"
 # 2. Guardar en un archivo de log (opcional pero recomendado para seguimiento)
 # Esto se guardará en la misma carpeta donde esté el script
 echo "$MENSAJE" >> "$(dirname "$0")/registro_ejecucion.txt"
+git add .
+git commit -m "Mensaje Script Automático Subido"
+git push origin Andres
+git checkout main
+git merge Andres
+git push origin main
