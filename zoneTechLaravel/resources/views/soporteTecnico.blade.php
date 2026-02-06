@@ -5,6 +5,9 @@
 @push('styles')
 <link rel="stylesheet" href="">
 <style>
+    /*ARCHIVOS NO TOCAR: plantillaPrincipal, inicio, soporteTecnico y los nuevo q cree
+
+    */
     h1 {
         color: blue;
     }
@@ -19,3 +22,4 @@
 @push('scripts')
 
 @endpush
+
