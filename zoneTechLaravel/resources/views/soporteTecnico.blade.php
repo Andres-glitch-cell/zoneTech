@@ -1,6 +1,6 @@
 @extends('plantillaPrincipal')
 
-@section('titulo', 'soporteTecnico')
+@section('titulo', 'Soporte técnico')
 
 @push('styles')
 <link rel="stylesheet" href="">
@@ -9,12 +9,12 @@
 
     */
     h1 {
-        color: blue;
+        color: #ff2a2a;
     }
 </style>
 @endpush
 
-@section('contenido')
+@section('principal')
 <h1>Nuestro soporte técnico</h1>
 <p>Pulsa el icono de la lupa → aparecerá el buscador animado con fondo en blur.</p>
 @endsection

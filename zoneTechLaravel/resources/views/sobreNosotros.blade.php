@@ -1,17 +1,18 @@
 @extends('plantillaPrincipal')
 
-@section('titulo', 'Inicio')
+@section('titulo', 'Sobre nosotros')
 
 @push('styles')
+<link rel="stylesheet" href="">
 <style>
     h1 {
-        color: #ff2a2a;
+        color: #ff0000;
     }
 </style>
 @endpush
 
 @section('principal')
-<h1>¡Bienvenido a ZoneTech!</h1>
+<h1>Sobre nosotros</h1>
 <p>Pulsa el icono de la lupa → aparecerá el buscador animado con fondo en blur.</p>
 @endsection
 

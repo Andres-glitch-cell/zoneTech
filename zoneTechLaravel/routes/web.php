@@ -90,6 +90,22 @@ Route::get('/inicio', function () {
     return view('inicio');
 });
 
+Route::get('/productos', function () {
+    return view('productos');
+});
+
+Route::get('/soporteTecnico', function () {
+    return view('soporteTecnico');
+});
+
+Route::get('/sobreNosotros', function () {
+    return view('sobreNosotros');
+});
+
+Route::get('/contacto', function () {
+    return view('contacto');
+});
+
 Route::get('/login', function () {
     return view('login');
 });
