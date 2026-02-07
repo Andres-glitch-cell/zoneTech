@@ -97,7 +97,7 @@
     <div class="w-full max-w-[420px]">
 
         <div class="mb-10 text-left">
-            <h1 class="text-4xl font-black text-white tracking-tighter uppercase logo-font italic">
+            <h1 onclick="inicio()" class="text-4xl font-black text-white tracking-tighter uppercase logo-font italic">
                 ZONE<span class="text-red-600">TECH</span>
             </h1>
             <p class="text-zinc-600 text-xs mt-1 font-medium">ESTABLISH NEW CORE IDENTITY</p>
@@ -157,7 +157,11 @@
         </div>
 
     </div>
-
+    <script>
+        function inicio() {
+            window.location.href = "inicio"
+        }
+    </script>
 </body>
 
 </html>

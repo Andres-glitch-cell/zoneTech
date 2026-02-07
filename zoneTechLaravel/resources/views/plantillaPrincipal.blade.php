@@ -8,7 +8,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800;900&display=swap"
+        rel="stylesheet">
 
     <style>
         * {
@@ -228,54 +230,6 @@
             color: #17202A;
         }
 
-        .superposicion-menu-movil {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            display: none;
-            justify-content: flex-end;
-        }
-
-        .superposicion-menu-movil.activo {
-            display: flex;
-        }
-
-        .panel-menu-movil {
-            background: #161618;
-            width: 80%;
-            max-width: 300px;
-            height: 100%;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .boton-cerrar-menu {
-            align-self: flex-end;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-        }
-
-        .navegacion-movil {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .navegacion-movil a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
-            padding: 10px;
-            font-family: 'Outfit', sans-serif;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
         main {
             padding-top: 120px;
             max-width: 1100px;
@@ -309,13 +263,12 @@
 <body>
     <header class="cabecera-sitio" id="cabeceraPrincipal">
         <div class="contenedor-cabecera">
-            <div class="logo">ZoneTech</div>
+            <div class="logo" onclick="inicio()">ZoneTech</div>
             <nav class="navegacion-principal">
-                <a href="#">Productos</a>
-                <button onclick="toSoporte()" class="boton-accion" title="Soporte técnico">
-                <a href="">Soporte técnico</a>
-                <a href="#">Sobre nosotros</a>
-                <a href="#">Contacto</a>
+                <a href="#" onclick="productos()">Productos</a>
+                <a href="#" onclick="soporte()">Soporte Técnico</a>
+                <a href="#" onclick="nosotros()">Sobre nosotros</a>
+                <a href="#" onclick="contacto()">Contacto</a>
             </nav>
             <div class="acciones-cabecera">
                 <button class="boton-accion" id="btnBuscar" aria-label="Buscar">
@@ -325,12 +278,14 @@
                 </button>
                 <button class="boton-accion" title="Lista de deseos">
                     <svg class="icono-svg" viewBox="0 0 24 24">
-                        <path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                        <path
+                            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                     </svg>
                 </button>
-                <button class="boton-accion" title="Mi cuenta">
+                <button onclick="login()" class="boton-accion" title="Mi cuenta">
                     <svg class="icono-svg" viewBox="0 0 24 24">
-                        <path d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path
+                            d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                 </button>
                 <button class="boton-menu-movil" id="botonMenuMovil" aria-label="Menú">☰</button>
@@ -345,7 +300,9 @@
             <div class="shadow__input"></div>
             <button class="input__button__shadow" id="btnBuscarAnimado">
                 <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" height="20" width="20">
-                    <path d="M4 9a5 5 0 1110 0A5 5 0 014 9zm5-7a7 7 0 104.2 12.6l3 3a1 1 0 001.414-1.414l-3-3A7 7 0 009 2z" fill="#17202A" />
+                    <path
+                        d="M4 9a5 5 0 1110 0A5 5 0 014 9zm5-7a7 7 0 104.2 12.6l3 3a1 1 0 001.414-1.414l-3-3A7 7 0 009 2z"
+                        fill="#17202A" />
                 </svg>
             </button>
             <input type="text" class="input__search" placeholder="Buscar productos..." />
@@ -353,7 +310,7 @@
     </div>
 
     <main>
-        @yield('contenido')
+        @yield('principal')
     </main>
 
     <script>
@@ -419,11 +376,28 @@
             setTimeout(() => btnAnimado.classList.remove("loading"), 1000);
         });
 
-        function toLogIn() {
-            window.location.href = "login"
+        function inicio() {
+            window.location.href = "inicio"
         }
-        function toSoporte() {
+
+        function productos() {
+            window.location.href = "productos"
+        }
+
+        function soporte() {
             window.location.href = "soporteTecnico"
+        }
+
+        function nosotros() {
+            window.location.href = "sobreNosotros"
+        }
+
+        function contacto() {
+            window.location.href = "contacto"
+        }
+
+        function login() {
+            window.location.href = "login"
         }
     </script>
     @stack('scripts')
