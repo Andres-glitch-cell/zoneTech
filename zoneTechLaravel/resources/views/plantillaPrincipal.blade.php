@@ -232,19 +232,10 @@
 
         main {
             padding-top: 120px;
-            max-width: 1100px;
+            max-width: 1440px;
             margin: 0 auto;
             padding-inline: 16px;
-            text-align: center;
-        }
-
-        h1 {
-            /* Fuente Outfit para títulos */
-            font-family: 'Outfit', sans-serif;
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-            letter-spacing: -1.5px;
-            font-size: clamp(2.2rem, 6vw, 3.4rem);
+            padding-bottom: 60px;
         }
 
         @media (max-width: 1023px) {
@@ -265,10 +256,10 @@
         <div class="contenedor-cabecera">
             <div class="logo" onclick="inicio()">ZoneTech</div>
             <nav class="navegacion-principal">
-                <a href="#" onclick="productos()">Productos</a>
-                <a href="#" onclick="soporte()">Soporte Técnico</a>
-                <a href="#" onclick="nosotros()">Sobre nosotros</a>
-                <a href="#" onclick="contacto()">Contacto</a>
+                <a onclick="productos()">Productos</a>
+                <a onclick="soporte()">Soporte Técnico</a>
+                <a onclick="nosotros()">Sobre nosotros</a>
+                <a onclick="contacto()">Contacto</a>
             </nav>
             <div class="acciones-cabecera">
                 <button class="boton-accion" id="btnBuscar" aria-label="Buscar">
@@ -381,7 +372,7 @@
         }
 
         function productos() {
-            window.location.href = "productos"
+            window.location.href = "productosPlantilla"
         }
 
         function soporte() {

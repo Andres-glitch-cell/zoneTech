@@ -90,8 +90,8 @@ Route::get('/inicio', function () {
     return view('inicio');
 });
 
-Route::get('/productos', function () {
-    return view('productos');
+Route::get('/productosPlantilla', function () {
+    return view('productosPlantilla');
 });
 
 Route::get('/soporteTecnico', function () {
@@ -116,6 +116,10 @@ Route::get('/register', function () {
 
 Route::get('/register', function () {
     return view('register');
+});
+
+Route::get('/portatilesI', function () {
+    return view('portatilesI');
 });
 
 /*
