@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ZoneTech – Registro de Identidad</title>
+    <title>ZoneTech – Restaurar Credenciales</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -15,33 +15,21 @@
 
     <style>
         /* ==========================================
-           1. CONFIGURACIÓN GENERAL
+           1. CONFIGURACIÓN BASE
            ========================================== */
         [x-cloak] { display: none !important; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #000000;
+            background-color: #000000; /* Negro ZoneTech */
             color: #ffffff;
-            -webkit-font-smoothing: antialiased;
         }
 
         .logo-font { font-family: 'Outfit', sans-serif; }
 
         /* ==========================================
-           2. FORMULARIOS E INPUTS (ESTILO ZONE)
+           2. FORMULARIOS E INPUTS
            ========================================== */
-        .label-text {
-            font-size: 10px;
-            font-weight: 800;
-            color: #444444;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 6px;
-            display: block;
-            transition: color 0.2s ease;
-        }
-
         .input-box {
             background: #0a0a0a;
             border: 1px solid #1a1a1a;
@@ -55,11 +43,6 @@
             box-shadow: 0 0 15px rgba(220, 38, 38, 0.1);
         }
 
-        /* Resaltado de etiqueta al enfocar el input */
-        .group:focus-within .label-text {
-            color: #dc2626;
-        }
-
         .input-field {
             background: transparent;
             width: 100%;
@@ -70,6 +53,16 @@
         }
 
         .input-field::placeholder { color: #333333; }
+
+        .label-text {
+            font-size: 10px;
+            font-weight: 800;
+            color: #444444;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+            display: block;
+        }
 
         /* ==========================================
            3. BOTONES Y ACCIONES
@@ -100,69 +93,53 @@
             <h1 onclick="inicio()" class="text-4xl font-black text-white tracking-tighter uppercase logo-font italic cursor-pointer">
                 ZONE<span class="text-red-600">TECH</span>
             </h1>
-            <p class="text-zinc-600 text-[10px] mt-1 font-bold tracking-widest uppercase">Crear Nueva Identidad en el Sistema</p>
+            <p class="text-zinc-600 text-[10px] mt-1 font-bold tracking-widest uppercase">Protocolo de Recuperación de Acceso</p>
         </div>
 
-        <form action="/register" method="POST" class="space-y-5">
-            <input type="hidden" name="_token" value="{{ csrf_token() ?? '' }}">
+        <div class="mb-8">
+            <h2 class="text-xl font-bold text-white uppercase tracking-tight">¿Perdiste el acceso?</h2>
+            <p onclick="significadoSecurityKey()" class="text-zinc-500 text-xs mt-2 leading-relaxed cursor-pointer hover:text-zinc-400 transition-colors">
+                Introduce el correo electrónico vinculado a tu identidad. Te enviaremos un código de seguridad para restablecer tu <span class="text-red-600 font-bold">Clave de Seguridad</span>.
+            </p>
+        </div>
+
+        <form action="#" method="POST" class="space-y-6">
+            @csrf
 
             <div class="group">
-                <label class="label-text">Identificador de Usuario</label>
-                <div class="input-box">
-                    <input type="text" name="username" placeholder="Ejemplo: Andres.Dev" required class="input-field" />
-                </div>
-            </div>
-
-            <div class="group">
-                <label class="label-text">Correo Electrónico del Sistema</label>
+                <label class="label-text">Dirección de Correo del Sistema</label>
                 <div class="input-box">
                     <input type="email" name="email" placeholder="acceso@zonetech.pro" required class="input-field" />
                 </div>
+                @error('email')
+                    <p class="text-[10px] text-red-600 mt-1 font-bold italic">{{ $message }}</p>
+                @enderror
             </div>
 
-            <div class="grid grid-cols-2 gap-4">
-                <div class="group">
-                    <label class="label-text">Nombre</label>
-                    <div class="input-box">
-                        <input type="text" name="nombre" placeholder="Andrés" required class="input-field" />
-                    </div>
-                </div>
-                <div class="group">
-                    <label class="label-text">Apellidos</label>
-                    <div class="input-box">
-                        <input type="text" name="apellidos" placeholder="García" required class="input-field" />
-                    </div>
-                </div>
-            </div>
-
-            <div class="group">
-                <label class="label-text">Clave de Seguridad (Security Key)</label>
-                <div class="input-box">
-                    <input type="password" name="password" placeholder="••••••••" required class="input-field" />
-                </div>
-            </div>
-
-            <div class="pt-4">
+            <div class="pt-2">
                 <button type="submit" class="btn-submit w-full py-4 text-xs">
-                    Generar Identidad
+                    Enviar Enlace de Restauración
                 </button>
             </div>
         </form>
 
         <div class="mt-10 flex items-center justify-between border-t border-zinc-900 pt-6">
-            <span class="text-zinc-700 text-[10px] font-bold tracking-widest uppercase">Cifrado: AES-256</span>
-            <a href="/login" class="text-zinc-500 hover:text-white text-[10px] font-bold uppercase transition-colors">
-                ¿Ya tienes cuenta? Inicia Sesión
+            <a onclick="onLogin()" class="text-zinc-500 hover:text-white text-[10px] font-bold uppercase transition-colors cursor-pointer flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
+                </svg>
+                Regresar al Inicio de Sesión
             </a>
+            <span class="text-zinc-700 text-[10px] font-bold tracking-widest uppercase">ID: PROTOCOLO-09</span>
         </div>
 
     </div>
 
     <script>
-        // Navegación
-        function inicio() {
-            window.location.href = "inicio";
-        }
+        // Atajos de navegación
+        function inicio() { window.location.href = "inicio"; }
+        function onLogin() { window.location.href = "login"; }
+        function significadoSecurityKey(){ window.location.href = "securityKey"; }
     </script>
 </body>
 
