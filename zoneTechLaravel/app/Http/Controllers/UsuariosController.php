@@ -5,71 +5,102 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash; // + Necesario para encriptar contraseñas
 
 class UsuariosController extends Controller
 {
+    /**
+     * ^ 1. showInicio() ^
+     * Gestiona la vista según el estado de la sesión.
+     */
+    public function showInicio()
+    {
+        if (Auth::check()) {
+            return view('inicioAutenticado');
+        }
+        return view('inicio');
+    }
 
-    /* ^ 1. index() --> "Saca" a los usuarios que tiene User::all() ^ */
+    /**
+     * ^ 2. index() ^
+     * Lista de expedientes (Admin/Control).
+     */
     public function index()
     {
         $usuarios = User::all();
-        // Asegúrate de tener esta vista creada o cámbiala por la tuya
         return view('usuarios.index', compact('usuarios'));
     }
 
- /* ^ 2. store(Request $request) --> Resumen: Verifíca si todos los campos son correctos ^ */
+    /**
+     * ^ 3. store() --> Registro de Identidad ^
+     * + Corregido: Encriptación y Mapeo de campos.
+     */
     public function store(Request $request)
     {
-        // ! 2.1 Validamos los datos de la captura de pantalla
         $request->validate([
-            'usuario'  => 'required|unique:usuarios,dni', // 'usuario' en HTML -> 'dni' en BD
-            'email'    => 'required|email|unique:usuarios,email',
-            'nombre'   => 'required|string',
-            'apellido' => 'required|string',
-            'password' => 'required|min:8',
+            'usuario'   => 'required|string|max:50|unique:usuariosNoAutenticados,usuario',
+            'email'     => 'required|email|unique:usuariosNoAutenticados,email',
+            'nombre'    => 'required|string|max:100',
+            'apellido1' => 'required|string|max:150',
+            'apellido2' => 'required|string|max:150',
+            'password'  => 'required|min:8',
         ]);
 
-        // ! 2.2 Creamos el registro en MySQL
-        User::create([
-            'dni'             => $request->usuario,
-            'nombre'          => $request->nombre,
-            'apellido1'       => $request->apellido,
-            'email'           => $request->email,
-            'contraseña_hash' => $request->password,  // [IMPORTANT] El Modelo se encarga de cifrarla
-            'rol'             => 'cliente',
-            'pais'            => 'España', // [IMPORTANT] Rellenamos campos obligatorios de tu migración para que no de error
-            'ciudad'          => 'No definida',
-            'poblacion'       => 'No definida',
-            'codigoPostal'    => 0,
-            'direccion'       => 'No definida',
-        ]);
+        try {
+            // & Generamos iniciales automáticamente para el perfil (Ej: "AF")
+            $iniciales = strtoupper(substr($request->nombre, 0, 1) . substr($request->apellido1, 0, 1));
 
-      return redirect()->route('login')->with('success', "IDENTIDAD ESTABLECIDA: El usuario {$request->usuario} ha sido registrado en el sistema.");
+            $user = User::create([
+                'usuario'         => $request->usuario,
+                'email'           => $request->email,
+                'nombre'          => $request->nombre,
+                'apellido1'       => $request->apellido1,
+                'apellido2'       => $request->apellido2,
+                'contraseña_hash' => Hash::make($request->password), // ! ENCRIPTADO
+                'iniciales'       => $iniciales,
+                'rol'             => 'usuario',
+            ]);
+
+            Auth::login($user);
+
+            return redirect()->route('inicio');
+
+        } catch (\Exception $e) {
+            // @ Revisar si 'contraseña_hash' y 'iniciales' están en $fillable en el Modelo
+            dd("FALLO CRÍTICO EN EL REGISTRO: " . $e->getMessage());
+        }
     }
 
-
- /* ^ 3. loginPost(Request $request) -->  ^ */
+    /**
+     * ^ 4. loginPost() --> Protocolo de Acceso ^
+     */
     public function loginPost(Request $request)
     {
-        // ! 3.1 Valida inputs
         $credenciales = $request->validate([
-            'usuario'  => 'required',
+            'usuario'  => 'required|string',
             'password' => 'required',
         ]);
 
-        // ! 3.1 Intentar autenticar (Comprueba si 'usuario' tiene el DNI correcto de ese mismo usuario --> 'dni')
-        if (Auth::attempt(['dni' => $credenciales['usuario'], 'password' => $credenciales['password']])) {
+        // # Laravel usará automáticamente 'contraseña_hash' gracias al método getAuthPassword() del modelo
+        if (Auth::attempt(['usuario' => $credenciales['usuario'], 'password' => $credenciales['password']])) {
             $request->session()->regenerate();
-            /*
-             NOTA IMPORTANTE SOBRE $request->session()-->regenerate()
-            & Cuando alguien inicia sesión, Laravel borra el ID de la sesión antigua y genera uno nuevo totalmente distinto. ¿Por qué? Para evitar ataques de "Fijación de Sesión", donde un hacker podría intentar robar una sesión abierta antes de que te identifiques. Es como cambiar la cerradura justo en el momento en que entras a casa.
-            */
-            return redirect()->intended('inicio'); // [IMPORTANT] Te manda a /inicio si todo va bien
+            return redirect()->route('inicio');
         }
 
- /* ^ 3. loginPost(Request $request) -->  ^ */
         return back()->withErrors([
-            'usuario' => "Credenciales Incorrectas"
+            'usuario' => "ACCESO DENEGADO: Credenciales no reconocidas en la base de datos."
         ]);
+    }
+
+    /**
+     * ^ 5. logout() --> Desconexión del Sistema ^
+     */
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('inicio');
     }
 }

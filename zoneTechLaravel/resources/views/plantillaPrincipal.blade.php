@@ -13,6 +13,7 @@
         rel="stylesheet">
 
     <style>
+        /* --- 1. RESET Y BASE --- */
         * {
             margin: 0;
             padding: 0;
@@ -20,17 +21,15 @@
         }
 
         body {
-            /* Cambio de fuente principal a Inter */
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #0f0f11;
             color: #e0e0e0;
             min-height: 100vh;
             line-height: 1.6;
-            margin: 0;
             overflow-x: hidden;
         }
 
-        /* --- Cabecera --- */
+        /* --- 2. CABECERA (LAYOUT) --- */
         .cabecera-sitio {
             position: fixed;
             inset: 0 0 auto;
@@ -56,13 +55,11 @@
         }
 
         .logo {
-            /* Fuente Outfit para el logo */
             font-family: 'Outfit', sans-serif;
             font-size: 1.9rem;
             font-weight: 900;
             color: #ff0000;
             letter-spacing: -1.5px;
-            /* Más compacto para estilo tech */
             cursor: pointer;
             text-transform: uppercase;
         }
@@ -77,22 +74,21 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 0.95rem;
-            white-space: nowrap;
+            cursor: pointer;
             transition: color .2s;
-            letter-spacing: -0.2px;
         }
 
         .navegacion-principal a:hover {
             color: #ff2a2a;
         }
 
-        /* ... (Resto de estilos iguales) ... */
         .acciones-cabecera {
             display: flex;
             align-items: center;
             gap: 24px;
         }
 
+        /* --- 3. BOTONES DE ACCIÓN --- */
         .boton-accion {
             background: none;
             border: none;
@@ -120,18 +116,92 @@
             stroke-linejoin: round;
         }
 
-        .boton-menu-movil {
-            display: none;
-            background: none;
-            border: none;
-            color: #e0e0e0;
-            font-size: 1.8rem;
-            cursor: pointer;
-            width: 44px;
-            height: 44px;
-            place-items: center;
+        /* --- 4. DESPLEGABLE DE PERFIL (MOUSEOVER) --- */
+        .perfil-desplegable-container {
+            position: relative;
+            display: inline-block;
         }
 
+        .menu-items {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 220px;
+            background: #16161a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 2px solid #ff0000;
+            /* Detalle ZoneTech */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            padding: 8px 0;
+            margin-top: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: 1100;
+        }
+
+        /* Activar al pasar ratón */
+        .perfil-desplegable-container:hover .menu-items {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Puente invisible para no perder el foco */
+        .perfil-desplegable-container::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 15px;
+        }
+
+        .item-link {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 12px 16px;
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .item-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ff2a2a;
+            padding-left: 20px;
+        }
+
+        .item-icon-svg {
+            width: 16px;
+            height: 16px;
+            margin-right: 12px;
+            flex-shrink: 0;
+            stroke: currentColor;
+        }
+
+        .logout-red:hover {
+            background: #dc2626 !important;
+            color: white !important;
+        }
+
+        .menu-divisor {
+            border: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin: 5px 0;
+        }
+
+        /* --- 5. BUSCADOR ANIMADO --- */
         .overlay-blur {
             position: fixed;
             inset: 0;
@@ -167,69 +237,25 @@
 
         .input__container {
             position: relative;
-            background: rgba(255, 255, 255, 0.9);
+            background: white;
             padding: 12px 16px;
             display: flex;
             align-items: center;
             gap: 10px;
             border-radius: 25px;
-            max-width: 360px;
-            width: 90vw;
-            transform: perspective(600px) rotateX(12deg) rotateY(-15deg);
-            transition: transform 0.4s ease;
-        }
-
-        .input__container:hover {
-            transform: perspective(600px) rotateX(0) rotateY(0) scale(1.05);
-        }
-
-        .shadow__input {
-            position: absolute;
-            inset: -5px;
-            z-index: -1;
-            filter: blur(35px);
-            border-radius: 30px;
-            background: linear-gradient(120deg, #7f7cff, #6effc9, #ff9dff);
-            animation: glow 5s linear infinite;
-        }
-
-        @keyframes glow {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        .input__button__shadow {
-            cursor: pointer;
-            border: none;
-            background: none;
-            border-radius: 50%;
-            padding: 6px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 360px;
         }
 
         .input__search {
             flex: 1;
-            border-radius: 20px;
-            outline: none;
             border: none;
-            padding: 10px 14px;
+            outline: none;
             font-family: 'Inter', sans-serif;
             font-size: 14px;
-            background: transparent;
             color: #17202A;
         }
 
+        /* --- 6. MAIN --- */
         main {
             padding-top: 120px;
             max-width: 1440px;
@@ -255,66 +281,87 @@
     <header class="cabecera-sitio" id="cabeceraPrincipal">
         <div class="contenedor-cabecera">
             <div class="logo" onclick="inicio()">ZoneTech</div>
+
             <nav class="navegacion-principal">
                 <a onclick="productos()">Productos</a>
                 <a onclick="soporte()">Soporte Técnico</a>
                 <a onclick="nosotros()">Sobre nosotros</a>
                 <a onclick="contacto()">Contacto</a>
             </nav>
+
             <div class="acciones-cabecera">
                 <button class="boton-accion" id="btnBuscar" aria-label="Buscar">
                     <svg class="icono-svg" viewBox="0 0 24 24">
                         <path d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
                 </button>
+
                 <button class="boton-accion" title="Lista de deseos">
                     <svg class="icono-svg" viewBox="0 0 24 24">
                         <path
                             d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                     </svg>
                 </button>
-                <button onclick="login()" class="boton-accion" title="Mi cuenta">
-                    <svg class="icono-svg" viewBox="0 0 24 24">
-                        <path
-                            d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                </button>
-                <button class="boton-menu-movil" id="botonMenuMovil" aria-label="Menú">☰</button>
+
+                <div class="perfil-desplegable-container">
+                    <button class="boton-accion" title="Mi cuenta">
+                        <svg class="icono-svg" viewBox="0 0 24 24">
+                            <path
+                                d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </button>
+
+                    <div class="menu-items">
+                        @auth
+                            <a href="{{ url('perfil') }}" class="item-link">
+                                <svg class="item-icon-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                </svg>
+                                Mi Expediente
+                            </a>
+                            <a href="{{ url('configuracion') }}" class="item-link">
+                                <svg class="item-icon-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <path
+                                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1V11a2 2 0 0 1-2-2 2 2 0 0 1 2-2v-.09A1.65 1.65 0 0 0 3 4.6l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H5a2 2 0 0 1 2 2 2 2 0 0 1-2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33-1.82V15z">
+                                    </path>
+                                </svg>
+                                Configuración
+                            </a>
+                            <hr class="menu-divisor">
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="item-link logout-red">
+                                    <svg class="item-icon-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                        <polyline points="16 17 21 12 16 7"></polyline>
+                                    </svg>
+                                    Cerrar Sistema
+                                </button>
+                            </form>
+                        @else
+                            <a href="{{ url('login') }}" class="item-link">Iniciar Sesión</a>
+                            <a href="{{ url('register') }}" class="item-link">Registrarse</a>
+                        @endauth
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
     <div class="overlay-blur" id="overlayBlur"></div>
 
-    <div class="buscador-animado" id="buscadorAnimado">
-        <div class="input__container">
-            <div class="shadow__input"></div>
-            <button class="input__button__shadow" id="btnBuscarAnimado">
-                <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" height="20" width="20">
-                    <path
-                        d="M4 9a5 5 0 1110 0A5 5 0 014 9zm5-7a7 7 0 104.2 12.6l3 3a1 1 0 001.414-1.414l-3-3A7 7 0 009 2z"
-                        fill="#17202A" />
-                </svg>
-            </button>
-            <input type="text" class="input__search" placeholder="Buscar productos..." />
-        </div>
-    </div>
-
     <main>
         @yield('principal')
     </main>
 
+
     <script>
         const cabecera = document.getElementById("cabeceraPrincipal");
-        const btnBuscar = document.getElementById("btnBuscar");
-        const buscador = document.getElementById("buscadorAnimado");
-        const overlay = document.getElementById("overlayBlur");
-        const btnAnimado = document.getElementById("btnBuscarAnimado");
-        const botonMenu = document.getElementById("botonMenuMovil");
-        const menuMovil = document.getElementById("menuMovil");
-        const botonCerrar = document.getElementById("botonCerrar");
-
         let ultimaPosicionScroll = 0;
+
+        // Control de scroll para ocultar/mostrar cabecera
         window.addEventListener("scroll", () => {
             const pos = window.scrollY;
             if (pos < 100) {
@@ -328,70 +375,33 @@
             passive: true
         });
 
-        function abrirBuscador() {
-            buscador.classList.add("activo");
-            overlay.classList.add("activo");
-            document.body.style.overflow = "hidden";
-        }
-
-        function cerrarBuscador() {
-            buscador.classList.remove("activo");
-            overlay.classList.remove("activo");
-            document.body.style.overflow = "";
-        }
-
-        btnBuscar.addEventListener("click", abrirBuscador);
-        overlay.addEventListener("click", cerrarBuscador);
-
-        botonMenu.addEventListener("click", () => {
-            menuMovil.classList.add("activo");
-            document.body.style.overflow = "hidden";
-        });
-
-        function cerrarMenu() {
-            menuMovil.classList.remove("activo");
-            document.body.style.overflow = "";
-        }
-
-        botonCerrar.addEventListener("click", cerrarMenu);
-
-        window.addEventListener("keydown", e => {
-            if (e.key === "Escape") {
-                cerrarBuscador();
-                cerrarMenu();
-            }
-        });
-
-        btnAnimado.addEventListener("click", () => {
-            btnAnimado.classList.add("loading");
-            setTimeout(() => btnAnimado.classList.remove("loading"), 1000);
-        });
-
+        // Funciones de Navegación (Asegúrate de que estas rutas existen en web.php)
         function inicio() {
-            window.location.href = "inicio"
+            window.location.href = "{{ route('inicio') }}";
         }
 
         function productos() {
-            window.location.href = "productosPlantilla"
+            window.location.href = "{{ route('productos') }}";
         }
 
         function soporte() {
-            window.location.href = "soporteTecnico"
+            window.location.href = "{{ route('soporte') }}";
         }
 
         function nosotros() {
-            window.location.href = "sobreNosotros"
+            window.location.href = "{{ route('nosotros') }}";
         }
 
         function contacto() {
-            window.location.href = "contacto"
+            window.location.href = "{{ route('contacto') }}";
         }
 
-        function login() {
-            window.location.href = "login"
+        // Función específica para los portátiles
+        function portatiles() {
+            console.log("Navegando a portatiles...");
+            window.location.href = "{{ route('portatiles') }}";
         }
     </script>
-    @stack('scripts')
 </body>
 
 </html>
