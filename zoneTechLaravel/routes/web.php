@@ -54,96 +54,122 @@
         // i18n: Relacionado con internacionalización (Verde global)
         // TYPO: Corregir error tipográfico (Rojo suave)
 
-        /**
-         * 🚀 GUÍA DE GIT - TRABAJO EN EQUIPO
-         * --------------------------------
-         * 1. ACTUALIZAR (Pull):
-         * git checkout main
-         * git pull origin main
-         * git checkout Andres
-         * git merge main
-         *
-         * 2. GUARDAR (Commit):
-         * git add .
-         * git commit -m "Descripción de los cambios"
-         *
-         * 3. SUBIR (Push):
-         * git push origin Andres
-         *
-         * 4. FIX .GITIGNORE (Si falla):
-         * git rm -r --cached .
-         * git add .
-         * git commit -m "Limpieza de cache"
-         */
-
+/**
+ * 🚀 GUÍA DE GIT - TRABAJO EN EQUIPO
+ * --------------------------------
+ * 1. ACTUALIZAR (Pull):
+ * git checkout main
+ * git pull origin main
+ * git checkout Andres
+ * git merge main
+ *
+ * 2. GUARDAR (Commit):
+ * git add .
+ * git commit -m "Descripción de los cambios"
+ *
+ * 3. SUBIR (Push):
+ * git push origin Andres
+ *
+ * 4. FIX .GITIGNORE (Si falla):
+ * git rm -r --cached .
+ * git add .
+ * git commit -m "Limpieza de cache"
+ */
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UsuariosController;
 
-
 /*
 |--------------------------------------------------------------------------
-| 🌐 [IMPORTANT] RUTAS PÚBLICAS (ACCESO LIBRE)
+[IMPORTANT] 🌐 [PUBLIC] RUTAS DE ACCESO LIBRE
 |--------------------------------------------------------------------------
 */
 
 // * --- PUNTO DE ENTRADA --- //
-Route::get('/', function () { return view('welcome'); });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 // * --- DASHBOARD INICIAL --- //
 Route::get('/inicio', [UsuariosController::class, 'showInicio'])->name('inicio');
 
 // * --- CATÁLOGO Y HARDWARE (SISTEMA DE PLANTILLAS) --- //
-// @ La ruta base del catálogo
-Route::get('/productos', function () {
-    return view('productosPlantilla');
-})->name('productos');
+Route::prefix('productos')->group(function () {
+    // @ Ruta base del catálogo
+    Route::get('/', function () {
+        return view('productosPlantilla');
+    })->name('productos');
 
-// + Sub-rutas de categorías (Inyectan contenido en productosPlantilla)
-// # Asegúrate de que el archivo físico sea: resources/views/portatilesI.blade.php
-Route::get('/productos/portatiles', function () {
-    return view('portatilesI');
-})->name('portatiles');
+    // + Sub-rutas de categorías (Inyectan contenido dinámico)
+    Route::get('/portatiles', function () {
+        return view('portatilesI');
+    })->name('portatiles');
 
-// TODO: Crear las vistas para estas rutas siguiendo el modelo de portatilesI
-Route::get('/productos/sobremesa', function () { return view('sobremesa'); })->name('sobremesa');
-Route::get('/productos/tablets', function () { return view('tablets'); })->name('tablets');
-
+    // TODO: Crear las vistas físicas para estas rutas
+    Route::get('/sobremesa', function () {
+        return view('sobremesa');
+    })->name('sobremesa');
+    Route::get('/tablets', function () {
+        return view('tablets');
+    })->name('tablets');
+});
 
 // * --- INFORMACIÓN CORPORATIVA --- //
-Route::get('/soporte-tecnico', function () { return view('soporteTecnico'); })->name('soporte');
-Route::get('/sobre-nosotros', function () { return view('sobreNosotros'); })->name('nosotros');
-Route::get('/contacto', function () { return view('contacto'); })->name('contacto');
 
+Route::get('/soporte-tecnico', function () {
+    return view('soporteTecnico');
+})->name('soporte');
+Route::get('/sobre-nosotros', function () {
+    return view('sobreNosotros');
+})->name('nosotros');
+Route::get('/contacto', function () {
+    return view('contacto');
+})->name('contacto');
 
 /*
 |--------------------------------------------------------------------------
-| 🔑 [IMPORTANT] PROTOCOLOS DE IDENTIDAD
+[IMPORTANT] 🔑 PROTOCOLOS DE IDENTIDAD Y ACCESO
 |--------------------------------------------------------------------------
 */
 
-Route::get('/login', function () { return view('login'); })->name('login');
-Route::post('/login', [UsuariosController::class, 'loginPost'])->name('login.post');
-Route::post('/logout', [UsuariosController::class, 'logout'])->name('logout');
+Route::name('auth.')->group(function () {
+    // ! GESTIÓN DE LOGIN
+    Route::get('/login', function () {
+        return view('login');
+    })->name('login');
+    Route::post('/login', [UsuariosController::class, 'loginPost'])->name('login.post');
+    Route::post('/logout', [UsuariosController::class, 'logout'])->name('logout');
 
-Route::get('/register', function () { return view('register'); })->name('register');
-Route::post('/register', [UsuariosController::class, 'store'])->name('usuarios.store');
+    // + REGISTRO DE NUEVAS UNIDADES
+    Route::get('/register', function () {
+        return view('register');
+    })->name('register');
+    Route::post('/register', [UsuariosController::class, 'store'])->name('usuarios.store');
 
-Route::get('/recuperar-password', function () { return view('recuperarContraseña'); })->name('password.request');
-Route::get('/security-key-info', function () { return view('securityKey'); })->name('security.info');
-
+    // & SEGURIDAD Y RECUPERACIÓN
+    Route::get('/recuperar-password', function () {
+        return view('recuperarContraseña');
+    })->name('password.request');
+    Route::get('/security-key-info', function () {
+        return view('securityKey');
+    })->name('security.info');
+});
 
 /*
 |--------------------------------------------------------------------------
-| 🛡️ ÁREA PRIVADA (SÓLO USUARIOS LOGUEADOS)
+[IMPORTANT] 🛡️ [PRIVATE] ÁREA RESTRINGIDA (SÓLO USUARIOS LOGUEADOS)
 |--------------------------------------------------------------------------
 */
 
 Route::middleware(['auth'])->group(function () {
+    // + EXPEDIENTES DE USUARIO
+    Route::get('/perfil', function () {
+        return view('perfil');
+    })->name('perfil');
 
-    Route::get('/perfil', function () { return view('perfil'); })->name('perfil');
-
-    Route::get('/configuracion', function () { return view('configuracion'); })->name('configuracion');
-
+    // TODO: Finalizar implementación de ajustes
+    Route::get('/configuracion', function () {
+        return view('configuracion');
+    })->name('configuracion');
 });

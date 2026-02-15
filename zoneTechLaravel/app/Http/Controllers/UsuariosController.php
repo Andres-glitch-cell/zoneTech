@@ -9,10 +9,8 @@ use Illuminate\Support\Facades\Hash; // + Necesario para encriptar contraseñas
 
 class UsuariosController extends Controller
 {
-    /**
-     * ^ 1. showInicio() ^
-     * Gestiona la vista según el estado de la sesión.
-     */
+    /* ^ 1. showInicio() Gestiona la vista según el estado de la sesión.  ^ */
+
     public function showInicio()
     {
         if (Auth::check()) {
@@ -21,20 +19,14 @@ class UsuariosController extends Controller
         return view('inicio');
     }
 
-    /**
-     * ^ 2. index() ^
-     * Lista de expedientes (Admin/Control).
-     */
+    /* ^ 2. index() Lista de expedientes (Admin/Control). ^ */
     public function index()
     {
         $usuarios = User::all();
         return view('usuarios.index', compact('usuarios'));
     }
 
-    /**
-     * ^ 3. store() --> Registro de Identidad ^
-     * + Corregido: Encriptación y Mapeo de campos.
-     */
+    /* ^ 3. store() --> Registro de Identidad ^ */
     public function store(Request $request)
     {
         $request->validate([
@@ -47,7 +39,7 @@ class UsuariosController extends Controller
         ]);
 
         try {
-            // & Generamos iniciales automáticamente para el perfil (Ej: "AF")
+            // ^ 3.1 Generamos iniciales automáticamente para el perfil (Ej: "AF") ^
             $iniciales = strtoupper(substr($request->nombre, 0, 1) . substr($request->apellido1, 0, 1));
 
             $user = User::create([
@@ -64,16 +56,13 @@ class UsuariosController extends Controller
             Auth::login($user);
 
             return redirect()->route('inicio');
-
         } catch (\Exception $e) {
-            // @ Revisar si 'contraseña_hash' y 'iniciales' están en $fillable en el Modelo
+            // ^ Revisar si 'contraseña_hash' y 'iniciales' están en $fillable en el Modelo ^
             dd("FALLO CRÍTICO EN EL REGISTRO: " . $e->getMessage());
         }
     }
 
-    /**
-     * ^ 4. loginPost() --> Protocolo de Acceso ^
-     */
+    /* ^ 4. loginPost() --> Protocolo de Acceso ^ */
     public function loginPost(Request $request)
     {
         $credenciales = $request->validate([
@@ -81,14 +70,14 @@ class UsuariosController extends Controller
             'password' => 'required',
         ]);
 
-        // # Laravel usará automáticamente 'contraseña_hash' gracias al método getAuthPassword() del modelo
+        // ^ Laravel usará automáticamente 'contraseña_hash' gracias al método getAuthPassword() del modelo ^
         if (Auth::attempt(['usuario' => $credenciales['usuario'], 'password' => $credenciales['password']])) {
             $request->session()->regenerate();
             return redirect()->route('inicio');
         }
 
         return back()->withErrors([
-            'usuario' => "ACCESO DENEGADO: Credenciales no reconocidas en la base de datos."
+            'usuario' => "Credenciales no reconocidas en la base de datos."
         ]);
     }
 
