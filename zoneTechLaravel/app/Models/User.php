@@ -18,7 +18,7 @@ class User extends Authenticatable
      * Por defecto Laravel busca "users".
      * Con esto le obligamos a que mire en tu tabla de MySQL llamada "usuarios".
      */
-    protected $table = 'usuarios';
+    protected $table = 'usuariosNoAutenticados';
 
     /**
      * 2. LA "LISTA BLANCA" (Fillable)
@@ -27,20 +27,13 @@ class User extends Authenticatable
      * lo ignorará por seguridad (para evitar que alguien hackee tu formulario).
      */
     protected $fillable = [
-        'dni',
-        'nombre',
-        'apellido1',
-        'apellido2',
-        'pais',
-        'ciudad',
-        'poblacion',
-        'codigoPostal',
-        'direccion',
-        'email',
-        'telefono',
-        'contraseña_hash',
-        'fecha_nacimiento',
-        'rol'
+        'usuario',
+    'nombre',
+    'apellido1',
+    'apellido2',
+    'email',
+    'contraseña_hash',
+    'rol'
     ];
 
     /**
@@ -79,4 +72,9 @@ class User extends Authenticatable
             'contraseña_hash' => 'hashed',
         ];
     }
+
+    public function getInicialesAttribute()
+{
+    return strtoupper(mb_substr($this->nombre, 0, 1) . mb_substr($this->apellido1, 0, 1));
+}
 }
