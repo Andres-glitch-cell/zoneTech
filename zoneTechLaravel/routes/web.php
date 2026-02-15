@@ -131,7 +131,7 @@ Route::get('/register', function () { return view('register'); })->name('registe
 Route::post('/register', [UsuariosController::class, 'store'])->name('usuarios.store');
 
 Route::get('/recuperar-password', function () { return view('recuperarContraseña'); })->name('password.request');
-Route::get('/security-key-info', function () { return view('securityKey'); })->name('security.info');
+Route::get('/securityKey', function () { return view('securityKey'); })->name('security.info');
 
 
 /*
