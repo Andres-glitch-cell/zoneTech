@@ -113,3 +113,5 @@ Route::get('/portatiles-industriales', function () { return view('portatilesI');
 Route::get('/soporte-tecnico', function () { return view('soporteTecnico'); })->name('soporte');
 Route::get('/sobre-nosotros', function () { return view('sobreNosotros'); })->name('nosotros');
 Route::get('/contacto', function () { return view('contacto'); })->name('contacto');
+// Esta ruta ahora es dinámica y la maneja el UsuariosController
+Route::get('/inicio', [UsuariosController::class, 'showInicio'])->name('inicio');
