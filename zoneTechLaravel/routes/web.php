@@ -54,75 +54,64 @@
         // i18n: Relacionado con internacionalización (Verde global)
         // TYPO: Corregir error tipográfico (Rojo suave)
 
-/**
- * 🚀 GUÍA DE GIT - TRABAJO EN EQUIPO
- * --------------------------------
- * 1. ACTUALIZAR (Pull):
- * git checkout main
- * git pull origin main
- * git checkout Andres
- * git merge main
- *
- * 2. GUARDAR (Commit):
- * git add .
- * git commit -m "Descripción de los cambios"
- *
- * 3. SUBIR (Push):
- * git push origin Andres
- *
- * 4. FIX .GITIGNORE (Si falla):
- * git rm -r --cached .
- * git add .
- * git commit -m "Limpieza de cache"
- */
+        /**
+         * 🚀 GUÍA DE GIT - TRABAJO EN EQUIPO
+         * --------------------------------
+         * 1. ACTUALIZAR (Pull):
+         * git checkout main
+         * git pull origin main
+         * git checkout Andres
+         * git merge main
+         *
+         * 2. GUARDAR (Commit):
+         * git add .
+         * git commit -m "Descripción de los cambios"
+         *
+         * 3. SUBIR (Push):
+         * git push origin Andres
+         *
+         * 4. FIX .GITIGNORE (Si falla):
+         * git rm -r --cached .
+         * git add .
+         * git commit -m "Limpieza de cache"
+         */
 
+/**
+ * 🛠️ CONTROLADORES Y SOPORTE
+ */
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UsuariosController;
 
-/* Ruta principal que carga la vista 'welcome' (significa que tiene el nombre welcome.blade.php)
-El "/" quiere decir que esta en localhost, si quisieramos tener archivos en otras carpetas u/o en otras ubicaciones serian por ejemplo /ubicaciones/objetos.blade.php
-*/
+// [IMPORTANT] PROTOCOLOS DE ACCESO (ANDRÉS) //
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/inicio', function () {
-    return view('inicio');
-});
+// * --- SESIÓN Y NÚCLEO --- //
+Route::get('/login', function () { return view('login'); })->name('login');
+Route::post('/login', [UsuariosController::class, 'loginPost'])->name('login.post');
+Route::post('/logout', [UsuariosController::class, 'logout'])->name('logout');
 
-Route::get('/productosPlantilla', function () {
-    return view('productosPlantilla');
-});
+// * --- REGISTRO DE IDENTIDAD --- //
+Route::get('/register', function () { return view('register'); })->name('register');
+Route::post('/register', [UsuariosController::class, 'store'])->name('usuarios.store');
 
-Route::get('/soporteTecnico', function () {
-    return view('soporteTecnico');
-});
+// * --- RECUPERACIÓN Y SEGURIDAD --- //
+// + Añadido para gestionar la recuperación y el whitepaper de seguridad
+Route::get('/recuperar-password', function () { return view('recuperarContraseña'); })->name('password.request');
+Route::get('/security-key-info', function () { return view('securityKey'); })->name('security.info');
 
-Route::get('/sobreNosotros', function () {
-    return view('sobreNosotros');
-});
 
-Route::get('/contacto', function () {
-    return view('contacto');
-});
+// [IMPORTANT] VISTAS DE NAVEGACIÓN //
 
-Route::get('/login', function () {
-    return view('login');
-});
+Route::get('/', function () { return view('welcome'); });
+Route::get('/inicio', function () { return view('inicio'); })->name('inicio');
 
-Route::get('/register', function () {
-    return view('register');
-});
+// * --- CATÁLOGO Y PRODUCTOS --- //
+Route::get('/productos', function () { return view('productosPlantilla'); })->name('productos');
+Route::get('/portatiles-industriales', function () { return view('portatilesI'); })->name('portatiles');
 
-Route::get('/register', function () {
-    return view('register');
-});
-
-Route::get('/portatilesI', function () {
-    return view('portatilesI');
-});
-
-/*
-? Texto de prueba bienvenida personalizado con fn() anónima =>
- route::get("/", fn() => "<h1>¡Hola! ZoneTech está online 🚀</h1>");
-*/
+// * --- INFORMACIÓN CORPORATIVA --- //
+Route::get('/soporte-tecnico', function () { return view('soporteTecnico'); })->name('soporte');
+Route::get('/sobre-nosotros', function () { return view('sobreNosotros'); })->name('nosotros');
+Route::get('/contacto', function () { return view('contacto'); })->name('contacto');
+// Esta ruta ahora es dinámica y la maneja el UsuariosController
+Route::get('/inicio', [UsuariosController::class, 'showInicio'])->name('inicio');
