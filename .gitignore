@@ -42,3 +42,6 @@ Guia_Git.odt
 
 # Config settings.json VSCode
 user-settings-fixed.json
+
+# Ocultar archivo .sql
+*.sql
