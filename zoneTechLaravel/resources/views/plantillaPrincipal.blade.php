@@ -8,7 +8,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800;900&display=swap"
+        rel="stylesheet">
 
     <style>
         /* --- 1. RESET Y BASE --- */
@@ -127,7 +129,8 @@
             width: 220px;
             background: #16161a;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-top: 2px solid #ff0000; /* Detalle ZoneTech */
+            border-top: 2px solid #ff0000;
+            /* Detalle ZoneTech */
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             border-radius: 4px;
             padding: 8px 0;
@@ -262,8 +265,13 @@
         }
 
         @media (max-width: 1023px) {
-            .navegacion-principal { display: none; }
-            .boton-menu-movil { display: grid; }
+            .navegacion-principal {
+                display: none;
+            }
+
+            .boton-menu-movil {
+                display: grid;
+            }
         }
     </style>
     @stack('styles')
@@ -290,14 +298,16 @@
 
                 <button class="boton-accion" title="Lista de deseos">
                     <svg class="icono-svg" viewBox="0 0 24 24">
-                        <path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                        <path
+                            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                     </svg>
                 </button>
 
                 <div class="perfil-desplegable-container">
                     <button class="boton-accion" title="Mi cuenta">
                         <svg class="icono-svg" viewBox="0 0 24 24">
-                            <path d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path
+                                d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
                     </button>
 
@@ -313,7 +323,9 @@
                             <a href="{{ url('configuracion') }}" class="item-link">
                                 <svg class="item-icon-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <circle cx="12" cy="12" r="3"></circle>
-                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1V11a2 2 0 0 1-2-2 2 2 0 0 1 2-2v-.09A1.65 1.65 0 0 0 3 4.6l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H5a2 2 0 0 1 2 2 2 2 0 0 1-2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33-1.82V15z"></path>
+                                    <path
+                                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1V11a2 2 0 0 1-2-2 2 2 0 0 1 2-2v-.09A1.65 1.65 0 0 0 3 4.6l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H5a2 2 0 0 1 2 2 2 2 0 0 1-2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33-1.82V15z">
+                                    </path>
                                 </svg>
                                 Configuración
                             </a>
@@ -344,17 +356,12 @@
         @yield('principal')
     </main>
 
-  <script>
-        const cabecera = document.getElementById("cabeceraPrincipal");
-        const btnBuscar = document.getElementById("btnBuscar");
-        const buscador = document.getElementById("buscadorAnimado");
-        const overlay = document.getElementById("overlayBlur");
-        const btnAnimado = document.getElementById("btnBuscarAnimado");
-        const botonMenu = document.getElementById("botonMenuMovil");
-        const menuMovil = document.getElementById("menuMovil");
-        const botonCerrar = document.getElementById("botonCerrar");
 
+    <script>
+        const cabecera = document.getElementById("cabeceraPrincipal");
         let ultimaPosicionScroll = 0;
+
+        // Control de scroll para ocultar/mostrar cabecera
         window.addEventListener("scroll", () => {
             const pos = window.scrollY;
             if (pos < 100) {
@@ -368,68 +375,33 @@
             passive: true
         });
 
-        function abrirBuscador() {
-            buscador.classList.add("activo");
-            overlay.classList.add("activo");
-            document.body.style.overflow = "hidden";
-        }
-
-        function cerrarBuscador() {
-            buscador.classList.remove("activo");
-            overlay.classList.remove("activo");
-            document.body.style.overflow = "";
-        }
-
-        btnBuscar.addEventListener("click", abrirBuscador);
-        overlay.addEventListener("click", cerrarBuscador);
-
-        botonMenu.addEventListener("click", () => {
-            menuMovil.classList.add("activo");
-            document.body.style.overflow = "hidden";
-        });
-
-        function cerrarMenu() {
-            menuMovil.classList.remove("activo");
-            document.body.style.overflow = "";
-        }
-
-        botonCerrar.addEventListener("click", cerrarMenu);
-
-        window.addEventListener("keydown", e => {
-            if (e.key === "Escape") {
-                cerrarBuscador();
-                cerrarMenu();
-            }
-        });
-
-        btnAnimado.addEventListener("click", () => {
-            btnAnimado.classList.add("loading");
-            setTimeout(() => btnAnimado.classList.remove("loading"), 1000);
-        });
-
+        // Funciones de Navegación (Asegúrate de que estas rutas existen en web.php)
         function inicio() {
-            window.location.href = "inicio"
+            window.location.href = "{{ route('inicio') }}";
         }
 
         function productos() {
-            window.location.href = "productosPlantilla"
+            window.location.href = "{{ route('productos') }}";
         }
 
         function soporte() {
-            window.location.href = "soporteTecnico"
+            window.location.href = "{{ route('soporte') }}";
         }
 
         function nosotros() {
-            window.location.href = "sobreNosotros"
+            window.location.href = "{{ route('nosotros') }}";
         }
 
         function contacto() {
-            window.location.href = "contacto"
+            window.location.href = "{{ route('contacto') }}";
         }
 
-        function login() {
-            window.location.href = "login"
+        // Función específica para los portátiles
+        function portatiles() {
+            console.log("Navegando a portatiles...");
+            window.location.href = "{{ route('portatiles') }}";
         }
     </script>
 </body>
+
 </html>

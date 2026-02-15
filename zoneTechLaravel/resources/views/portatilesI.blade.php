@@ -1,116 +1,82 @@
 @extends('productosPlantilla')
 
-@section('titulo', 'Portátiles')
+@section('titulo', 'Sistemas Portátiles')
 
 @push('estilo-categorias')
-<style>
-    /* --- Contenido Principal --- */
+    <style>
         .encabezado-productos {
-            margin-bottom: 32px;
+            margin-bottom: 40px;
+            border-left: 4px solid #ff2a2a;
+            padding-left: 20px;
         }
 
         .titulo-seccion {
             font-family: 'Outfit', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 800;
-            letter-spacing: -1.2px;
-            margin-bottom: 8px;
-            color: #ffffff;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #ffffff !important;
+            margin: 0;
+            line-height: 1;
         }
 
-        .subtitulo-seccion {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.95rem;
-        }
-
-        /* Grid de productos placeholder */
         .grid-productos {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            padding-bottom: 50px;
         }
 
         .producto-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            background: #1a1a1e;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
         .producto-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 0, 0, 0.3);
-            transform: translateY(-4px);
+            border-color: #ff2a2a;
+            transform: translateY(-5px);
         }
 
         .producto-imagen {
-            width: 100%;
-            height: 180px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 8px;
-            margin-bottom: 16px;
+            height: 160px;
+            background: #000;
+            border-radius: 12px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgba(255, 255, 255, 0.2);
         }
-</style>
+    </style>
 @endpush
 
 @section('categoria')
-<div class="encabezado-productos">
-    <h1 class="titulo-seccion">Portátiles</h1>
-    <p class="subtitulo-seccion">Descubre nuestra selección de portátiles</p>
-</div>
-
-<div class="grid-productos">
-    <!-- Tarjetas de producto de ejemplo -->
-    <div class="producto-card">
-        <div class="producto-imagen">
-            <svg width="64" height="64" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                <rect x="2" y="7" width="20" height="14" rx="2" />
-                <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
-            </svg>
-        </div>
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.1rem; margin-bottom: 8px;">Portátil
-            Gaming</h3>
-        <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">Intel Core i7 | 16GB RAM | RTX 4060
-        </p>
-        <p style="color: #ff2a2a; font-weight: 600; margin-top: 12px; font-size: 1.2rem;">1.299€</p>
+    <div class="encabezado-productos">
+        <span
+            style="color: #ff2a2a; font-weight: 800; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px;">Hardware
+            Division</span>
+        <h1 class="titulo-seccion">Sistemas Portátiles</h1>
     </div>
 
-    <div class="producto-card">
-        <div class="producto-imagen">
-            <svg width="64" height="64" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                <rect x="2" y="7" width="20" height="14" rx="2" />
-                <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
-            </svg>
+    <div class="grid-productos">
+        {{-- Tarjeta de ejemplo --}}
+        <div class="producto-card">
+            <div class="producto-imagen">
+                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="2" y1="20" x2="22" y2="20"></line>
+                </svg>
+            </div>
+            <h3 style="color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: 10px;">Titan Gaming X15</h3>
+            <p style="color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-bottom: 20px;">
+                RTX 4060 • i7-13700H • 16GB RAM
+            </p>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: #fff; font-weight: 900; font-size: 1.5rem;">1.299€</span>
+                <button
+                    style="background: #fff; color: #000; border: none; padding: 8px 15px; border-radius: 6px; font-weight: 800; font-size: 0.7rem; cursor: pointer;">DETALLES</button>
+            </div>
         </div>
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.1rem; margin-bottom: 8px;">Ultrabook
-            Pro</h3>
-        <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">AMD Ryzen 5 | 8GB RAM | 512GB SSD
-        </p>
-        <p style="color: #ff2a2a; font-weight: 600; margin-top: 12px; font-size: 1.2rem;">799€</p>
     </div>
-
-    <div class="producto-card">
-        <div class="producto-imagen">
-            <svg width="64" height="64" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                <rect x="2" y="7" width="20" height="14" rx="2" />
-                <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
-            </svg>
-        </div>
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.1rem; margin-bottom: 8px;">Business
-            Laptop</h3>
-        <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">Intel Core i5 | 16GB RAM | 1TB SSD
-        </p>
-        <p style="color: #ff2a2a; font-weight: 600; margin-top: 12px; font-size: 1.2rem;">949€</p>
-    </div>
-</div>
 @endsection
-
-@push('script-categorias')
-
-@endpush

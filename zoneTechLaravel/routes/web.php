@@ -76,42 +76,74 @@
          * git commit -m "Limpieza de cache"
          */
 
-/**
- * 🛠️ CONTROLADORES Y SOPORTE
- */
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UsuariosController;
 
-// [IMPORTANT] PROTOCOLOS DE ACCESO (ANDRÉS) //
 
-// * --- SESIÓN Y NÚCLEO --- //
-Route::get('/login', function () { return view('login'); })->name('login');
-Route::post('/login', [UsuariosController::class, 'loginPost'])->name('login.post');
-Route::post('/logout', [UsuariosController::class, 'logout'])->name('logout');
+/*
+|--------------------------------------------------------------------------
+| 🌐 [IMPORTANT] RUTAS PÚBLICAS (ACCESO LIBRE)
+|--------------------------------------------------------------------------
+*/
 
-// * --- REGISTRO DE IDENTIDAD --- //
-Route::get('/register', function () { return view('register'); })->name('register');
-Route::post('/register', [UsuariosController::class, 'store'])->name('usuarios.store');
-
-// * --- RECUPERACIÓN Y SEGURIDAD --- //
-// + Añadido para gestionar la recuperación y el whitepaper de seguridad
-Route::get('/recuperar-password', function () { return view('recuperarContraseña'); })->name('password.request');
-Route::get('/security-key-info', function () { return view('securityKey'); })->name('security.info');
-
-
-// [IMPORTANT] VISTAS DE NAVEGACIÓN //
-
+// * --- PUNTO DE ENTRADA --- //
 Route::get('/', function () { return view('welcome'); });
-Route::get('/inicio', function () { return view('inicio'); })->name('inicio');
 
-// * --- CATÁLOGO Y PRODUCTOS --- //
-Route::get('/productos', function () { return view('productosPlantilla'); })->name('productos');
-Route::get('/portatiles-industriales', function () { return view('portatilesI'); })->name('portatiles');
+// * --- DASHBOARD INICIAL --- //
+Route::get('/inicio', [UsuariosController::class, 'showInicio'])->name('inicio');
+
+// * --- CATÁLOGO Y HARDWARE (SISTEMA DE PLANTILLAS) --- //
+// @ La ruta base del catálogo
+Route::get('/productos', function () {
+    return view('productosPlantilla');
+})->name('productos');
+
+// + Sub-rutas de categorías (Inyectan contenido en productosPlantilla)
+// # Asegúrate de que el archivo físico sea: resources/views/portatilesI.blade.php
+Route::get('/productos/portatiles', function () {
+    return view('portatilesI');
+})->name('portatiles');
+
+// TODO: Crear las vistas para estas rutas siguiendo el modelo de portatilesI
+Route::get('/productos/sobremesa', function () { return view('sobremesa'); })->name('sobremesa');
+Route::get('/productos/tablets', function () { return view('tablets'); })->name('tablets');
+
 
 // * --- INFORMACIÓN CORPORATIVA --- //
 Route::get('/soporte-tecnico', function () { return view('soporteTecnico'); })->name('soporte');
 Route::get('/sobre-nosotros', function () { return view('sobreNosotros'); })->name('nosotros');
 Route::get('/contacto', function () { return view('contacto'); })->name('contacto');
-// Esta ruta ahora es dinámica y la maneja el UsuariosController
-Route::get('/inicio', [UsuariosController::class, 'showInicio'])->name('inicio');
+
+
+/*
+|--------------------------------------------------------------------------
+| 🔑 [IMPORTANT] PROTOCOLOS DE IDENTIDAD
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/login', function () { return view('login'); })->name('login');
+Route::post('/login', [UsuariosController::class, 'loginPost'])->name('login.post');
+Route::post('/logout', [UsuariosController::class, 'logout'])->name('logout');
+
+Route::get('/register', function () { return view('register'); })->name('register');
+Route::post('/register', [UsuariosController::class, 'store'])->name('usuarios.store');
+
+Route::get('/recuperar-password', function () { return view('recuperarContraseña'); })->name('password.request');
+Route::get('/security-key-info', function () { return view('securityKey'); })->name('security.info');
+
+
+/*
+|--------------------------------------------------------------------------
+| 🛡️ ÁREA PRIVADA (SÓLO USUARIOS LOGUEADOS)
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/perfil', function () { return view('perfil'); })->name('perfil');
+
+    Route::get('/configuracion', function () { return view('configuracion'); })->name('configuracion');
+
+});
