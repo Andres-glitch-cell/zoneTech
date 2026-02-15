@@ -5,33 +5,36 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash; // + Necesario para encriptar contraseñas
 
 class UsuariosController extends Controller
 {
     /**
      * ^ 1. showInicio() ^
-     * Este es el "Cerebro" de ZoneTech.
-     * Decide si mostrar el Landing (invitado) o el Dashboard (autenticado).
+     * Gestiona la vista según el estado de la sesión.
      */
     public function showInicio()
     {
         if (Auth::check()) {
-            // Si está logueado, vamos al panel de control
             return view('inicioAutenticado');
         }
-
-        // Si es un visitante, vemos la página de inicio normal
         return view('inicio');
     }
 
-    /* ^ 2. index() --> Muestra los usuarios registrados en el sistema ^ */
+    /**
+     * ^ 2. index() ^
+     * Lista de expedientes (Admin/Control).
+     */
     public function index()
     {
         $usuarios = User::all();
         return view('usuarios.index', compact('usuarios'));
     }
 
-    /* ^ 3. store() --> Registro y Redirección Automática ^ */
+    /**
+     * ^ 3. store() --> Registro de Identidad ^
+     * + Corregido: Encriptación y Mapeo de campos.
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -44,27 +47,33 @@ class UsuariosController extends Controller
         ]);
 
         try {
+            // & Generamos iniciales automáticamente para el perfil (Ej: "AF")
+            $iniciales = strtoupper(substr($request->nombre, 0, 1) . substr($request->apellido1, 0, 1));
+
             $user = User::create([
                 'usuario'         => $request->usuario,
                 'email'           => $request->email,
                 'nombre'          => $request->nombre,
                 'apellido1'       => $request->apellido1,
                 'apellido2'       => $request->apellido2,
-                'contraseña_hash' => $request->password,
+                'contraseña_hash' => Hash::make($request->password), // ! ENCRIPTADO
+                'iniciales'       => $iniciales,
                 'rol'             => 'usuario',
             ]);
 
             Auth::login($user);
 
-            // Redirigimos a la ruta 'inicio' (donde el método showInicio decidirá la vista)
             return redirect()->route('inicio');
 
         } catch (\Exception $e) {
+            // @ Revisar si 'contraseña_hash' y 'iniciales' están en $fillable en el Modelo
             dd("FALLO CRÍTICO EN EL REGISTRO: " . $e->getMessage());
         }
     }
 
-    /* ^ 4. loginPost() --> Autenticación por Usuario ^ */
+    /**
+     * ^ 4. loginPost() --> Protocolo de Acceso ^
+     */
     public function loginPost(Request $request)
     {
         $credenciales = $request->validate([
@@ -72,26 +81,26 @@ class UsuariosController extends Controller
             'password' => 'required',
         ]);
 
+        // # Laravel usará automáticamente 'contraseña_hash' gracias al método getAuthPassword() del modelo
         if (Auth::attempt(['usuario' => $credenciales['usuario'], 'password' => $credenciales['password']])) {
             $request->session()->regenerate();
-
-            // Al loguearse con éxito, va a la ruta 'inicio'
             return redirect()->route('inicio');
         }
 
         return back()->withErrors([
-            'usuario' => "ACCESO DENEGADO: Credenciales no reconocidas."
+            'usuario' => "ACCESO DENEGADO: Credenciales no reconocidas en la base de datos."
         ]);
     }
 
-    /* ^ 5. logout() --> Cierre de sesión seguro ^ */
+    /**
+     * ^ 5. logout() --> Desconexión del Sistema ^
+     */
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        // Al salir, lo mandamos a la ruta inicio (verá la landing de nuevo)
         return redirect()->route('inicio');
     }
 }
