@@ -77,7 +77,6 @@
  */
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UsuariosController;
 
 /*
@@ -156,20 +155,32 @@ Route::name('auth.')->group(function () {
     })->name('security.info');
 });
 
+// Esta es la página de "Aviso"
+Route::get('/advertenciaUsuarioSinLogin', function () {
+    return view('advertenciaUsuarioSinLogin');
+})->name('advertencia.login');
+
 /*
 |--------------------------------------------------------------------------
 [IMPORTANT] 🛡️ [PRIVATE] ÁREA RESTRINGIDA (SÓLO USUARIOS LOGUEADOS)
 |--------------------------------------------------------------------------
 */
+Route::group([], function () {
 
-Route::middleware(['auth'])->group(function () {
     // + EXPEDIENTES DE USUARIO
     Route::get('/perfil', function () {
+        // Usamos la ruta absoluta \Auth para limpiar errores de VS Code
+        if (!\Illuminate\Support\Facades\Auth::check()) {
+            return redirect('/advertenciaUsuarioSinLogin');
+        }
         return view('perfil');
     })->name('perfil');
 
     // TODO: Finalizar implementación de ajustes
     Route::get('/configuracion', function () {
+        if (!\Illuminate\Support\Facades\Auth::check()) {
+            return redirect('/advertenciaUsuarioSinLogin');
+        }
         return view('configuracion');
     })->name('configuracion');
 });
