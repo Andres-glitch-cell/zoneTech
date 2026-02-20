@@ -80,12 +80,30 @@
         transition: all 0.3s;
         border: none;
         margin-bottom: 40px;
+        cursor: pointer;
     }
 
     .btn-admin:hover {
         background: var(--zt-red);
         color: white;
         box-shadow: 0 0 20px rgba(255, 42, 42, 0.4);
+    }
+
+    /* Botón eliminar pequeño para productos */
+    .btn-delete-mini {
+        background: rgba(255, 0, 0, 0.1);
+        color: #ff4444;
+        border: 1px solid rgba(255, 0, 0, 0.2);
+        padding: 4px 8px;
+        font-size: 9px;
+        font-weight: 800;
+        text-transform: uppercase;
+        transition: all 0.2s;
+    }
+
+    .btn-delete-mini:hover {
+        background: #ff0000;
+        color: white;
     }
 
     .contenedor-productos {
@@ -131,12 +149,28 @@
                     <svg class="w-4 h-4 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
                     </svg>
-                    Sobremsa
+                    Sobremesa
                     <span class="status-badge mono">CAT_02</span>
                 </a>
             </nav>
 
-            <div class="mt-20 p-6 border border-zinc-900 rounded-sm">
+            {{-- PANEL DE ESTADO ADMIN --}}
+            @auth
+                @if(Auth::user()->rol === 'administrador')
+                    <div class="mt-10 p-6 border border-red-900/50 bg-red-950/10 rounded-sm">
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></div>
+                            <span class="mono text-[9px] text-red-500 font-bold uppercase tracking-tighter">Admin_Session_Active</span>
+                        </div>
+                        <p class="mono text-[9px] text-zinc-400 leading-relaxed uppercase">
+                            Privilegios de escritura habilitados. <br>
+                            Puede modificar el núcleo de stock.
+                        </p>
+                    </div>
+                @endif
+            @endauth
+
+            <div class="mt-10 p-6 border border-zinc-900 rounded-sm">
                 <p class="mono text-[9px] text-zinc-500 leading-relaxed uppercase">
                     Escaneo de stock activo. <br>
                     Sincronizado con Base Benicarló.
@@ -145,14 +179,22 @@
         </aside>
 
         <main class="contenido-principal">
+            {{-- BOTÓN PARA AÑADIR (CORREGIDO EL ROL A 'administrador') --}}
             @auth
-                @if(Auth::user()->rol === 'admin')
-                    <a href="{{ route('Productos.create') }}" class="btn-admin">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                        </svg>
-                        Nivel Admin: Añadir Hardware
-                    </a>
+                @if(Auth::user()->rol === 'administrador')
+                    <div class="flex justify-between items-center mb-10">
+                        <a href="{{ route('productos.create') }}" class="btn-admin">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                            </svg>
+                            Sobrescribir Inventario: Añadir Hardware
+                        </a>
+                        
+                        <div class="text-right">
+                            <span class="block mono text-[10px] text-zinc-600">OPERADOR_ACTUAL</span>
+                            <span class="block text-xs font-bold uppercase">{{ Auth::user()->nombre }} {{ Auth::user()->apellido1 }}</span>
+                        </div>
+                    </div>
                 @endif
             @endauth
 
@@ -160,6 +202,8 @@
                 <div class="absolute -top-10 left-0 mono text-[10px] text-red-600/50 uppercase tracking-[0.5em]">
                     Resultados_Encontrados
                 </div>
+                
+                {{-- Aquí es donde se cargan los productos (index.blade.php o similares) --}}
                 @yield('categoria')
             </div>
         </main>

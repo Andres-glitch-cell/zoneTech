@@ -75,87 +75,55 @@
  * git add .
  * git commit -m "Limpieza de cache"
  */
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\UsuariosController;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
-| 🌐 RUTAS PÚBLICAS (ACCESO LIBRE)
+| 🌐 RUTAS PÚBLICAS
 |--------------------------------------------------------------------------
 */
+Route::get('/', [UsuariosController::class, 'showInicio'])->name('inicio');
+Route::get('/inicio', [UsuariosController::class, 'showInicio']);
 
-// * Punto de entrada del servidor
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// * Landing Espectacular (RTX 5090 / Andrés & Carolina)
-Route::get('/inicio', [UsuariosController::class, 'showInicio'])->name('inicio');
-
-// * Catálogo y Hardware
-Route::prefix('productos')->group(function () {
-    Route::get('/', function () {
-        return view('Productos.productosPlantilla');
-    })->name('productos');
-
-    Route::get('/portatiles', [ProductosController::class, 'index'])->name('portatiles');
-    Route::get('/sobremesa',  fn() => view('sobremesa'))->name('sobremesa');
-    Route::get('/tablets',    fn() => view('tablets'))->name('tablets');
-
-    // + CRUD Operativo de Productos
-    Route::get('/crear',            [ProductosController::class, 'create'])->name('Productos.create');
-    Route::post('/',                [ProductosController::class, 'store'])->name('Productos.store');
-    Route::get('/{id}',             [ProductosController::class, 'show'])->name('Productos.show');
-    Route::get('/{id}/editar',      [ProductosController::class, 'edit'])->name('Productos.edit');
-    Route::put('/{id}',             [ProductosController::class, 'update'])->name('Productos.update');
-    Route::delete('/{id}',          [ProductosController::class, 'destroy'])->name('Productos.destroy');
-});
-
-// * Información Corporativa
-Route::get('/soporte-tecnico', fn() => view('soporteTecnico'))->name('soporte');
+// Fíjate en el 'Tecnico.' antes del nombre del archivo
+Route::get('/soporte-tecnico', fn() => view('Tecnico.soporteTecnico'))->name('soporte');
 Route::get('/sobre-nosotros',  fn() => view('sobreNosotros'))->name('nosotros');
 Route::get('/contacto',        fn() => view('contacto'))->name('contacto');
+
+// + Grupo de Productos accesible para todos
+Route::prefix('productos')->group(function () {
+    Route::get('/', [ProductosController::class, 'index'])->name('productos');
+    Route::get('/portatiles', [ProductosController::class, 'index'])->name('portatiles');
+    Route::get('/sobremesa',  fn() => view('sobremesa'))->name('sobremesa');
+    Route::get('/{id}', [ProductosController::class, 'show'])->name('productos.show');
+});
 
 /*
 |--------------------------------------------------------------------------
 | 🔑 PROTOCOLOS DE IDENTIDAD (AUTH)
 |--------------------------------------------------------------------------
 */
+Route::get('/login', fn() => view('Usuario.login'))->name('login');
+Route::post('/login', [UsuariosController::class, 'loginPost'])->name('login.post');
+Route::post('/logout', [UsuariosController::class, 'logout'])->name('logout');
 
-Route::name('auth.')->group(function () {
-    // ! Acceso
-    Route::get('/login', fn() => view('Usuario.login'))->name('login');
-    Route::post('/login', [UsuariosController::class, 'loginPost'])->name('login.post');
-    Route::post('/logout', [UsuariosController::class, 'logout'])->name('logout');
-
-    // + Registro
-    Route::get('/register', fn() => view('Usuario.register'))->name('register');
-    Route::post('/register', [UsuariosController::class, 'store'])->name('usuarios.store');
-
-    // & Seguridad
-    Route::get('/recuperar-password', fn() => view('Usuario.recuperarContraseña'))->name('password.request');
-    Route::get('/securityKey', fn() => view('securityKey'))->name('security.info');
-});
-
-// @ Aviso para invitados
-Route::get('/Usuario/advertenciaUsuarioSinLogin', fn() => view('Usuario.advertenciaUsuarioSinLogin'))->name('advertencia.login');
+Route::get('/register', fn() => view('Usuario.register'))->name('register');
+Route::post('/register', [UsuariosController::class, 'store'])->name('register.post');
 
 /*
 |--------------------------------------------------------------------------
-| 🛡️ ÁREA RESTRINGIDA (MIDDLEWARE AUTH)
+| 🛡️ ÁREA RESTRINGIDA (LOGUEADOS)
 |--------------------------------------------------------------------------
 */
-
-Route::resource('Productos', ProductosController::class);
 Route::middleware(['auth'])->group(function () {
-
-    // @ PANEL DE CONTROL (El que tiene las dos tarjetas: Productos o Pantalla Principal)
     Route::get('/panel-control', [UsuariosController::class, 'dashboard'])->name('usuario.dashboard');
-
-    // + Expedientes y Ajustes
     Route::get('/perfil', fn() => view('Usuario.perfil'))->name('perfil');
-    Route::get('/configuracion', fn() => view('Usuario.configuracion'))->name('configuracion');
+
+    // ! ACCIONES DE ADMINISTRADOR (Añadir y Quitar)
+    // Usamos nombres explícitos para evitar el error "Route not defined"
+    Route::get('/admin/productos/crear', [ProductosController::class, 'create'])->name('productos.create');
+    Route::post('/admin/productos/guardar', [ProductosController::class, 'store'])->name('productos.store');
+    Route::delete('/admin/productos/{id}', [ProductosController::class, 'destroy'])->name('productos.destroy');
 });

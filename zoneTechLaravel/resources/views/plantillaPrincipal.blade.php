@@ -331,7 +331,7 @@
                                 Configuración
                             </a>
                             <hr class="menu-divisor">
-                           <form action="{{ route('auth.logout') }}" method="POST">
+                           <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="item-link logout-red">
                                     <svg class="item-icon-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

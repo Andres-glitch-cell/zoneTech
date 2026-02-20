@@ -3,7 +3,6 @@
 @section('titulo', 'Sistemas Portátiles')
 
 @push('estilo-categorias')
-    {{-- Importamos SweetAlert2 para el popup --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
@@ -56,7 +55,6 @@
             border: 1px solid #111;
         }
 
-        /* Botón de añadir rápido */
         .btn-add-list {
             background: transparent;
             color: #ff2a2a;
@@ -74,6 +72,26 @@
             background: #ff2a2a;
             color: #fff;
         }
+
+        /* Estilo para botón de eliminar */
+        .btn-delete-list {
+            background: transparent;
+            color: #666;
+            border: 1px solid #333;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 0.6rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-delete-list:hover {
+            background: #ff2a2a;
+            color: #fff;
+            border-color: #ff2a2a;
+        }
     </style>
 @endpush
 
@@ -88,21 +106,14 @@
 
     <div class="grid-productos">
         @php
-            // Catálogo inicial de ZoneTech
             $productosDemo = [
                 ['nombre' => 'ZT-Titan v1: RTX 5090', 'precio' => 4299],
                 ['nombre' => 'ZT-Blade Stealth: Ultra 7', 'precio' => 2199],
                 ['nombre' => 'Andrés Special Edition: Liquid', 'precio' => 3500],
                 ['nombre' => 'Carolina Workstation: Pro', 'precio' => 5100],
-                ['nombre' => 'ZT-Shadow: RTX 4080', 'precio' => 2899],
-                ['nombre' => 'ZT-Air: Carbon Fiber', 'precio' => 1599],
-                ['nombre' => 'Neuro-Link Pro: AI Ready', 'precio' => 3200],
-                ['nombre' => 'ZT-Strike: RTX 4060', 'precio' => 1150],
-                ['nombre' => 'Quantum Mobile: 128GB RAM', 'precio' => 4800],
-                ['nombre' => 'ZT-Evo: i5 Business', 'precio' => 899],
             ];
 
-            // Priorizamos los productos de la BD si existen
+            // Si hay productos en la BD, los usamos. Si no, usamos los demo.
             $itemsAMostrar = count($productos) > 0 ? $productos : json_decode(json_encode($productosDemo));
         @endphp
 
@@ -125,16 +136,33 @@
                     </span>
 
                     <div style="display: flex; gap: 8px;">
-                        {{-- Formulario oculto que conecta con el ProductosController@store --}}
-                        <form id="form-{{ $loop->index }}" action="{{ route('Productos.store') }}" method="POST" style="display: none;">
-                            @csrf
-                            <input type="hidden" name="nombre" value="{{ $producto->nombre }}">
-                            <input type="hidden" name="precio" value="{{ $producto->precio }}">
-                        </form>
+                        @auth
+                            @if(Auth::user()->rol === 'administrador')
+                                
+                                @if(isset($producto->id))
+                                    {{-- CASO A: El producto YA ESTÁ en la base de datos (Opción de Eliminar) --}}
+                                    <form action="{{ route('productos.destroy', $producto->id) }}" method="POST" onsubmit="return confirmarBorrado(event)">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-delete-list">
+                                            ELIMINAR
+                                        </button>
+                                    </form>
+                                @else
+                                    {{-- CASO B: El producto es DEMO (Opción de Guardar) --}}
+                                    <form id="form-{{ $loop->index }}" action="{{ route('productos.store') }}" method="POST" style="display: none;">
+                                        @csrf
+                                        <input type="hidden" name="nombre" value="{{ $producto->nombre }}">
+                                        <input type="hidden" name="precio" value="{{ $producto->precio }}">
+                                        <input type="hidden" name="categoria" value="portatil">
+                                    </form>
+                                    <button onclick="enviarADatabase('{{ $producto->nombre }}', '{{ $loop->index }}')" class="btn-add-list">
+                                        + GUARDAR DB
+                                    </button>
+                                @endif
 
-                        <button onclick="enviarADatabase('{{ $producto->nombre }}', '{{ $loop->index }}')" class="btn-add-list">
-                            + GUARDAR DB
-                        </button>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             </div>
@@ -142,30 +170,44 @@
     </div>
 
     <script>
+        // Función para Guardar
         function enviarADatabase(nombreProducto, index) {
-            // 1. Popup visual de ZoneTech
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
+            Swal.fire({
+                title: '¿Sincronizar Hardware?',
+                text: `Se añadirá ${nombreProducto} al inventario oficial.`,
+                icon: 'info',
                 background: '#1a1a1e',
-                color: '#ffffff',
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                color: '#fff',
+                confirmButtonColor: '#ff2a2a',
+                showCancelButton: true,
+                cancelButtonText: 'CANCELAR'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('form-' + index).submit();
                 }
             });
+        }
 
-            Toast.fire({
-                icon: 'success',
-                iconColor: '#ff2a2a',
-                title: 'Sincronizando Hardware...',
-                text: nombreProducto
-            }).then(() => {
-                // 2. Ejecutar el envío del formulario tras el aviso
-                document.getElementById('form-' + index).submit();
+        // Función para Confirmar Borrado
+        function confirmarBorrado(event) {
+            event.preventDefault();
+            const form = event.target;
+
+            Swal.fire({
+                title: '¿ELIMINAR PRODUCTO?',
+                text: "Esta acción no se puede deshacer.",
+                icon: 'warning',
+                showCancelButton: true,
+                background: '#1a1a1e',
+                color: '#fff',
+                confirmButtonColor: '#ff2a2a',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'SÍ, BORRAR',
+                cancelButtonText: 'CANCELAR'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
             });
         }
     </script>
