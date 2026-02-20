@@ -4,15 +4,17 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash; // Importante para el manejo de hashes
 
 class User extends Authenticatable
 {
     use Notifiable;
 
-    // ? Definimos la tabla exacta de tu base de datos
     protected $table = 'usuariosNoAutenticados';
 
-    /* DONE: Atributos que se pueden asignar masivamente  */
+    // Laravel por defecto busca 'id'. Si tu PK tiene otro nombre, añádelo aquí:
+    // protected $primaryKey = 'id_usuario'; 
+
     protected $fillable = [
         'usuario',
         'nombre',
@@ -25,17 +27,22 @@ class User extends Authenticatable
     ];
 
     /**
-     * ! CONVERSIÓN DE TIPOS (Casts)
-     * + Esto soluciona errores de formato de fecha y asegura el hashing
+     * Atributos que deben ocultarse en serialización.
      */
+    protected $hidden = [
+        'contraseña_hash',
+        'remember_token',
+    ];
+
     protected $casts = [
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        // 'contraseña_hash' => 'hashed', // Solo si usas Laravel 10+
     ];
 
-    /* ! 🔑 PROTOCOLO DE AUTENTICACIÓN PERSONALIZADO
-     & @ Este método le dice a Laravel: "No busques la columna 'password', usa esta"
+    /**
+     * Sobrescribimos el nombre de la columna de contraseña para Laravel Auth.
      */
     public function getAuthPassword()
     {
