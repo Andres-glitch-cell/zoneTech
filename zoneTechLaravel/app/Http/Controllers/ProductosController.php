@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ProductosController extends Controller
 {
-
+    // ! Mensaje de añadido a favoritos
     public function saveFavorite(Request $request)
     {
         // NOTE: Aquí recibiríamos el ID del producto
@@ -17,7 +17,7 @@ class ProductosController extends Controller
             'message' => 'Hardware añadido al sector de favoritos.'
         ]);
     }
-    /* 1. index() --> Lista todos los productos del catálogo */
+    /*1. index() --> Lista todos los productos del catálogo */
     public function index()
     {
         $productos = Producto::all();

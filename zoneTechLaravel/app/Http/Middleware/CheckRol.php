@@ -5,25 +5,25 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+// + Importación necesaria para que VS Code no se pierda
+use Illuminate\Support\Facades\Auth;
 
 class CheckRol
 {
-    /**
-     * Handle an incoming request.
-     *
-     */
-    public function handle($request, \Closure $next, ...$roles)
-{
-    // 1. Si no está logueado, fuera
-    if (!auth()->check()) {
-        return redirect()->route('login');
-    }
+    public function handle($request, Closure $next, ...$roles)
+    {
+        // SECURITY: Validación de sesión activa usando la Facade Auth
+        // @ ¡IMPORTANTE! Al usar Auth::check(), el error desaparecerá
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
 
-    // 2. Si su rol no está en la lista de permitidos, fuera
-    if (!in_array(auth()->user()->rol, $roles)) {
-        return redirect()->route('inicio')->with('error', 'Nivel de autorización insuficiente.');
-    }
+        // XXX: VALIDACIÓN DE PERMISOS
+        // NOTE: Usamos Auth::user() para obtener los datos del usuario logueado
+        if (!in_array(Auth::user()->rol, $roles)) {
+            return redirect()->route('inicio')->with('error', 'Nivel de autorización insuficiente.');
+        }
 
-    return $next($request);
-}
+        return $next($request);
+    }
 }
