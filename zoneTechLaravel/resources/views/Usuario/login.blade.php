@@ -146,7 +146,7 @@
             <p class="text-zinc-600 text-[10px] mt-1 font-bold tracking-widest uppercase">Acceso Restringido al Sistema</p>
         </div>
 
-        <form action="{{ route('login.post') }}" method="POST" class="space-y-5">
+       <form action="{{ route('auth.login.post') }}" method="POST" class="space-y-5">
             @csrf
 
             <div class="group">

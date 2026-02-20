@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ZoneTech – @yield('titulo', 'Inicio')</title>
@@ -341,7 +342,7 @@
                                 </button>
                             </form>
                         @else
-                            <a href="{{ url('advertenciaUsuarioSinLogin') }}" class="item-link">Iniciar Sesión</a>
+                            <a href="{{ url('/Usuario/advertenciaUsuarioSinLogin') }}" class="item-link">Iniciar Sesión</a>
                             <a href="{{ url('register') }}" class="item-link">Registrarse</a>
                         @endauth
                     </div>

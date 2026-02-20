@@ -1,5 +1,4 @@
-@extends('layouts.tu_archivo_layout') {{-- Asegúrate de poner el nombre correcto de tu layout --}}
-
+@extends('plantillaPrincipal')
 @section('titulo', 'Acceso Denegado')
 
 @section('principal')

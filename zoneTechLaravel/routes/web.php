@@ -96,12 +96,10 @@ Route::get('/inicio', [UsuariosController::class, 'showInicio'])->name('inicio')
 
 // * --- CATÁLOGO Y HARDWARE (SISTEMA DE PLANTILLAS) --- //
 Route::prefix('productos')->group(function () {
-    // @ Ruta base del catálogo
     Route::get('/', function () {
         return view('Productos.productosPlantilla');
     })->name('productos');
 
-    // + Sub-rutas de categorías (Inyectan contenido dinámico)
     Route::get('/portatiles', [ProductosController::class, 'index'])->name('portatiles');
 
     // + CRUD completo de productos
@@ -112,7 +110,6 @@ Route::prefix('productos')->group(function () {
     Route::put('/{id}',             [ProductosController::class, 'update'])->name('Productos.update');
     Route::delete('/{id}',          [ProductosController::class, 'destroy'])->name('Productos.destroy');
 
-    // TODO: Crear las vistas físicas para estas rutas
     Route::get('/sobremesa', function () {
         return view('sobremesa');
     })->name('sobremesa');
@@ -122,7 +119,6 @@ Route::prefix('productos')->group(function () {
 });
 
 // * --- INFORMACIÓN CORPORATIVA --- //
-
 Route::get('/soporte-tecnico', function () {
     return view('soporteTecnico');
 })->name('soporte');
@@ -142,8 +138,10 @@ Route::get('/contacto', function () {
 Route::name('auth.')->group(function () {
     // ! GESTIÓN DE LOGIN
     Route::get('/login', function () {
-        return view('login');
+        // @ FIX: Añadida carpeta Usuario.
+        return view('Usuario.login');
     })->name('login');
+
     Route::post('/login', [UsuariosController::class, 'loginPost'])->name('login.post');
     Route::post('/logout', [UsuariosController::class, 'logout'])->name('logout');
 
@@ -153,25 +151,20 @@ Route::name('auth.')->group(function () {
     })->name('register');
     Route::post('/register', [UsuariosController::class, 'store'])->name('usuarios.store');
 
-    Route::get('/recuperar-password', function () {
-        return view('Usuario.recuperarContraseña');
-    })->name('password.request');
-    Route::get('/securityKey', function () {
-        return view('securityKey');
-    })->name('security.info');
-
     // & SEGURIDAD Y RECUPERACIÓN
     Route::get('/recuperar-password', function () {
         return view('Usuario.recuperarContraseña');
     })->name('password.request');
+
     Route::get('/securityKey', function () {
         return view('securityKey');
     })->name('security.info');
 });
 
 // Esta es la página de "Aviso"
-Route::get('/advertenciaUsuarioSinLogin', function () {
-    return view('advertenciaUsuarioSinLogin');
+Route::get('/Usuario/advertenciaUsuarioSinLogin', function () {
+    // @ FIX: Usar formato punto y sin barra inicial
+    return view('Usuario.advertenciaUsuarioSinLogin');
 })->name('advertencia.login');
 
 /*
@@ -183,18 +176,18 @@ Route::group([], function () {
 
     // + EXPEDIENTES DE USUARIO
     Route::get('/perfil', function () {
-        // Usamos la ruta absoluta \Auth para limpiar errores de VS Code
         if (!\Illuminate\Support\Facades\Auth::check()) {
-            return redirect('/advertenciaUsuarioSinLogin');
+            // @ FIX: Redirigir usando el NOMBRE de la ruta
+            return redirect()->route('advertencia.login');
         }
-        return view('perfil');
+        return view('Usuario.perfil');
     })->name('perfil');
 
     // TODO: Finalizar implementación de ajustes
     Route::get('/configuracion', function () {
         if (!\Illuminate\Support\Facades\Auth::check()) {
-            return redirect('/advertenciaUsuarioSinLogin');
+            return redirect()->route('advertencia.login');
         }
-        return view('configuracion');
+        return view('Usuario.configuracion');
     })->name('configuracion');
 });
