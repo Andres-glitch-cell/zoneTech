@@ -79,6 +79,15 @@
         </aside>
 
         <main class="contenido-principal">
+            {{-- + Botón solo visible para usuarios con rol admin --}}
+            @auth
+                @if(Auth::user()->rol === 'admin')
+                    <a href="{{ route('Productos.create') }}"
+                        style="display: inline-block; margin-bottom: 30px; background: #ff2a2a; color: #fff; text-decoration: none; padding: 10px 22px; border-radius: 8px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">
+                        + Añadir Producto
+                    </a>
+                @endif
+            @endauth
             @yield('categoria')
         </main>
     </div>
