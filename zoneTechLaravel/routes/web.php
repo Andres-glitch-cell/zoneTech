@@ -77,7 +77,7 @@
  */
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\UsuariosController;
 
 /*
@@ -98,13 +98,19 @@ Route::get('/inicio', [UsuariosController::class, 'showInicio'])->name('inicio')
 Route::prefix('productos')->group(function () {
     // @ Ruta base del catálogo
     Route::get('/', function () {
-        return view('productosPlantilla');
+        return view('Productos.productosPlantilla');
     })->name('productos');
 
     // + Sub-rutas de categorías (Inyectan contenido dinámico)
-    Route::get('/portatiles', function () {
-        return view('portatilesI');
-    })->name('portatiles');
+    Route::get('/portatiles', [ProductosController::class, 'index'])->name('portatiles');
+
+    // + CRUD completo de productos
+    Route::get('/crear',            [ProductosController::class, 'create'])->name('Productos.create');
+    Route::post('/',                [ProductosController::class, 'store'])->name('Productos.store');
+    Route::get('/{id}',             [ProductosController::class, 'show'])->name('Productos.show');
+    Route::get('/{id}/editar',      [ProductosController::class, 'edit'])->name('Productos.edit');
+    Route::put('/{id}',             [ProductosController::class, 'update'])->name('Productos.update');
+    Route::delete('/{id}',          [ProductosController::class, 'destroy'])->name('Productos.destroy');
 
     // TODO: Crear las vistas físicas para estas rutas
     Route::get('/sobremesa', function () {
@@ -143,12 +149,12 @@ Route::name('auth.')->group(function () {
 
     // + REGISTRO DE NUEVAS UNIDADES
     Route::get('/register', function () {
-        return view('register');
+        return view('Usuario.register');
     })->name('register');
     Route::post('/register', [UsuariosController::class, 'store'])->name('usuarios.store');
 
     Route::get('/recuperar-password', function () {
-        return view('recuperarContraseña');
+        return view('Usuario.recuperarContraseña');
     })->name('password.request');
     Route::get('/securityKey', function () {
         return view('securityKey');
@@ -156,7 +162,7 @@ Route::name('auth.')->group(function () {
 
     // & SEGURIDAD Y RECUPERACIÓN
     Route::get('/recuperar-password', function () {
-        return view('recuperarContraseña');
+        return view('Usuario.recuperarContraseña');
     })->name('password.request');
     Route::get('/securityKey', function () {
         return view('securityKey');
