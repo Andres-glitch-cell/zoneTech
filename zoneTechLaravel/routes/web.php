@@ -118,6 +118,7 @@ Route::prefix('productos')->group(function () {
 
 // UI: Puntos de entrada para el personal y usuarios
 Route::get('/login', fn() => view('Usuario.login'))->name('login');
+Route::get('/securityKey', fn() => view('securityKey'))->name('securityKey');
 Route::get('/register', fn() => view('Usuario.register'))->name('register');
 
 // SECURITY: Endpoints de autenticación y cierre de sesión
