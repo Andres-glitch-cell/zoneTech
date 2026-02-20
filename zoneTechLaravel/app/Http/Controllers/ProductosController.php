@@ -2,64 +2,93 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
 class ProductosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    /* ^ 1. index() --> Lista todos los productos del catálogo ^ */
     public function index()
-    {
-        //
-    }
+{
+    $productos = Producto::all();
+    return view('Productos.portatilesI', compact('productos'));
+}
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    /* ^ 2. create() --> Muestra el formulario para añadir un nuevo producto ^ */
     public function create()
     {
-        //
+        return view('Productos.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    /* ^ 3. store() --> Guarda el nuevo producto en la base de datos ^ */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'precio' => 'required|numeric|min:0',
+        ]);
+
+        try {
+            Producto::create([
+                'nombre' => $request->nombre,
+                'precio' => $request->precio,
+            ]);
+
+            return redirect()->route('Productos.index')
+                ->with('success', 'Producto añadido correctamente.');
+        } catch (\Exception $e) {
+            dd("FALLO CRÍTICO AL CREAR PRODUCTO: " . $e->getMessage());
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
+    /* ^ 4. show() --> Muestra los detalles de un producto específico ^ */
     public function show(string $id)
     {
-        //
+        $producto = Producto::findOrFail($id);
+        return view('Productos.show', compact('producto'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    /* ^ 5. edit() --> Muestra el formulario para editar un producto ^ */
     public function edit(string $id)
     {
-        //
+        $producto = Producto::findOrFail($id);
+        return view('productos.edit', compact('producto'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     * TODO: storage = Base de Datos
-     */
+    /* ^ 6. update() --> Actualiza el producto en la base de datos ^ */
+    // TODO: storage = Base de Datos
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'precio' => 'required|numeric|min:0',
+        ]);
+
+        try {
+            $producto = Producto::findOrFail($id);
+            $producto->update([
+                'nombre' => $request->nombre,
+                'precio' => $request->precio,
+            ]);
+
+            return redirect()->route('Productos.index')
+                ->with('success', 'Producto actualizado correctamente.');
+        } catch (\Exception $e) {
+            dd("FALLO CRÍTICO AL ACTUALIZAR PRODUCTO: " . $e->getMessage());
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    /* ^ 7. destroy() --> Elimina un producto de la base de datos ^ */
     public function destroy(string $id)
     {
-        //
+        try {
+            $producto = Producto::findOrFail($id);
+            $producto->delete();
+
+            return redirect()->route('Productos.index')
+                ->with('success', 'Producto eliminado correctamente.');
+        } catch (\Exception $e) {
+            dd("FALLO CRÍTICO AL ELIMINAR PRODUCTO: " . $e->getMessage());
+        }
     }
 }

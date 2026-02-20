@@ -14,7 +14,7 @@ class UsuariosController extends Controller
     public function showInicio()
     {
         if (Auth::check()) {
-            return view('inicioAutenticado');
+            return view('Uusuario.inicioAutenticado');
         }
         return view('inicio');
     }
