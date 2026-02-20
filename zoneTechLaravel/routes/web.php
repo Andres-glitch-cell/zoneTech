@@ -75,6 +75,7 @@
  * git add .
  * git commit -m "Limpieza de cache"
  */
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\UsuariosController;
@@ -84,6 +85,7 @@ use App\Http\Controllers\UsuariosController;
 | 🌐 RUTAS PÚBLICAS
 |--------------------------------------------------------------------------
 */
+
 Route::get('/', [UsuariosController::class, 'showInicio'])->name('inicio');
 Route::get('/inicio', [UsuariosController::class, 'showInicio']);
 
@@ -117,6 +119,12 @@ Route::post('/register', [UsuariosController::class, 'store'])->name('register.p
 | 🛡️ ÁREA RESTRINGIDA (LOGUEADOS)
 |--------------------------------------------------------------------------
 */
+
+// Usa este nombre de ruta para que coincida con tu URL
+Route::get('/Usuario/advertenciaUsuarioSinLogin', function () {
+    return view('Usuario.advertenciaUsuarioSinLogin');
+})->name('advertencia.login');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/panel-control', [UsuariosController::class, 'dashboard'])->name('usuario.dashboard');
     Route::get('/perfil', fn() => view('Usuario.perfil'))->name('perfil');
