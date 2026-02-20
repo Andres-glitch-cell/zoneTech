@@ -9,36 +9,27 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    // ? Definimos la tabla exacta de tu base de datos
+    // 1. Apuntamos a tu tabla del .sql
     protected $table = 'usuariosNoAutenticados';
 
-    /* DONE: Atributos que se pueden asignar masivamente  */
+    // 2. Campos que se pueden llenar (Fillable)
     protected $fillable = [
-        'usuario',
-        'nombre',
-        'apellido1',
-        'apellido2',
-        'email',
-        'contraseña_hash',
-        'iniciales',
+        'usuario', 
+        'nombre', 
+        'apellido1', 
+        'apellido2', 
+        'email', 
+        'contraseña_hash', 
+        'iniciales', 
         'rol'
     ];
 
-    /**
-     * ! CONVERSIÓN DE TIPOS (Casts)
-     * + Esto soluciona errores de formato de fecha y asegura el hashing
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
-
-    /* ! 🔑 PROTOCOLO DE AUTENTICACIÓN PERSONALIZADO
-     & @ Este método le dice a Laravel: "No busques la columna 'password', usa esta"
-     */
+    // 3. Importante: Laravel necesita saber cuál es la columna de la contraseña
     public function getAuthPassword()
     {
         return $this->contraseña_hash;
     }
+
+    // Desactivamos los timestamps si tu SQL usa fecha_creacion manualmente
+    public $timestamps = true; 
 }
