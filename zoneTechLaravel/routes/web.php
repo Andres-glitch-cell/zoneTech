@@ -19,7 +19,6 @@
         // NOTE: Explicación adicional o aclaración (Azul claro)
         // REVIEW: Necesita revisión por otro programador (Morado)
         // OPTIMIZE: Código que se puede mejorar en rendimiento (Naranja)
-        // DEPRECATED: Esta parte ya no se recomienda usar (Gris, Tachado)
         // SECURITY: Posible vulnerabilidad o tema de seguridad (Rojo con fondo)
         // PERF: Mejora de rendimiento posible (Azul verdoso)
         // CLEANUP: Código que hay que limpiar/reorganizar (Gris claro)
@@ -82,23 +81,31 @@ use App\Http\Controllers\UsuariosController;
 
 /*
 |--------------------------------------------------------------------------
-| 🌐 RUTAS PÚBLICAS
+| 🌐 RUTAS PÚBLICAS (NODO CIVIL)
 |--------------------------------------------------------------------------
+| * Estas rutas son de libre acceso en el ecosistema ZoneTech.
 */
 
+// * Redirección de aterrizaje: Interfaz principal RTX 5090
 Route::get('/', [UsuariosController::class, 'showInicio'])->name('inicio');
 Route::get('/inicio', [UsuariosController::class, 'showInicio']);
 
-// Fíjate en el 'Tecnico.' antes del nombre del archivo
+// NOTE: Información corporativa y soporte técnico
+// # Referencia: Ver manual de identidad en docs/branding.pdf
 Route::get('/soporte-tecnico', fn() => view('Tecnico.soporteTecnico'))->name('soporte');
 Route::get('/sobre-nosotros',  fn() => view('sobreNosotros'))->name('nosotros');
 Route::get('/contacto',        fn() => view('contacto'))->name('contacto');
 
-// + Grupo de Productos accesible para todos
+// + Grupo de Catálogo: Visualización de hardware
 Route::prefix('productos')->group(function () {
+    // API: Sincronización de inventario desde SQL
     Route::get('/', [ProductosController::class, 'index'])->name('productos');
     Route::get('/portatiles', [ProductosController::class, 'index'])->name('portatiles');
+
+    // UI: Galería de estaciones de trabajo
     Route::get('/sobremesa',  fn() => view('sobremesa'))->name('sobremesa');
+
+    // ? Query: ¿Implementar caché para las vistas de productos individuales?
     Route::get('/{id}', [ProductosController::class, 'show'])->name('productos.show');
 });
 
@@ -106,32 +113,61 @@ Route::prefix('productos')->group(function () {
 |--------------------------------------------------------------------------
 | 🔑 PROTOCOLOS DE IDENTIDAD (AUTH)
 |--------------------------------------------------------------------------
+| @ ¡IMPORTANTE! La encriptación se gestiona mediante el modelo User (contraseña_hash)
 */
-Route::get('/login', fn() => view('Usuario.login'))->name('login');
-Route::post('/login', [UsuariosController::class, 'loginPost'])->name('login.post');
-Route::post('/logout', [UsuariosController::class, 'logout'])->name('logout');
 
+// UI: Puntos de entrada para el personal y usuarios
+Route::get('/login', fn() => view('Usuario.login'))->name('login');
 Route::get('/register', fn() => view('Usuario.register'))->name('register');
+
+// SECURITY: Endpoints de autenticación y cierre de sesión
+Route::post('/login', [UsuariosController::class, 'loginPost'])->name('login.post');
 Route::post('/register', [UsuariosController::class, 'store'])->name('register.post');
+Route::post('/logout', [UsuariosController::class, 'logout'])->name('logout');
 
 /*
 |--------------------------------------------------------------------------
-| 🛡️ ÁREA RESTRINGIDA (LOGUEADOS)
+| 🛡️ ÁREA RESTRINGIDA (NODO SEGURO)
 |--------------------------------------------------------------------------
+| XXX: El acceso no autorizado redirigirá al protocolo de advertencia.
 */
 
-// Usa este nombre de ruta para que coincida con tu URL
+// WARNING: Ruta de escape para accesos denegados
 Route::get('/Usuario/advertenciaUsuarioSinLogin', function () {
     return view('Usuario.advertenciaUsuarioSinLogin');
 })->name('advertencia.login');
 
+// & Seguimiento: Control de acceso mediante Middleware 'auth'
 Route::middleware(['auth'])->group(function () {
+
+    // UI: Dashboard y Perfil de usuario
     Route::get('/panel-control', [UsuariosController::class, 'dashboard'])->name('usuario.dashboard');
     Route::get('/perfil', fn() => view('Usuario.perfil'))->name('perfil');
 
-    // ! ACCIONES DE ADMINISTRADOR (Añadir y Quitar)
-    // Usamos nombres explícitos para evitar el error "Route not defined"
+    /*
+    |--------------------------------------------------------------------------
+    | ⚙️ SISTEMA DE CONFIGURACIÓN
+    |--------------------------------------------------------------------------
+    | @ ¡IMPORTANTE! Se han unificado las rutas para evitar errores 404
+    */
+
+    // + Funcionalidad: Ambos alias apuntan al nodo de configuración de ZoneTech
+    Route::get('/configuracion', fn() => view('Usuario.configuracion'))->name('configuracion');
+    Route::get('/Usuario/configuracion', fn() => view('Usuario.configuracion'))->name('usuario.configuracion');
+
+    /*
+    |--------------------------------------------------------------------------
+    | 🛠️ ACCIONES DE ADMINISTRADOR (HARDWARE MGT)
+    |--------------------------------------------------------------------------
+    | ! Advertencia: Estas rutas modifican la tabla 'productos' en SQL
+    */
+
+    Route::post('/favoritos/guardar', [ProductosController::class, 'saveFavorite'])->name('favoritos.store');
     Route::get('/admin/productos/crear', [ProductosController::class, 'create'])->name('productos.create');
     Route::post('/admin/productos/guardar', [ProductosController::class, 'store'])->name('productos.store');
+
+    // FIXME: Añadir middleware de rol 'admin' para mayor seguridad
     Route::delete('/admin/productos/{id}', [ProductosController::class, 'destroy'])->name('productos.destroy');
+
+    // TODO: <u>Desplegar vistas para edit() y lógica para update()</u>
 });

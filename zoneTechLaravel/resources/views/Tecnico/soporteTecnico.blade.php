@@ -61,7 +61,6 @@
 
 @section('principal')
 <div class="bg-grid min-h-screen pt-32 pb-24 px-6">
-
     <div class="max-w-7xl mx-auto">
         <div class="text-center mb-20">
             <span class="mono text-red-600 text-xs tracking-[0.5em] uppercase block mb-4">Diagnostics_Center // Level_01</span>

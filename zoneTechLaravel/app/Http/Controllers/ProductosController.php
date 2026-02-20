@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class ProductosController extends Controller
 {
+
+    public function saveFavorite(Request $request)
+    {
+        // NOTE: Aquí recibiríamos el ID del producto
+        // Por ahora, devolvemos una respuesta de éxito para el SweetAlert
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Hardware añadido al sector de favoritos.'
+        ]);
+    }
     /* 1. index() --> Lista todos los productos del catálogo */
     public function index()
     {
@@ -27,7 +37,7 @@ class ProductosController extends Controller
             'nombre' => 'required|string|max:255',
             'precio' => 'required|numeric|min:0',
             // Añadimos categoría si la usas en el formulario
-            'categoria' => 'nullable|string' 
+            'categoria' => 'nullable|string'
         ]);
 
         try {

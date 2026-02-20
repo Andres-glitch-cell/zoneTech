@@ -1,11 +1,12 @@
 @extends('Productos.productosPlantilla')
 
-@section('titulo', 'Sistemas Portátiles')
+@section('titulo', 'Sistemas Portátiles | ZoneTech')
 
 @push('estilo-categorias')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
+        /* --- ESTILOS DE NÚCLEO ZONETECH --- */
         .encabezado-productos {
             margin-bottom: 40px;
             border-left: 4px solid #ff2a2a;
@@ -55,6 +56,7 @@
             border: 1px solid #111;
         }
 
+        /* --- BOTONES DE ACCIÓN --- */
         .btn-add-list {
             background: transparent;
             color: #ff2a2a;
@@ -68,12 +70,8 @@
             transition: 0.3s;
         }
 
-        .btn-add-list:hover {
-            background: #ff2a2a;
-            color: #fff;
-        }
+        .btn-add-list:hover { background: #ff2a2a; color: #fff; }
 
-        /* Estilo para botón de eliminar */
         .btn-delete-list {
             background: transparent;
             color: #666;
@@ -87,10 +85,30 @@
             transition: 0.3s;
         }
 
-        .btn-delete-list:hover {
+        .btn-delete-list:hover { background: #ff2a2a; color: #fff; border-color: #ff2a2a; }
+
+        /* + ESTILO PARA FAVORITOS */
+        .btn-fav {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border: 1px solid #333;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-fav:hover { border-color: #ff2a2a; color: #ff2a2a; }
+
+        /* Estado activo: Corazón rojo brillante */
+        .btn-fav.active {
             background: #ff2a2a;
             color: #fff;
             border-color: #ff2a2a;
+            box-shadow: 0 0 10px rgba(255, 42, 42, 0.5);
         }
     </style>
 @endpush
@@ -112,8 +130,6 @@
                 ['nombre' => 'Andrés Special Edition: Liquid', 'precio' => 3500],
                 ['nombre' => 'Carolina Workstation: Pro', 'precio' => 5100],
             ];
-
-            // Si hay productos en la BD, los usamos. Si no, usamos los demo.
             $itemsAMostrar = count($productos) > 0 ? $productos : json_decode(json_encode($productosDemo));
         @endphp
 
@@ -137,30 +153,30 @@
 
                     <div style="display: flex; gap: 8px;">
                         @auth
+                            <button onclick="enviarAFavoritos('{{ $producto->nombre }}', '{{ $producto->id ?? 0 }}', this)"
+                                    class="btn-fav"
+                                    title="Añadir a Favoritos">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                            </button>
+
                             @if(Auth::user()->rol === 'administrador')
-                                
                                 @if(isset($producto->id))
-                                    {{-- CASO A: El producto YA ESTÁ en la base de datos (Opción de Eliminar) --}}
+                                    {{-- CASO A: Producto en SQL (Borrado) --}}
                                     <form action="{{ route('productos.destroy', $producto->id) }}" method="POST" onsubmit="return confirmarBorrado(event)">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn-delete-list">
-                                            ELIMINAR
-                                        </button>
+                                        @csrf @method('DELETE')
+                                        <button type="submit" class="btn-delete-list">ELIMINAR</button>
                                     </form>
                                 @else
-                                    {{-- CASO B: El producto es DEMO (Opción de Guardar) --}}
+                                    {{-- CASO B: Producto Demo (Guardado) --}}
                                     <form id="form-{{ $loop->index }}" action="{{ route('productos.store') }}" method="POST" style="display: none;">
                                         @csrf
                                         <input type="hidden" name="nombre" value="{{ $producto->nombre }}">
                                         <input type="hidden" name="precio" value="{{ $producto->precio }}">
-                                        <input type="hidden" name="categoria" value="portatil">
                                     </form>
-                                    <button onclick="enviarADatabase('{{ $producto->nombre }}', '{{ $loop->index }}')" class="btn-add-list">
-                                        + GUARDAR DB
-                                    </button>
+                                    <button onclick="enviarADatabase('{{ $producto->nombre }}', '{{ $loop->index }}')" class="btn-add-list">+ GUARDAR</button>
                                 @endif
-
                             @endif
                         @endauth
                     </div>
@@ -170,45 +186,66 @@
     </div>
 
     <script>
-        // Función para Guardar
-        function enviarADatabase(nombreProducto, index) {
-            Swal.fire({
-                title: '¿Sincronizar Hardware?',
-                text: `Se añadirá ${nombreProducto} al inventario oficial.`,
-                icon: 'info',
-                background: '#1a1a1e',
-                color: '#fff',
-                confirmButtonColor: '#ff2a2a',
-                showCancelButton: true,
-                cancelButtonText: 'CANCELAR'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('form-' + index).submit();
-                }
+        /* + FUNCIONALIDAD: FAVORITOS (CONEXIÓN AL CONTROLADOR) */
+        function enviarAFavoritos(nombre, id, btn) {
+            btn.classList.toggle('active');
+
+            // Enviamos la petición al servidor sin recargar la página
+            fetch("{{ route('favoritos.store') }}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ producto_id: id })
+            })
+            .then(response => response.json())
+            .then(data => {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Sincronización de Favoritos',
+                    text: `${nombre} guardado en el sector personal.`,
+                    showConfirmButton: false,
+                    timer: 2500,
+                    background: '#1a1a1e',
+                    color: '#fff',
+                    iconColor: '#ff2a2a'
+                });
+            })
+            .catch(error => {
+                console.error('Error en el enlace de datos:', error);
             });
         }
 
-        // Función para Confirmar Borrado
-        function confirmarBorrado(event) {
-            event.preventDefault();
-            const form = event.target;
-
+        /* @ FUNCIONALIDAD: GUARDAR EN BASE DE DATOS SQL */
+        function enviarADatabase(nombre, index) {
             Swal.fire({
-                title: '¿ELIMINAR PRODUCTO?',
-                text: "Esta acción no se puede deshacer.",
-                icon: 'warning',
-                showCancelButton: true,
+                title: '¿Sincronizar Hardware?',
+                text: `Se escribirá ${nombre} en la base de datos oficial.`,
+                icon: 'info',
                 background: '#1a1a1e',
                 color: '#fff',
+                showCancelButton: true,
                 confirmButtonColor: '#ff2a2a',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'SÍ, BORRAR',
-                cancelButtonText: 'CANCELAR'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            });
+                confirmButtonText: 'SÍ, GUARDAR'
+            }).then((res) => { if(res.isConfirmed) document.getElementById('form-'+index).submit(); });
+        }
+
+        /* ! FUNCIONALIDAD: ELIMINACIÓN FÍSICA */
+        function confirmarBorrado(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿ELIMINAR PERMANENTEMENTE?',
+                text: "Esta acción borrará el registro del SQL.",
+                icon: 'warning',
+                background: '#1a1a1e',
+                color: '#fff',
+                showCancelButton: true,
+                confirmButtonColor: '#ff2a2a',
+                confirmButtonText: 'ELIMINAR'
+            }).then((res) => { if(res.isConfirmed) e.target.submit(); });
         }
     </script>
 @endsection
