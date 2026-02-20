@@ -341,7 +341,7 @@
                                 </button>
                             </form>
                         @else
-                            <a href="{{ url('login') }}" class="item-link">Iniciar Sesión</a>
+                            <a href="{{ url('advertenciaUsuarioSinLogin') }}" class="item-link">Iniciar Sesión</a>
                             <a href="{{ url('register') }}" class="item-link">Registrarse</a>
                         @endauth
                     </div>
