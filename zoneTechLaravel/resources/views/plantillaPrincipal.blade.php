@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ZoneTech – @yield('titulo', 'Inicio')</title>
@@ -331,7 +331,7 @@
                                 Configuración
                             </a>
                             <hr class="menu-divisor">
-                            <form action="{{ route('logout') }}" method="POST">
+                           <form action="{{ route('auth.logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="item-link logout-red">
                                     <svg class="item-icon-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -79,115 +79,83 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\UsuariosController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
-[IMPORTANT] 🌐 [PUBLIC] RUTAS DE ACCESO LIBRE
+| 🌐 RUTAS PÚBLICAS (ACCESO LIBRE)
 |--------------------------------------------------------------------------
 */
 
-// * --- PUNTO DE ENTRADA --- //
+// * Punto de entrada del servidor
 Route::get('/', function () {
     return view('welcome');
 });
 
-// * --- DASHBOARD INICIAL --- //
+// * Landing Espectacular (RTX 5090 / Andrés & Carolina)
 Route::get('/inicio', [UsuariosController::class, 'showInicio'])->name('inicio');
 
-// * --- CATÁLOGO Y HARDWARE (SISTEMA DE PLANTILLAS) --- //
+// * Catálogo y Hardware
 Route::prefix('productos')->group(function () {
     Route::get('/', function () {
         return view('Productos.productosPlantilla');
     })->name('productos');
 
     Route::get('/portatiles', [ProductosController::class, 'index'])->name('portatiles');
+    Route::get('/sobremesa',  fn() => view('sobremesa'))->name('sobremesa');
+    Route::get('/tablets',    fn() => view('tablets'))->name('tablets');
 
-    // + CRUD completo de productos
+    // + CRUD Operativo de Productos
     Route::get('/crear',            [ProductosController::class, 'create'])->name('Productos.create');
     Route::post('/',                [ProductosController::class, 'store'])->name('Productos.store');
     Route::get('/{id}',             [ProductosController::class, 'show'])->name('Productos.show');
     Route::get('/{id}/editar',      [ProductosController::class, 'edit'])->name('Productos.edit');
     Route::put('/{id}',             [ProductosController::class, 'update'])->name('Productos.update');
     Route::delete('/{id}',          [ProductosController::class, 'destroy'])->name('Productos.destroy');
-
-    Route::get('/sobremesa', function () {
-        return view('sobremesa');
-    })->name('sobremesa');
-    Route::get('/tablets', function () {
-        return view('tablets');
-    })->name('tablets');
 });
 
-// * --- INFORMACIÓN CORPORATIVA --- //
-Route::get('/soporte-tecnico', function () {
-    return view('soporteTecnico');
-})->name('soporte');
-Route::get('/sobre-nosotros', function () {
-    return view('sobreNosotros');
-})->name('nosotros');
-Route::get('/contacto', function () {
-    return view('contacto');
-})->name('contacto');
+// * Información Corporativa
+Route::get('/soporte-tecnico', fn() => view('soporteTecnico'))->name('soporte');
+Route::get('/sobre-nosotros',  fn() => view('sobreNosotros'))->name('nosotros');
+Route::get('/contacto',        fn() => view('contacto'))->name('contacto');
 
 /*
 |--------------------------------------------------------------------------
-[IMPORTANT] 🔑 PROTOCOLOS DE IDENTIDAD Y ACCESO
+| 🔑 PROTOCOLOS DE IDENTIDAD (AUTH)
 |--------------------------------------------------------------------------
 */
 
 Route::name('auth.')->group(function () {
-    // ! GESTIÓN DE LOGIN
-    Route::get('/login', function () {
-        // @ FIX: Añadida carpeta Usuario.
-        return view('Usuario.login');
-    })->name('login');
-
+    // ! Acceso
+    Route::get('/login', fn() => view('Usuario.login'))->name('login');
     Route::post('/login', [UsuariosController::class, 'loginPost'])->name('login.post');
     Route::post('/logout', [UsuariosController::class, 'logout'])->name('logout');
 
-    // + REGISTRO DE NUEVAS UNIDADES
-    Route::get('/register', function () {
-        return view('Usuario.register');
-    })->name('register');
+    // + Registro
+    Route::get('/register', fn() => view('Usuario.register'))->name('register');
     Route::post('/register', [UsuariosController::class, 'store'])->name('usuarios.store');
 
-    // & SEGURIDAD Y RECUPERACIÓN
-    Route::get('/recuperar-password', function () {
-        return view('Usuario.recuperarContraseña');
-    })->name('password.request');
-
-    Route::get('/securityKey', function () {
-        return view('securityKey');
-    })->name('security.info');
+    // & Seguridad
+    Route::get('/recuperar-password', fn() => view('Usuario.recuperarContraseña'))->name('password.request');
+    Route::get('/securityKey', fn() => view('securityKey'))->name('security.info');
 });
 
-// Esta es la página de "Aviso"
-Route::get('/Usuario/advertenciaUsuarioSinLogin', function () {
-    // @ FIX: Usar formato punto y sin barra inicial
-    return view('Usuario.advertenciaUsuarioSinLogin');
-})->name('advertencia.login');
+// @ Aviso para invitados
+Route::get('/Usuario/advertenciaUsuarioSinLogin', fn() => view('Usuario.advertenciaUsuarioSinLogin'))->name('advertencia.login');
 
 /*
 |--------------------------------------------------------------------------
-[IMPORTANT] 🛡️ [PRIVATE] ÁREA RESTRINGIDA (SÓLO USUARIOS LOGUEADOS)
+| 🛡️ ÁREA RESTRINGIDA (MIDDLEWARE AUTH)
 |--------------------------------------------------------------------------
 */
-Route::group([], function () {
 
-    // + EXPEDIENTES DE USUARIO
-    Route::get('/perfil', function () {
-        if (!\Illuminate\Support\Facades\Auth::check()) {
-            // @ FIX: Redirigir usando el NOMBRE de la ruta
-            return redirect()->route('advertencia.login');
-        }
-        return view('Usuario.perfil');
-    })->name('perfil');
+Route::resource('Productos', ProductosController::class);
+Route::middleware(['auth'])->group(function () {
 
-    // TODO: Finalizar implementación de ajustes
-    Route::get('/configuracion', function () {
-        if (!\Illuminate\Support\Facades\Auth::check()) {
-            return redirect()->route('advertencia.login');
-        }
-        return view('Usuario.configuracion');
-    })->name('configuracion');
+    // @ PANEL DE CONTROL (El que tiene las dos tarjetas: Productos o Pantalla Principal)
+    Route::get('/panel-control', [UsuariosController::class, 'dashboard'])->name('usuario.dashboard');
+
+    // + Expedientes y Ajustes
+    Route::get('/perfil', fn() => view('Usuario.perfil'))->name('perfil');
+    Route::get('/configuracion', fn() => view('Usuario.configuracion'))->name('configuracion');
 });

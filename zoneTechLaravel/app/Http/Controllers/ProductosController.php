@@ -9,10 +9,10 @@ class ProductosController extends Controller
 {
     /* ^ 1. index() --> Lista todos los productos del catálogo ^ */
     public function index()
-{
-    $productos = Producto::all();
-    return view('Productos.portatilesI', compact('productos'));
-}
+    {
+        $productos = Producto::all();
+        return view('Productos.portatilesI', compact('productos'));
+    }
 
     /* ^ 2. create() --> Muestra el formulario para añadir un nuevo producto ^ */
     public function create()
@@ -20,7 +20,7 @@ class ProductosController extends Controller
         return view('Productos.create');
     }
 
-    /* ^ 3. store() --> Guarda el nuevo producto en la base de datos ^ */
+    /* ^ 3. store() --> Mejorado para ZoneTech ^ */
     public function store(Request $request)
     {
         $request->validate([
@@ -34,10 +34,11 @@ class ProductosController extends Controller
                 'precio' => $request->precio,
             ]);
 
-            return redirect()->route('Productos.index')
-                ->with('success', 'Producto añadido correctamente.');
+            // Redirigimos atrás con un mensaje de éxito que SweetAlert o un alert de Laravel pueda leer
+            return redirect()->back()->with('success', 'Hardware sincronizado con el núcleo.');
         } catch (\Exception $e) {
-            dd("FALLO CRÍTICO AL CREAR PRODUCTO: " . $e->getMessage());
+            // En lugar de morir con dd(), volvemos con el error
+            return redirect()->back()->withErrors(['error' => 'Fallo en la sincronización: ' . $e->getMessage()]);
         }
     }
 

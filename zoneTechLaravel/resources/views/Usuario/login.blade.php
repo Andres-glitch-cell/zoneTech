@@ -14,23 +14,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
 
     <style>
-        /* ==========================================
-           1. CONFIGURACIÓN GENERAL
-           ========================================== */
         [x-cloak] { display: none !important; }
-
         body {
             font-family: 'Inter', sans-serif;
             background-color: #000000;
             color: #ffffff;
             -webkit-font-smoothing: antialiased;
         }
-
         .logo-font { font-family: 'Outfit', sans-serif; }
-
-        /* ==========================================
-           2. INPUTS Y FORMULARIOS (ESTILO INDUSTRIAL)
-           ========================================== */
         .label-text {
             font-size: 10px;
             font-weight: 800;
@@ -40,20 +31,17 @@
             margin-bottom: 6px;
             display: block;
         }
-
         .input-box {
             background: #0a0a0a;
             border: 1px solid #1a1a1a;
             border-radius: 8px;
             transition: all 0.2s ease-in-out;
         }
-
         .input-box:focus-within {
-            border-color: #dc2626; /* Rojo ZoneTech */
+            border-color: #dc2626;
             background: #111111;
             box-shadow: 0 0 15px rgba(220, 38, 38, 0.1);
         }
-
         .input-field {
             background: transparent;
             width: 100%;
@@ -62,12 +50,6 @@
             font-size: 0.9rem;
             color: #ffffff;
         }
-
-        .input-field::placeholder { color: #333333; }
-
-        /* ==========================================
-           3. BOTONES Y ACCIONES
-           ========================================== */
         .btn-submit {
             background: #ffffff;
             color: #000000;
@@ -77,29 +59,18 @@
             transition: all 0.3s ease;
             border-radius: 8px;
         }
-
         .btn-submit:hover {
             background: #dc2626;
             color: #ffffff;
             transform: translateY(-1px);
         }
-
-        /* ==========================================
-           4. COMPONENTE: INTERRUPTOR (TOGGLE)
-           ========================================== */
         .switch {
             position: relative;
             display: inline-block;
             width: 34px;
             height: 18px;
         }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
+        .switch input { opacity: 0; width: 0; height: 0; }
         .slider {
             position: absolute;
             cursor: pointer;
@@ -109,7 +80,6 @@
             border-radius: 20px;
             border: 1px solid #333;
         }
-
         .slider:before {
             position: absolute;
             content: "";
@@ -121,17 +91,8 @@
             transition: .3s;
             border-radius: 50%;
         }
-
-        input:checked + .slider {
-            background-color: rgba(220, 38, 38, 0.1);
-            border-color: #dc2626;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(16px);
-            background-color: #dc2626;
-            box-shadow: 0 0 8px #dc2626;
-        }
+        input:checked + .slider { background-color: rgba(220, 38, 38, 0.1); border-color: #dc2626; }
+        input:checked + .slider:before { transform: translateX(16px); background-color: #dc2626; box-shadow: 0 0 8px #dc2626; }
     </style>
 </head>
 
@@ -146,17 +107,25 @@
             <p class="text-zinc-600 text-[10px] mt-1 font-bold tracking-widest uppercase">Acceso Restringido al Sistema</p>
         </div>
 
+        {{-- @ Bloque de Errores de Validación --}}
+        @if ($errors->any())
+            <div class="bg-red-600/10 border border-red-600/20 p-4 rounded-lg mb-6">
+                @foreach ($errors->all() as $error)
+                    <p class="text-[10px] text-red-500 font-black uppercase italic leading-tight mb-1 last:mb-0">
+                        !! {{ $error }}
+                    </p>
+                @endforeach
+            </div>
+        @endif
+
        <form action="{{ route('auth.login.post') }}" method="POST" class="space-y-5">
             @csrf
 
             <div class="group">
                 <label class="label-text">Identificador de Usuario</label>
                 <div class="input-box">
-                    <input type="text" name="usuario" placeholder="Ejemplo: Andres.Dev" required class="input-field" />
+                    <input type="text" name="usuario" placeholder="Ejemplo: Andres.Dev" value="{{ old('usuario') }}" required class="input-field" />
                 </div>
-                @error('usuario')
-                    <p class="text-[10px] text-red-600 mt-1 font-bold italic tracking-tight">{{ $message }}</p>
-                @enderror
             </div>
 
             <div class="group">
@@ -192,14 +161,12 @@
                 ¿Nuevo aquí? Crear Identidad
             </a>
         </div>
-
     </div>
 
     <script>
-        function inicio() { window.location.href = "inicio" }
-        function onRegister() { window.location.href = "register" }
-        function recuperarPasswd(){ window.location.href = "recuperarContraseña" }
+        function inicio() { window.location.href = "{{ route('inicio') }}"; }
+        function onRegister() { window.location.href = "{{ route('auth.register') }}"; }
+        function recuperarPasswd(){ window.location.href = "{{ route('auth.password.request') }}"; }
     </script>
 </body>
-
 </html>
