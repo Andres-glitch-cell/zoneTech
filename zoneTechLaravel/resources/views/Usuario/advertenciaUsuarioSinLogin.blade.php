@@ -20,18 +20,18 @@
         </p>
 
         <div style="display: flex; gap: 20px; justify-content: center;">
-            <a href="{{ route('auth.login') }}"
+            <a href="{{ route('login') }}"
                style="background: #fff; color: #000; padding: 15px 30px; border-radius: 6px; text-decoration: none; font-weight: 800; font-size: 12px; text-transform: uppercase; transition: transform 0.2s;"
                onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                Ingresar al Sistema
             </a>
 
-            <a href="{{ route('auth.register') }}"
+            <a href="{{ route('register') }}"
                style="background: transparent; border: 1px solid #333; color: #fff; padding: 15px 30px; border-radius: 6px; text-decoration: none; font-weight: 800; font-size: 12px; text-transform: uppercase; transition: all 0.2s;"
                onmouseover="this.style.borderColor='#ff0000'; this.style.color='#ff0000'" onmouseout="this.style.borderColor='#333'; this.style.color='#fff'">
                Crear Cuenta
             </a>
-        </div>
+        </div>  
 
     </div>
 
