@@ -3,8 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 // + Importación necesaria para que VS Code no se pierda
 use Illuminate\Support\Facades\Auth;
 
