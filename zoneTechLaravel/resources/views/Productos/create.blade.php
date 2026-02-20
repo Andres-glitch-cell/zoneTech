@@ -115,7 +115,7 @@
     </div>
 
     <div class="form-card">
-        <form action="{{ route('Productos.store') }}" method="POST">
+        <form action="{{ route('productos.store') }}" method="POST">
             @csrf
 
             <div class="form-grupo">

@@ -1,172 +1,93 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('layout.app')
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ZoneTech – Acceso al Sistema</title>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
-
-    <style>
-        [x-cloak] { display: none !important; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000000;
-            color: #ffffff;
-            -webkit-font-smoothing: antialiased;
-        }
-        .logo-font { font-family: 'Outfit', sans-serif; }
-        .label-text {
-            font-size: 10px;
-            font-weight: 800;
-            color: #444444;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 6px;
-            display: block;
-        }
-        .input-box {
-            background: #0a0a0a;
-            border: 1px solid #1a1a1a;
-            border-radius: 8px;
-            transition: all 0.2s ease-in-out;
-        }
-        .input-box:focus-within {
-            border-color: #dc2626;
-            background: #111111;
-            box-shadow: 0 0 15px rgba(220, 38, 38, 0.1);
-        }
-        .input-field {
-            background: transparent;
-            width: 100%;
-            padding: 14px 16px;
-            outline: none;
-            font-size: 0.9rem;
-            color: #ffffff;
-        }
-        .btn-submit {
-            background: #ffffff;
-            color: #000000;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: all 0.3s ease;
-            border-radius: 8px;
-        }
-        .btn-submit:hover {
-            background: #dc2626;
-            color: #ffffff;
-            transform: translateY(-1px);
-        }
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 34px;
-            height: 18px;
-        }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #1a1a1a;
-            transition: .3s;
-            border-radius: 20px;
-            border: 1px solid #333;
-        }
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 12px;
-            width: 12px;
-            left: 2px;
-            bottom: 2px;
-            background-color: #444;
-            transition: .3s;
-            border-radius: 50%;
-        }
-        input:checked + .slider { background-color: rgba(220, 38, 38, 0.1); border-color: #dc2626; }
-        input:checked + .slider:before { transform: translateX(16px); background-color: #dc2626; box-shadow: 0 0 8px #dc2626; }
-    </style>
-</head>
-
-<body class="min-h-screen flex items-center justify-center p-6">
-
-    <div class="w-full max-w-[420px]">
+@section('content')
+<div class="min-h-screen flex items-center justify-center p-6">
+    <div class="w-full max-w-[450px]">
 
         <div class="mb-10 text-left">
-            <h1 onclick="inicio()" class="text-4xl font-black text-white tracking-tighter uppercase logo-font italic cursor-pointer">
+            <h1 onclick="window.location.href='{{ route('inicio') }}'" class="text-4xl font-black text-white tracking-tighter uppercase logo-font italic cursor-pointer">
                 ZONE<span class="text-red-600">TECH</span>
             </h1>
-            <p class="text-zinc-600 text-[10px] mt-1 font-bold tracking-widest uppercase">Acceso Restringido al Sistema</p>
+            <p class="text-zinc-600 text-[10px] mt-1 font-bold tracking-widest uppercase">Protocolo de Acceso al Núcleo</p>
         </div>
 
-        {{-- @ Bloque de Errores de Validación --}}
+        {{-- Alertas de Error --}}
         @if ($errors->any())
             <div class="bg-red-600/10 border border-red-600/20 p-4 rounded-lg mb-6">
-                @foreach ($errors->all() as $error)
-                    <p class="text-[10px] text-red-500 font-black uppercase italic leading-tight mb-1 last:mb-0">
-                        !! {{ $error }}
-                    </p>
-                @endforeach
+                <ul class="list-none">
+                    @foreach ($errors->all() as $error)
+                        <li class="text-[9px] text-red-400 font-bold uppercase italic">!! {{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
 
-       <form action="{{ route('auth.login.post') }}" method="POST" class="space-y-5">
+       <form action="{{ route('login.post') }}" method="POST" class="space-y-5">
             @csrf
 
             <div class="group">
-                <label class="label-text">Identificador de Usuario</label>
+                <label class="label-text">Correo Electrónico</label>
                 <div class="input-box">
-                    <input type="text" name="usuario" placeholder="Ejemplo: Andres.Dev" value="{{ old('usuario') }}" required class="input-field" />
+                    <input type="email" name="email" placeholder="identidad@zonetech.pro" value="{{ old('email') }}" required class="input-field" />
+                </div>
+            </div>
+
+            <div class="group" x-data="{ 
+                open: false, 
+                selected: '{{ old('rol') }}', 
+                label: '{{ old('rol') ? ucfirst(old('rol')) : 'Seleccione Rango...' }}',
+                roles: [
+                    { id: 'cliente', name: 'Cliente', desc: 'Acceso Estándar' },
+                    { id: 'tecnico', name: 'Técnico', desc: 'Soporte y Hardware' },
+                    { id: 'administrador', name: 'Administrador', desc: 'Acceso Total al Núcleo' }
+                ]
+            }">
+                <label class="label-text">Rango de Autorización</label>
+                <input type="hidden" name="rol" :value="selected" required>
+
+                <div class="relative">
+                    <button type="button" @click="open = !open" @click.away="open = false"
+                        class="input-box w-full flex items-center justify-between px-4 py-[14px] text-sm transition-all"
+                        :class="open ? 'border-red-600 bg-[#111]' : ''">
+                        <span :class="selected ? 'text-white' : 'text-zinc-600'" x-text="label"></span>
+                        <svg class="w-4 h-4 text-zinc-500 transition-transform duration-300" :class="open ? 'rotate-180 text-red-600' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <div x-show="open" x-cloak x-transition class="absolute z-50 w-full mt-2 bg-[#0a0a0a] border border-zinc-800 rounded-lg overflow-hidden dropdown-panel">
+                        <template x-for="role in roles" :key="role.id">
+                            <div @click="selected = role.id; label = role.name; open = false" class="custom-option px-4 py-3 cursor-pointer">
+                                <div class="flex flex-col">
+                                    <span class="text-[11px] font-black uppercase tracking-wider" :class="selected === role.id ? 'text-red-500' : 'text-zinc-300'" x-text="role.name"></span>
+                                    <span class="text-[9px] text-zinc-600 font-bold uppercase italic" x-text="role.desc"></span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
                 </div>
             </div>
 
             <div class="group">
-                <div class="flex justify-between items-center">
-                    <label class="label-text">Clave de Seguridad</label>
-                    <a onclick="recuperarPasswd()" class="text-[9px] text-zinc-600 hover:text-red-500 uppercase font-bold mb-1 cursor-pointer transition-colors">¿Olvidaste la contraseña?</a>
-                </div>
+                <label class="label-text">Security Key</label>
                 <div class="input-box">
                     <input type="password" name="password" placeholder="••••••••" required class="input-field" />
                 </div>
             </div>
 
-            <div class="flex items-center gap-3 py-2 group/toggle cursor-pointer">
-                <label class="switch">
-                    <input type="checkbox" name="remember" id="remember">
-                    <span class="slider"></span>
-                </label>
-                <label for="remember" class="text-[10px] text-zinc-500 font-extrabold uppercase tracking-widest cursor-pointer group-hover/toggle:text-zinc-200 transition-colors">
-                    Mantener Sesión Activa
-                </label>
-            </div>
-
             <div class="pt-2">
                 <button type="submit" class="btn-submit w-full py-4 text-xs">
-                    Entrar al Núcleo
+                    Iniciar Secuencia de Acceso
                 </button>
             </div>
         </form>
 
-        <div class="mt-10 flex items-center justify-between border-t border-zinc-900 pt-6">
-            <span class="text-zinc-700 text-[10px] font-bold tracking-widest uppercase">Seguridad: SSL-ACTIVO</span>
-            <a onclick="onRegister()" class="text-zinc-500 hover:text-white text-[10px] font-bold uppercase transition-colors cursor-pointer">
-                ¿Nuevo aquí? Crear Identidad
+        <div class="mt-8 flex items-center justify-between border-t border-zinc-900 pt-6">
+            <span class="text-zinc-700 text-[10px] font-bold tracking-widest uppercase">Nodo: Zone-OS</span>
+            <a href="{{ route('register') }}" class="text-zinc-500 hover:text-white text-[10px] font-bold uppercase transition-colors">
+                ¿Sin identidad? Registrar
             </a>
         </div>
     </div>
-
-    <script>
-        function inicio() { window.location.href = "{{ route('inicio') }}"; }
-        function onRegister() { window.location.href = "{{ route('auth.register') }}"; }
-        function recuperarPasswd(){ window.location.href = "{{ route('auth.password.request') }}"; }
-    </script>
-</body>
-</html>
+</div>
+@endsection

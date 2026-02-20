@@ -12,30 +12,31 @@ class UsuariosController extends Controller
 {
     /**
      * 1. showInicio()
-     * Muestra SIEMPRE la landing de la RTX 5090 (inicio.blade.php)
+     * Muestra la landing principal.
      */
     public function showInicio()
     {
-        // Eliminamos el IF que redirigía automáticamente.
-        // Ahora todos ven la landing al pulsar "Pantalla Principal".
         return view('inicio');
     }
 
     /**
-     * 2. store() --> Registro de Identidad
+     * 2. store() --> Registro corregido para procesar nombres y apellidos
      */
     public function store(Request $request)
     {
+        // + Añadimos todos los campos del formulario a la validación
         $validated = $request->validate([
             'usuario'   => 'required|string|max:50|unique:usuariosNoAutenticados,usuario',
             'email'     => 'required|email|unique:usuariosNoAutenticados,email',
             'nombre'    => 'required|string|max:100',
-            'apellido1' => 'required|string|max:150',
-            'apellido2' => 'nullable|string|max:150',
+            'apellido1' => 'required|string|max:100',
+            'apellido2' => 'nullable|string|max:100', // Nullable por si solo tiene un apellido
+            'rol'       => 'required|in:cliente,tecnico,administrador',
             'password'  => 'required|min:8|confirmed',
         ]);
 
         try {
+            // Generamos las iniciales dinámicamente: 1ª letra nombre + 1ª letra apellido
             $iniciales = strtoupper(substr($validated['nombre'], 0, 1) . substr($validated['apellido1'], 0, 1));
 
             $user = User::create([
@@ -44,40 +45,53 @@ class UsuariosController extends Controller
                 'nombre'          => $validated['nombre'],
                 'apellido1'       => $validated['apellido1'],
                 'apellido2'       => $validated['apellido2'] ?? '',
+                'rol'             => $validated['rol'],
                 'contraseña_hash' => Hash::make($validated['password']),
                 'iniciales'       => $iniciales,
-                'rol'             => 'usuario',
             ]);
 
             Auth::login($user);
             $request->session()->regenerate();
 
-            // Tras registrarse, va al panel de las dos opciones
-            return redirect()->route('usuario.dashboard');
+            return redirect()->route('usuario.dashboard')
+                ->with('success', 'Identidad ZoneTech creada correctamente.');
+
         } catch (\Exception $e) {
-            Log::error("Fallo en registro ZoneTech: " . $e->getMessage());
-            return back()->withInput()->withErrors(['error' => 'Error en el despliegue.']);
+            // ! Error crítico: Logueamos el mensaje real para debug
+            Log::error("Fallo en registro: " . $e->getMessage());
+            
+            return back()->withInput()->withErrors([
+                'error' => 'Error en el despliegue: ' . $e->getMessage()
+            ]);
         }
     }
 
     /**
-     * 3. loginPost() --> Protocolo de Acceso
+     * 3. loginPost() --> Autenticación por Email + Rol
      */
     public function loginPost(Request $request)
     {
         $credenciales = $request->validate([
-            'usuario'  => 'required|string',
+            'email'    => 'required|email',
             'password' => 'required',
+            'rol'      => 'required|in:cliente,tecnico,administrador',
         ]);
 
-        if (Auth::attempt(['usuario' => $credenciales['usuario'], 'password' => $credenciales['password']])) {
+        // Intentamos autenticar con la lógica personalizada del modelo User
+        if (Auth::attempt([
+            'email'    => $credenciales['email'], 
+            'password' => $credenciales['password'], 
+            'rol'      => $credenciales['rol']
+        ])) {
+            
             $request->session()->regenerate();
-            // Tras el login, va al panel de las dos opciones
-            return redirect()->route('usuario.dashboard');
+            
+            return redirect()->route('usuario.dashboard')
+                ->with('success', 'Acceso concedido al Nodo: ' . strtoupper($credenciales['rol']));
         }
 
         return back()->withInput()->withErrors([
-            'usuario' => "Acceso denegado. Credenciales no reconocidas."
+            'email' => "Las credenciales o el rango de acceso no son válidos."
         ]);
     }
 
@@ -94,10 +108,11 @@ class UsuariosController extends Controller
 
     /**
      * 5. dashboard()
-     * Este es el panel con las dos tarjetas (Ir a Productos / Ir a Pantalla Principal)
      */
     public function dashboard()
     {
-        return view('Usuario.inicioAutenticado');
+        return view('Usuario.inicioAutenticado', [
+            'usuario' => Auth::user()
+        ]);
     }
 }
